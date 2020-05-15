@@ -1,0 +1,242 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+enum Role {
+ ADMIN
+  USER
+  SELLER
+}
+
+enum Permission {
+ 
+  UPRDATE_PERMISSION
+  ADD_ITEM
+  EDIT_ITEM
+  DELETE_ITEM
+}
+enum OrderStatus {
+  PENDING
+  DELIVERED
+  ONHOLD
+  APPROVED
+  ON_THE_WAY
+}
+
+model Seller {
+  id                                    String    @default(cuid()) @id
+  name                                  String
+  email                                 String    @unique
+  password                              String
+  confirmPassword                       String
+  storeName                             String
+  sellerNationality                     String
+  sellerIdentification                  String       @unique
+  EmailVarificationHash                 String
+  EmailIsVerified                       Boolean        @default(false)
+  PasswordResetToken                    String
+  PasswordResetTokenExpiry              Float
+  SellerItemsCout                       Int 
+  role                                  Role             @default(SELLER) 
+  phone                                 String[]    @unique
+  PickupLocations                       Address[]   @relation("ItemSeller" )
+  Brand                                 String[]
+  items                                 Item[]        
+  permissions                           Permission[]
+  createdAt                             DateTime  @default(now())
+  updatedAt                             DateTime  @updatedAt
+}
+
+
+model User {
+  id               String    @default(cuid()) @id
+  email            String    @unique
+  avatar           String?   @default("https://www.freepik.com/free-icon/user-image-with-black-background_751548.htm")
+  name String
+  password String
+  PasswordResetToken                    String
+  PasswordResetTokenExpiry              Float
+  role                 Role             @default(USER)
+  address Address[]
+  permissions Permission[]
+  cart CartItem[]
+  likes                Like[]
+  likesCount           Int  
+  itemReview           Review[]
+  reviewCount          Int
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+
+
+model Item {
+  id                   String    @default(cuid()) @id
+  likes                Like[]
+  likesCount           Int  
+  itemReview           Review[]
+  reviewCount          Int
+  images               ItemImage[]
+  catagory             Catagory[]
+  tags                 Tags[]
+  colors               Colors[]
+  oherFeatures         OherFeatures[]  
+  title                String
+  description          String       @default("No Description Provided")
+  overview             String       @default("No Overview Provided")
+  otherInfo            String?      @default("No Other Info Provided")
+  videoLink            String?      @default("No Video Link Provided")
+  brand                String       @default("No brand Provided")
+  weight               String       @default("No weight Provided")
+  dimensions           String       @default("No dimensions Provided")
+  materials            String       @default("No materials Provided")
+  price                Float
+  beforeDiscountPrice  Float
+  stock                Int          @default(1)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+}
+model Order {
+  id          String    @default(cuid()) @id
+  item        Item      @relation(fields: [itemId], references: [id])
+  itemId      String
+  total       Int
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String 
+  charge      String
+  status      OrderStatus[] 
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model OrderItem {
+  id                   String    @default(cuid()) @id
+  likes                Like[]  
+  itemReview           Review[]
+  images               ItemImage[]
+  catagory             Catagory[]
+  tags                 Tags[]
+  colors               Colors[]
+  oherFeatures         OherFeatures[]  
+  title                String
+  description          String       @default("No Description Provided")
+  overview             String       @default("No Overview Provided")
+  otherInfo            String?      @default("No Other Info Provided")
+  videoLink            String?      @default("No Video Link Provided")
+  brand                String       @default("No brand Provided")
+  weight               String       @default("No weight Provided")
+  dimensions           String       @default("No dimensions Provided")
+  materials            String       @default("No materials Provided")
+  price                Float
+  beforeDiscountPrice  Float
+  stock                Int          @default(1)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+ 
+}
+
+model CartItem {
+  id          String    @default(cuid()) @id
+  quantity    Int       @default(1)
+  item        Item      @relation(fields: [itemId], references: [id])
+  itemId      String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String 
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model ItemImage {
+    id        String    @default(cuid()) @id
+    url       String
+    largeUrl  String?    
+    item      Item     @relation(fields: [itemId], references: [id])
+    itemId    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+
+
+
+
+model Address {
+    id                   String   @default(cuid()) @id
+    name                 String
+    address              String
+    country              String   @default("No country Provided")
+    state                String   @default("No state Provided")
+    city                 String   @default("No city Provided")
+    streetAddress1       String?  @default("No streetAddress1 Provided")
+    streetAddress2       String?  @default("No streetAddress2 Provided")
+    zipCode              String   @default("No zipCode Provided")
+    company              String?  @default("No company Provided")
+    message              String?  @default("No message Provided")
+    additionalInfo       String?
+    MaincontactNubmer    String
+    OthercontactNubmers  String[]
+    isPrimary            Boolean   @default(false)
+    Lat                  Float     @default( 0)
+    Lng                  Float     @default( 0)
+    createdAt            DateTime  @default(now())
+    updatedAt            DateTime  @updatedAt
+}
+
+
+
+model Review {
+  id           String   @default(cuid()) @id
+  item         Item     @relation(fields: [itemId], references: [id])
+  itemId       String   
+  author       User     @relation(fields: [authorId], references: [id])
+  authorId     String     
+  rating       Float    @default(0)
+  text         String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+
+
+model Like {
+  id        String   @default(cuid()) @id
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+model Catagory {
+  id                   String   @default(cuid()) @id
+  text       String
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    String
+
+}
+model Tags {
+   id                   String   @default(cuid()) @id
+  text       String
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    String
+}
+model Colors {
+  id                   String   @default(cuid()) @id
+  text       String
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    String
+}
+model OherFeatures {
+  id                   String   @default(cuid()) @id
+  text       String
+  item      Item     @relation(fields: [itemId], references: [id])
+  itemId    String
+}
