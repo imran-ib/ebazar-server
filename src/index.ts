@@ -13,6 +13,7 @@ server.express.use(cookieParser());
 server.express.use(helmet());
 server.express.use(logger("dev"));
 
+// TODO Change this and get token from cookie
 server.express.use((req, res, next) => {
   const Authorization = req.get("Authorization");
   if (Authorization) {

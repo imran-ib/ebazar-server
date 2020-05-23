@@ -1,0 +1,21 @@
+{
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Shades of Purple",
+  "cSpell.userWords": ["Ionicons", "ebazar", "inmemory", "webp"],
+
+  "editor.formatOnSave": true,
+  // Enable per-language
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+
+  "window.zoomLevel": 0,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "emmet.triggerExpansionOnTab": true
+}

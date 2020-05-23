@@ -24,7 +24,6 @@ function ContactFormMail(email: string, message: string) {
   </div> 
   `;
 }
-
 function ForgotPasswordUser(user: User, token: string) {
   return `
   <div 
