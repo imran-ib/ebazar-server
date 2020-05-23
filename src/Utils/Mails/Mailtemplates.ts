@@ -1,39 +1,83 @@
-import { User } from "@prisma/client";
-
-import { ElevenDigitKey } from "../TokenORKey/GenCustomKey";
-
-function LoginSecret(user: User, key: string) {
+import { User, Seller } from "@prisma/client";
+function ContactFormMail(email: string, message: string) {
   return `
   <div 
   style ="text-align: center;
   padding: 70px 0;"
   >
-    <h1>Hello ${user.email}</h1>
-    <h2>Welcome in Prismagram.</h2>
-    <h3> Your Code is : <a><b style="color:red" >${key}</b></a> </h3>
+  <div>
+  <h1 style="text-align:center;
+  padding: 20px;
+  ">A New Contact Message from ${email}</h1>
+  <p 
+  style="text-align:center;
+  width: 70%;
+  padding: 40px;
+  margin: 0 auto;
+  font-size:22px;
+  word-spacing: 4px;
+  ">
+  ${message} </p>
+
+  </div>
   
   </div> 
   `;
 }
-// function WelcomeMessage(user, ctx: Context, VerificationKey) {
-//   return `
-//   <div>Hello Mr.${user.fullName}</div>
-//   <div>Welcome in My Portfolio App.</div>
-//   <p> Your Code is ${VerificationKey}</p>
-//     <div>Please find link to validate your email.
-//        ${process.env.FRONTEND_URL}/validateEmail?validateEmailToken=${VerificationKey}
-//     </div>
-//   `;
-// }
 
-// function PasswordResetLink(token, user: User, ctx: Context) {
-//   return `
-//     <div>hello</div>
-//     <div>Please find link to reset your password.
-//     <a href="${process.env.FRONTEND_URL}/user-reset-password?token=${token}">Click Here </a>
-//     </div>
-//   `;
-// }
+function ForgotPasswordUser(user: User, token: string) {
+  return `
+  <div 
+  style ="text-align: center;
+  padding: 70px 0;"
+  >
+    <h1>Hello ${user.name}</h1>
+    <h2>Welcome in ebazar.</h2>
+    <div>
+      <h1>Click On The Link To Reset Your Password 
+      <a className="btn btn-info btn-block" 
+      href='${process.env.FRONTEND_URL}/user-password-reset?token=${token}'>Click Here</a> </h1>
+      </div>
+  
+  </div> 
+  `;
+}
+function ForgotPasswordSeller(seller: Seller, token: string) {
+  return `
+  <div 
+  style ="text-align: center;
+  padding: 70px 0;"
+  >
+    <h1>Hello ${seller.name}</h1>
+    <h2>Welcome in ebazar.</h2>
 
-// export { WelcomeMessage, PasswordResetLink, LoginSecret };
-export { LoginSecret };
+    <div>
+   <h1>Click On The Link To Reset Your Password 
+   <a className="btn btn-info btn-block" 
+   href='${process.env.FRONTEND_URL}/seller-password-reset?token=${token}'>Click Here</a> </h1>
+   </div>
+  </div> 
+  `;
+}
+function SellerVerification(seller: Seller, token: string) {
+  return `
+  <div 
+  style ="text-align: center;
+  padding: 70px 0;"
+  >
+    <h1>Hello ${seller.name}</h1>
+    <h2>Welcome in ebazar.</h2>
+    <div>
+      <h1>Click On The Link To Verify Your Account <a href='${process.env.FRONTEND_URL}/sellerverification?token=${token}'>Click Here</a> </h1>
+      </div>
+  
+  </div> 
+  `;
+}
+
+export {
+  ContactFormMail,
+  SellerVerification,
+  ForgotPasswordUser,
+  ForgotPasswordSeller,
+};

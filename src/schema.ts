@@ -2,20 +2,41 @@ import { nexusPrismaPlugin } from "nexus-prisma";
 import { makeSchema, subscriptionField, connectionPlugin } from "@nexus/schema";
 import {
   User,
+  Seller,
   Like,
+  ItemImage,
+  CartItem,
+  Order,
+  Item,
+  OrderItem,
+  Catagory,
+  Tags,
+  Colors,
+  OherFeatures,
+  Review,
+  Address,
 } from "./api/Models/Modles";
 import { Query } from "./api/Queries/Queries";
 import { Mutation } from "./api/Mutations/Mutations";
-import { Subscriptions } from "./api/Subscription/Subscriptios";
 
 export const schema = makeSchema({
   types: [
     Query,
     Mutation,
-    Subscriptions,
     User,
+    Seller,
     Like,
-  
+    ItemImage,
+    CartItem,
+    Order,
+    Item,
+    OrderItem,
+    Catagory,
+    Tags,
+    Colors,
+    OherFeatures,
+    Review,
+    Address,
   ],
   plugins: [
     nexusPrismaPlugin(),

@@ -2,6 +2,27 @@
 ### Do not make changes to this file directly
 
 
+type Address {
+  additionalInfo: String
+  address: String!
+  city: String!
+  company: String
+  country: String!
+  id: String!
+  isPrimary: Boolean
+  Lat: Float
+  Lng: Float
+  MaincontactNubmer: String!
+  message: String
+  name: String!
+  OthercontactNubmers: [String!]!
+  state: String!
+  streetAddress1: String
+  streetAddress2: String
+  User: User
+  zipCode: String!
+}
+
 input AddressCreateManyWithoutSellerInput {
   connect: [AddressWhereUniqueInput!]
   create: [AddressCreateWithoutSellerInput!]
@@ -77,9 +98,9 @@ input AddressScalarWhereInput {
   country: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  isPrimary: BooleanFilter
-  Lat: FloatFilter
-  Lng: FloatFilter
+  isPrimary: NullableBooleanFilter
+  Lat: NullableFloatFilter
+  Lng: NullableFloatFilter
   MaincontactNubmer: StringFilter
   message: NullableStringFilter
   name: StringFilter
@@ -92,6 +113,30 @@ input AddressScalarWhereInput {
   updatedAt: DateTimeFilter
   userId: NullableStringFilter
   zipCode: StringFilter
+}
+
+input AddressUpdateInput {
+  additionalInfo: String
+  address: String
+  city: String
+  company: String
+  country: String
+  createdAt: DateTime
+  id: String
+  isPrimary: Boolean
+  Lat: Float
+  Lng: Float
+  MaincontactNubmer: String
+  message: String
+  name: String
+  OthercontactNubmers: AddressUpdateOthercontactNubmersInput
+  Seller: SellerUpdateOneWithoutPickupLocationsInput
+  state: String
+  streetAddress1: String
+  streetAddress2: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutAddressInput
+  zipCode: String
 }
 
 input AddressUpdateManyDataInput {
@@ -226,9 +271,9 @@ input AddressWhereInput {
   country: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  isPrimary: BooleanFilter
-  Lat: FloatFilter
-  Lng: FloatFilter
+  isPrimary: NullableBooleanFilter
+  Lat: NullableFloatFilter
+  Lng: NullableFloatFilter
   MaincontactNubmer: StringFilter
   message: NullableStringFilter
   name: StringFilter
@@ -249,9 +294,13 @@ input AddressWhereUniqueInput {
   id: String
 }
 
-input BooleanFilter {
-  equals: Boolean
-  not: Boolean
+type CartItem {
+  id: String!
+  item: Item!
+  itemId: String!
+  quantity: Int!
+  user: User!
+  userId: String!
 }
 
 input CartItemCreateManyWithoutItemInput {
@@ -390,6 +439,13 @@ input CartItemWhereUniqueInput {
   id: String
 }
 
+type Catagory {
+  id: String!
+  item: Item!
+  itemId: String!
+  text: String!
+}
+
 input CatagoryCreateManyWithoutItemInput {
   connect: [CatagoryWhereUniqueInput!]
   create: [CatagoryCreateWithoutItemInput!]
@@ -401,15 +457,19 @@ input CatagoryCreateManyWithoutOrderItemInput {
 }
 
 input CatagoryCreateWithoutItemInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutCatagoryInput
   text: String!
+  updatedAt: DateTime
 }
 
 input CatagoryCreateWithoutOrderItemInput {
+  createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutCatagoryInput!
   text: String!
+  updatedAt: DateTime
 }
 
 input CatagoryFilter {
@@ -420,17 +480,21 @@ input CatagoryFilter {
 
 input CatagoryScalarWhereInput {
   AND: [CatagoryScalarWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
   NOT: [CatagoryScalarWhereInput!]
   OR: [CatagoryScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input CatagoryUpdateManyDataInput {
+  createdAt: DateTime
   id: String
   text: String
+  updatedAt: DateTime
 }
 
 input CatagoryUpdateManyWithoutItemInput {
@@ -463,15 +527,19 @@ input CatagoryUpdateManyWithWhereNestedInput {
 }
 
 input CatagoryUpdateWithoutItemDataInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutCatagoryInput
   text: String
+  updatedAt: DateTime
 }
 
 input CatagoryUpdateWithoutOrderItemDataInput {
+  createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutCatagoryInput
   text: String
+  updatedAt: DateTime
 }
 
 input CatagoryUpdateWithWhereUniqueWithoutItemInput {
@@ -498,6 +566,7 @@ input CatagoryUpsertWithWhereUniqueWithoutOrderItemInput {
 
 input CatagoryWhereInput {
   AND: [CatagoryWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
@@ -506,10 +575,18 @@ input CatagoryWhereInput {
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input CatagoryWhereUniqueInput {
   id: String
+}
+
+type Colors {
+  id: String!
+  item: Item!
+  itemId: String!
+  text: String!
 }
 
 input ColorsCreateManyWithoutItemInput {
@@ -523,15 +600,19 @@ input ColorsCreateManyWithoutOrderItemInput {
 }
 
 input ColorsCreateWithoutItemInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutColorsInput
   text: String!
+  updatedAt: DateTime
 }
 
 input ColorsCreateWithoutOrderItemInput {
+  createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutColorsInput!
   text: String!
+  updatedAt: DateTime
 }
 
 input ColorsFilter {
@@ -542,17 +623,21 @@ input ColorsFilter {
 
 input ColorsScalarWhereInput {
   AND: [ColorsScalarWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
   NOT: [ColorsScalarWhereInput!]
   OR: [ColorsScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input ColorsUpdateManyDataInput {
+  createdAt: DateTime
   id: String
   text: String
+  updatedAt: DateTime
 }
 
 input ColorsUpdateManyWithoutItemInput {
@@ -585,15 +670,19 @@ input ColorsUpdateManyWithWhereNestedInput {
 }
 
 input ColorsUpdateWithoutItemDataInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutColorsInput
   text: String
+  updatedAt: DateTime
 }
 
 input ColorsUpdateWithoutOrderItemDataInput {
+  createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutColorsInput
   text: String
+  updatedAt: DateTime
 }
 
 input ColorsUpdateWithWhereUniqueWithoutItemInput {
@@ -620,6 +709,7 @@ input ColorsUpsertWithWhereUniqueWithoutOrderItemInput {
 
 input ColorsWhereInput {
   AND: [ColorsWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
@@ -628,6 +718,7 @@ input ColorsWhereInput {
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input ColorsWhereUniqueInput {
@@ -667,6 +758,31 @@ input IntFilter {
   lte: Int
   not: Int
   notIn: [Int!]
+}
+
+type Item {
+  beforeDiscountPrice: Float!
+  brand: String
+  catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
+  colors(after: ColorsWhereUniqueInput, before: ColorsWhereUniqueInput, first: Int, last: Int, skip: Int): [Colors!]!
+  description: String!
+  dimensions: String
+  id: String!
+  images(after: ItemImageWhereUniqueInput, before: ItemImageWhereUniqueInput, first: Int, last: Int, skip: Int): [ItemImage!]!
+  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
+  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  likesCount: Int
+  materials: String
+  oherFeatures(after: OherFeaturesWhereUniqueInput, before: OherFeaturesWhereUniqueInput, first: Int, last: Int, skip: Int): [OherFeatures!]!
+  otherInfo: String
+  overview: String
+  price: Float!
+  reviewCount: Int
+  stock: Int
+  tags(after: TagsWhereUniqueInput, before: TagsWhereUniqueInput, first: Int, last: Int, skip: Int): [Tags!]!
+  title: String!
+  videoLink: String
+  weight: String
 }
 
 input ItemCreateManyWithoutSellerInput {
@@ -731,14 +847,14 @@ input ItemCreateWithoutCartItemInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -760,14 +876,14 @@ input ItemCreateWithoutCatagoryInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -789,14 +905,14 @@ input ItemCreateWithoutColorsInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -818,14 +934,14 @@ input ItemCreateWithoutImagesInput {
   id: String
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -847,14 +963,14 @@ input ItemCreateWithoutItemReviewInput {
   id: String
   images: ItemImageCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -876,14 +992,14 @@ input ItemCreateWithoutLikesInput {
   id: String
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -906,13 +1022,13 @@ input ItemCreateWithoutOherFeaturesInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -935,13 +1051,13 @@ input ItemCreateWithoutOrderInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   tags: TagsCreateManyWithoutItemInput
@@ -964,14 +1080,14 @@ input ItemCreateWithoutSellerInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   stock: Int
   tags: TagsCreateManyWithoutItemInput
   title: String!
@@ -993,14 +1109,14 @@ input ItemCreateWithoutTagsInput {
   images: ItemImageCreateManyWithoutItemInput
   itemReview: ReviewCreateManyWithoutItemInput
   likes: LikeCreateManyWithoutItemInput
-  likesCount: Int!
+  likesCount: Int
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
-  reviewCount: Int!
+  reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
   title: String!
@@ -1013,6 +1129,14 @@ input ItemFilter {
   every: ItemWhereInput
   none: ItemWhereInput
   some: ItemWhereInput
+}
+
+type ItemImage {
+  id: String!
+  item: Item!
+  itemId: String!
+  largeUrl: String
+  url: String!
 }
 
 input ItemImageCreateManyWithoutItemInput {
@@ -1161,34 +1285,34 @@ input ItemImageWhereUniqueInput {
 input ItemScalarWhereInput {
   AND: [ItemScalarWhereInput!]
   beforeDiscountPrice: FloatFilter
-  brand: StringFilter
+  brand: NullableStringFilter
   CartItem: CartItemFilter
   catagory: CatagoryFilter
   colors: ColorsFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  dimensions: StringFilter
+  dimensions: NullableStringFilter
   id: StringFilter
   images: ItemImageFilter
   itemReview: ReviewFilter
   likes: LikeFilter
-  likesCount: IntFilter
-  materials: StringFilter
+  likesCount: NullableIntFilter
+  materials: NullableStringFilter
   NOT: [ItemScalarWhereInput!]
   oherFeatures: OherFeaturesFilter
   OR: [ItemScalarWhereInput!]
   Order: OrderFilter
   otherInfo: NullableStringFilter
-  overview: StringFilter
+  overview: NullableStringFilter
   price: FloatFilter
-  reviewCount: IntFilter
+  reviewCount: NullableIntFilter
   sellerId: NullableStringFilter
-  stock: IntFilter
+  stock: NullableIntFilter
   tags: TagsFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
-  weight: StringFilter
+  weight: NullableStringFilter
 }
 
 input ItemUpdateManyDataInput {
@@ -1277,18 +1401,20 @@ input ItemUpdateOneRequiredWithoutOherFeaturesInput {
   upsert: ItemUpsertWithoutOherFeaturesInput
 }
 
-input ItemUpdateOneRequiredWithoutOrderInput {
-  connect: ItemWhereUniqueInput
-  create: ItemCreateWithoutOrderInput
-  update: ItemUpdateWithoutOrderDataInput
-  upsert: ItemUpsertWithoutOrderInput
-}
-
 input ItemUpdateOneRequiredWithoutTagsInput {
   connect: ItemWhereUniqueInput
   create: ItemCreateWithoutTagsInput
   update: ItemUpdateWithoutTagsDataInput
   upsert: ItemUpsertWithoutTagsInput
+}
+
+input ItemUpdateOneWithoutOrderInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutOrderInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ItemUpdateWithoutOrderDataInput
+  upsert: ItemUpsertWithoutOrderInput
 }
 
 input ItemUpdateWithoutCartItemDataInput {
@@ -1640,35 +1766,35 @@ input ItemUpsertWithWhereUniqueWithoutSellerInput {
 input ItemWhereInput {
   AND: [ItemWhereInput!]
   beforeDiscountPrice: FloatFilter
-  brand: StringFilter
+  brand: NullableStringFilter
   CartItem: CartItemFilter
   catagory: CatagoryFilter
   colors: ColorsFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  dimensions: StringFilter
+  dimensions: NullableStringFilter
   id: StringFilter
   images: ItemImageFilter
   itemReview: ReviewFilter
   likes: LikeFilter
-  likesCount: IntFilter
-  materials: StringFilter
+  likesCount: NullableIntFilter
+  materials: NullableStringFilter
   NOT: [ItemWhereInput!]
   oherFeatures: OherFeaturesFilter
   OR: [ItemWhereInput!]
   Order: OrderFilter
   otherInfo: NullableStringFilter
-  overview: StringFilter
+  overview: NullableStringFilter
   price: FloatFilter
-  reviewCount: IntFilter
+  reviewCount: NullableIntFilter
   Seller: SellerWhereInput
   sellerId: NullableStringFilter
-  stock: IntFilter
+  stock: NullableIntFilter
   tags: TagsFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
-  weight: StringFilter
+  weight: NullableStringFilter
 }
 
 input ItemWhereUniqueInput {
@@ -1677,6 +1803,10 @@ input ItemWhereUniqueInput {
 
 type Like {
   id: String!
+  item: Item!
+  itemId: String!
+  user: User!
+  userId: String!
 }
 
 input LikeCreateManyWithoutItemInput {
@@ -1860,8 +1990,103 @@ input LikeWhereUniqueInput {
 }
 
 type Mutation {
-  deleteOneUser(where: UserWhereUniqueInput!): User
-  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  """Add Item To Cart"""
+  AddItemToTheCart(itemId: String!, quantity: Int!): String!
+
+  """Contact Form"""
+  ContactUs(email: String!, message: String!, subject: String!): String!
+
+  """Create New Item"""
+  CreateItem(beforeDiscountPrice: Float!, brand: String, catagory: [String!], colors: [String!], description: String!, dimensions: String, images: [String!], likesCount: Int, materials: String, oherFeatures: [String!], otherInfo: String, overview: String, price: Float!, reviewCount: Int, stock: Int, tags: [String!], title: String!, videoLink: String, weight: String): Item!
+
+  """Create Item Review"""
+  CreateItemReview(itemId: String!, rating: Float!, text: String!): Review!
+  CreateOrder(token: String!): String!
+
+  """Create New Seller Account"""
+  CreateSeller(confirmPassword: String!, email: String!, name: String!, password: String!, sellerIdentification: String!, sellerNationality: String!, storeName: String!): Seller!
+
+  """Create New User"""
+  CreateUser(avatar: String, email: String!, name: String!, password: String!): String!
+
+  """Create Users Address"""
+  CreateUsersAddress(additionalInfo: String, address: String!, city: String!, company: String, country: String!, Lat: Float, Lng: Float, MaincontactNubmer: String!, message: String, name: String!, OthercontactNubmers: [String!], state: String!, streetAddress1: String, streetAddress2: String, zipCode: String): Address!
+  DeleteCartItem(cartItemId: String!): String!
+
+  """Delete Item"""
+  DeleteItem(itemId: String!): String!
+  deleteOneAddress(where: AddressWhereUniqueInput!): Address
+  DeleteSellersAccount(sellerId: String!): String!
+  DeleteUserAccount(userId: String!): String!
+  EmptyUserCart(userId: String!): String!
+
+  """Seller Request Email verification"""
+  RequestEmailVerificationToken(email: String!): String!
+
+  """Reset Password"""
+  ResetSellerPassword(confirmPassword: String!, password: String!, token: String!): String!
+
+  """User Reset Password"""
+  ResetUserPassword(confirmPassword: String!, password: String!, token: String!): String!
+
+  """Request A Password Reset"""
+  SellerForgotPasswordRequest(email: String!): String!
+
+  """Seller Login"""
+  SellerLogin(email: String!, password: String!): String!
+
+  """Like Or Remove Like From Item"""
+  ToggleLikeItem(itemId: String!): String!
+
+  """Toggle Primary Address"""
+  TogglePrimaryAddress(addressId: String!): Address!
+
+  """Update Item"""
+  UpdateItem(beforeDiscountPrice: Float, brand: String, catagory: [String!], colors: [String!], description: String, dimensions: String, id: String, images: [String!], likesCount: Int, materials: String, oherFeatures: [String!], otherInfo: String, overview: String, price: Float, reviewCount: Int, stock: Int, tags: [String!], title: String, videoLink: String, weight: String): Item!
+  updateOneAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
+
+  """User Request A Password Reset"""
+  UserForgotPasswordRequest(email: String!): String!
+  UserLogin(
+    """User Email"""
+    email: String!
+
+    """User Password"""
+    password: String!
+  ): String!
+
+  """Log User Out"""
+  UserLogout: String!
+
+  """Verify Seller Account"""
+  VerifySeller(SellerVerificationToken: String!): String!
+}
+
+input NullableBooleanFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+input NullableFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: Float
+  notIn: [Float!]
+}
+
+input NullableIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
 }
 
 input NullableStringFilter {
@@ -1878,6 +2103,13 @@ input NullableStringFilter {
   startsWith: String
 }
 
+type OherFeatures {
+  id: String!
+  item: Item!
+  itemId: String!
+  text: String!
+}
+
 input OherFeaturesCreateManyWithoutItemInput {
   connect: [OherFeaturesWhereUniqueInput!]
   create: [OherFeaturesCreateWithoutItemInput!]
@@ -1889,15 +2121,19 @@ input OherFeaturesCreateManyWithoutOrderItemInput {
 }
 
 input OherFeaturesCreateWithoutItemInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutOherFeaturesInput
   text: String!
+  updatedAt: DateTime
 }
 
 input OherFeaturesCreateWithoutOrderItemInput {
+  createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutOherFeaturesInput!
   text: String!
+  updatedAt: DateTime
 }
 
 input OherFeaturesFilter {
@@ -1908,17 +2144,21 @@ input OherFeaturesFilter {
 
 input OherFeaturesScalarWhereInput {
   AND: [OherFeaturesScalarWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
   NOT: [OherFeaturesScalarWhereInput!]
   OR: [OherFeaturesScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input OherFeaturesUpdateManyDataInput {
+  createdAt: DateTime
   id: String
   text: String
+  updatedAt: DateTime
 }
 
 input OherFeaturesUpdateManyWithoutItemInput {
@@ -1951,15 +2191,19 @@ input OherFeaturesUpdateManyWithWhereNestedInput {
 }
 
 input OherFeaturesUpdateWithoutItemDataInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutOherFeaturesInput
   text: String
+  updatedAt: DateTime
 }
 
 input OherFeaturesUpdateWithoutOrderItemDataInput {
+  createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutOherFeaturesInput
   text: String
+  updatedAt: DateTime
 }
 
 input OherFeaturesUpdateWithWhereUniqueWithoutItemInput {
@@ -1986,6 +2230,7 @@ input OherFeaturesUpsertWithWhereUniqueWithoutOrderItemInput {
 
 input OherFeaturesWhereInput {
   AND: [OherFeaturesWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
@@ -1994,10 +2239,22 @@ input OherFeaturesWhereInput {
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input OherFeaturesWhereUniqueInput {
   id: String
+}
+
+type Order {
+  charge: String!
+  id: String!
+  itemId: String
+  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, skip: Int): [OrderItem!]!
+  status: OrderStatus!
+  total: Int!
+  user: User!
+  userId: String!
 }
 
 input OrderCreateManyWithoutItemInput {
@@ -2005,20 +2262,33 @@ input OrderCreateManyWithoutItemInput {
   create: [OrderCreateWithoutItemInput!]
 }
 
+input OrderCreateManyWithoutItemsInput {
+  connect: [OrderWhereUniqueInput!]
+  create: [OrderCreateWithoutItemsInput!]
+}
+
 input OrderCreateManyWithoutUserInput {
   connect: [OrderWhereUniqueInput!]
   create: [OrderCreateWithoutUserInput!]
-}
-
-input OrderCreatestatusInput {
-  set: [OrderStatus!]
 }
 
 input OrderCreateWithoutItemInput {
   charge: String!
   createdAt: DateTime
   id: String
-  status: OrderCreatestatusInput
+  items: OrderItemCreateManyWithoutOrderInput
+  status: OrderStatus
+  total: Int!
+  updatedAt: DateTime
+  user: UserCreateOneWithoutOrderInput!
+}
+
+input OrderCreateWithoutItemsInput {
+  charge: String!
+  createdAt: DateTime
+  id: String
+  Item: ItemCreateOneWithoutOrderInput
+  status: OrderStatus
   total: Int!
   updatedAt: DateTime
   user: UserCreateOneWithoutOrderInput!
@@ -2028,8 +2298,9 @@ input OrderCreateWithoutUserInput {
   charge: String!
   createdAt: DateTime
   id: String
-  item: ItemCreateOneWithoutOrderInput!
-  status: OrderCreatestatusInput
+  Item: ItemCreateOneWithoutOrderInput
+  items: OrderItemCreateManyWithoutOrderInput
+  status: OrderStatus
   total: Int!
   updatedAt: DateTime
 }
@@ -2038,6 +2309,34 @@ input OrderFilter {
   every: OrderWhereInput
   none: OrderWhereInput
   some: OrderWhereInput
+}
+
+type OrderItem {
+  beforeDiscountPrice: Float!
+  brand: String
+  catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
+  colors(after: ColorsWhereUniqueInput, before: ColorsWhereUniqueInput, first: Int, last: Int, skip: Int): [Colors!]!
+  description: String!
+  dimensions: String
+  id: String!
+  images(after: ItemImageWhereUniqueInput, before: ItemImageWhereUniqueInput, first: Int, last: Int, skip: Int): [ItemImage!]!
+  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
+  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  materials: String
+  oherFeatures(after: OherFeaturesWhereUniqueInput, before: OherFeaturesWhereUniqueInput, first: Int, last: Int, skip: Int): [OherFeatures!]!
+  otherInfo: String
+  overview: String
+  price: Float!
+  stock: Int
+  tags(after: TagsWhereUniqueInput, before: TagsWhereUniqueInput, first: Int, last: Int, skip: Int): [Tags!]!
+  title: String!
+  videoLink: String
+  weight: String
+}
+
+input OrderItemCreateManyWithoutOrderInput {
+  connect: [OrderItemWhereUniqueInput!]
+  create: [OrderItemCreateWithoutOrderInput!]
 }
 
 input OrderItemCreateOneWithoutCatagoryInput {
@@ -2088,6 +2387,7 @@ input OrderItemCreateWithoutCatagoryInput {
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2112,6 +2412,7 @@ input OrderItemCreateWithoutColorsInput {
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2136,6 +2437,7 @@ input OrderItemCreateWithoutImagesInput {
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2160,6 +2462,7 @@ input OrderItemCreateWithoutItemReviewInput {
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2184,6 +2487,7 @@ input OrderItemCreateWithoutLikesInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2208,6 +2512,32 @@ input OrderItemCreateWithoutOherFeaturesInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
+  Order: OrderCreateManyWithoutItemsInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  stock: Int
+  tags: TagsCreateManyWithoutOrderItemInput
+  title: String!
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input OrderItemCreateWithoutOrderInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  catagory: CatagoryCreateManyWithoutOrderItemInput
+  colors: ColorsCreateManyWithoutOrderItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageCreateManyWithoutOrderItemInput
+  itemReview: ReviewCreateManyWithoutOrderItemInput
+  likes: LikeCreateManyWithoutOrderItemInput
+  materials: String
+  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2233,6 +2563,7 @@ input OrderItemCreateWithoutTagsInput {
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  Order: OrderCreateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2241,6 +2572,76 @@ input OrderItemCreateWithoutTagsInput {
   updatedAt: DateTime
   videoLink: String
   weight: String
+}
+
+input OrderItemFilter {
+  every: OrderItemWhereInput
+  none: OrderItemWhereInput
+  some: OrderItemWhereInput
+}
+
+input OrderItemScalarWhereInput {
+  AND: [OrderItemScalarWhereInput!]
+  beforeDiscountPrice: FloatFilter
+  brand: NullableStringFilter
+  catagory: CatagoryFilter
+  colors: ColorsFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  dimensions: NullableStringFilter
+  id: StringFilter
+  images: ItemImageFilter
+  itemReview: ReviewFilter
+  likes: LikeFilter
+  materials: NullableStringFilter
+  NOT: [OrderItemScalarWhereInput!]
+  oherFeatures: OherFeaturesFilter
+  OR: [OrderItemScalarWhereInput!]
+  Order: OrderFilter
+  otherInfo: NullableStringFilter
+  overview: NullableStringFilter
+  price: FloatFilter
+  stock: NullableIntFilter
+  tags: TagsFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  videoLink: NullableStringFilter
+  weight: NullableStringFilter
+}
+
+input OrderItemUpdateManyDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  materials: String
+  otherInfo: String
+  overview: String
+  price: Float
+  stock: Int
+  title: String
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input OrderItemUpdateManyWithoutOrderInput {
+  connect: [OrderItemWhereUniqueInput!]
+  create: [OrderItemCreateWithoutOrderInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutOrderInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutOrderInput!]
+}
+
+input OrderItemUpdateManyWithWhereNestedInput {
+  data: OrderItemUpdateManyDataInput!
+  where: OrderItemScalarWhereInput!
 }
 
 input OrderItemUpdateOneWithoutCatagoryInput {
@@ -2319,6 +2720,7 @@ input OrderItemUpdateWithoutCatagoryDataInput {
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2343,6 +2745,7 @@ input OrderItemUpdateWithoutColorsDataInput {
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2367,6 +2770,7 @@ input OrderItemUpdateWithoutImagesDataInput {
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2391,6 +2795,7 @@ input OrderItemUpdateWithoutItemReviewDataInput {
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2415,6 +2820,7 @@ input OrderItemUpdateWithoutLikesDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2439,6 +2845,32 @@ input OrderItemUpdateWithoutOherFeaturesDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
+  Order: OrderUpdateManyWithoutItemsInput
+  otherInfo: String
+  overview: String
+  price: Float
+  stock: Int
+  tags: TagsUpdateManyWithoutOrderItemInput
+  title: String
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input OrderItemUpdateWithoutOrderDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  catagory: CatagoryUpdateManyWithoutOrderItemInput
+  colors: ColorsUpdateManyWithoutOrderItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageUpdateManyWithoutOrderItemInput
+  itemReview: ReviewUpdateManyWithoutOrderItemInput
+  likes: LikeUpdateManyWithoutOrderItemInput
+  materials: String
+  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
@@ -2464,6 +2896,7 @@ input OrderItemUpdateWithoutTagsDataInput {
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
   oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  Order: OrderUpdateManyWithoutItemsInput
   otherInfo: String
   overview: String
   price: Float
@@ -2472,6 +2905,11 @@ input OrderItemUpdateWithoutTagsDataInput {
   updatedAt: DateTime
   videoLink: String
   weight: String
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutOrderInput {
+  data: OrderItemUpdateWithoutOrderDataInput!
+  where: OrderItemWhereUniqueInput!
 }
 
 input OrderItemUpsertWithoutCatagoryInput {
@@ -2509,32 +2947,39 @@ input OrderItemUpsertWithoutTagsInput {
   update: OrderItemUpdateWithoutTagsDataInput!
 }
 
+input OrderItemUpsertWithWhereUniqueWithoutOrderInput {
+  create: OrderItemCreateWithoutOrderInput!
+  update: OrderItemUpdateWithoutOrderDataInput!
+  where: OrderItemWhereUniqueInput!
+}
+
 input OrderItemWhereInput {
   AND: [OrderItemWhereInput!]
   beforeDiscountPrice: FloatFilter
-  brand: StringFilter
+  brand: NullableStringFilter
   catagory: CatagoryFilter
   colors: ColorsFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  dimensions: StringFilter
+  dimensions: NullableStringFilter
   id: StringFilter
   images: ItemImageFilter
   itemReview: ReviewFilter
   likes: LikeFilter
-  materials: StringFilter
+  materials: NullableStringFilter
   NOT: [OrderItemWhereInput!]
   oherFeatures: OherFeaturesFilter
   OR: [OrderItemWhereInput!]
+  Order: OrderFilter
   otherInfo: NullableStringFilter
-  overview: StringFilter
+  overview: NullableStringFilter
   price: FloatFilter
-  stock: IntFilter
+  stock: NullableIntFilter
   tags: TagsFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
-  weight: StringFilter
+  weight: NullableStringFilter
 }
 
 input OrderItemWhereUniqueInput {
@@ -2546,9 +2991,11 @@ input OrderScalarWhereInput {
   charge: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  itemId: StringFilter
+  itemId: NullableStringFilter
+  items: OrderItemFilter
   NOT: [OrderScalarWhereInput!]
   OR: [OrderScalarWhereInput!]
+  status: OrderStatus
   total: IntFilter
   updatedAt: DateTimeFilter
   userId: StringFilter
@@ -2566,7 +3013,7 @@ input OrderUpdateManyDataInput {
   charge: String
   createdAt: DateTime
   id: String
-  status: OrderUpdatestatusInput
+  status: OrderStatus
   total: Int
   updatedAt: DateTime
 }
@@ -2581,6 +3028,18 @@ input OrderUpdateManyWithoutItemInput {
   update: [OrderUpdateWithWhereUniqueWithoutItemInput!]
   updateMany: [OrderUpdateManyWithWhereNestedInput!]
   upsert: [OrderUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input OrderUpdateManyWithoutItemsInput {
+  connect: [OrderWhereUniqueInput!]
+  create: [OrderCreateWithoutItemsInput!]
+  delete: [OrderWhereUniqueInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+  update: [OrderUpdateWithWhereUniqueWithoutItemsInput!]
+  updateMany: [OrderUpdateManyWithWhereNestedInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutItemsInput!]
 }
 
 input OrderUpdateManyWithoutUserInput {
@@ -2600,15 +3059,23 @@ input OrderUpdateManyWithWhereNestedInput {
   where: OrderScalarWhereInput!
 }
 
-input OrderUpdatestatusInput {
-  set: [OrderStatus!]
-}
-
 input OrderUpdateWithoutItemDataInput {
   charge: String
   createdAt: DateTime
   id: String
-  status: OrderUpdatestatusInput
+  items: OrderItemUpdateManyWithoutOrderInput
+  status: OrderStatus
+  total: Int
+  updatedAt: DateTime
+  user: UserUpdateOneRequiredWithoutOrderInput
+}
+
+input OrderUpdateWithoutItemsDataInput {
+  charge: String
+  createdAt: DateTime
+  id: String
+  Item: ItemUpdateOneWithoutOrderInput
+  status: OrderStatus
   total: Int
   updatedAt: DateTime
   user: UserUpdateOneRequiredWithoutOrderInput
@@ -2618,14 +3085,20 @@ input OrderUpdateWithoutUserDataInput {
   charge: String
   createdAt: DateTime
   id: String
-  item: ItemUpdateOneRequiredWithoutOrderInput
-  status: OrderUpdatestatusInput
+  Item: ItemUpdateOneWithoutOrderInput
+  items: OrderItemUpdateManyWithoutOrderInput
+  status: OrderStatus
   total: Int
   updatedAt: DateTime
 }
 
 input OrderUpdateWithWhereUniqueWithoutItemInput {
   data: OrderUpdateWithoutItemDataInput!
+  where: OrderWhereUniqueInput!
+}
+
+input OrderUpdateWithWhereUniqueWithoutItemsInput {
+  data: OrderUpdateWithoutItemsDataInput!
   where: OrderWhereUniqueInput!
 }
 
@@ -2640,6 +3113,12 @@ input OrderUpsertWithWhereUniqueWithoutItemInput {
   where: OrderWhereUniqueInput!
 }
 
+input OrderUpsertWithWhereUniqueWithoutItemsInput {
+  create: OrderCreateWithoutItemsInput!
+  update: OrderUpdateWithoutItemsDataInput!
+  where: OrderWhereUniqueInput!
+}
+
 input OrderUpsertWithWhereUniqueWithoutUserInput {
   create: OrderCreateWithoutUserInput!
   update: OrderUpdateWithoutUserDataInput!
@@ -2651,10 +3130,12 @@ input OrderWhereInput {
   charge: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  item: ItemWhereInput
-  itemId: StringFilter
+  Item: ItemWhereInput
+  itemId: NullableStringFilter
+  items: OrderItemFilter
   NOT: [OrderWhereInput!]
   OR: [OrderWhereInput!]
+  status: OrderStatus
   total: IntFilter
   updatedAt: DateTimeFilter
   user: UserWhereInput
@@ -2669,12 +3150,43 @@ enum Permission {
   ADD_ITEM
   DELETE_ITEM
   EDIT_ITEM
-  UPRDATE_PERMISSION
+  NONE
+  UPDATE_PERMISSION
 }
 
 type Query {
-  """Current User"""
+  addresses(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+
+  """Currently Logged in Seller"""
+  CurrentSeller: Seller!
+
+  """Currently Logged in User"""
   CurrentUser: User
+  item(where: ItemWhereUniqueInput!): Item
+
+  """Item Reviews"""
+  ITemRevives(itemId: String!): [Review!]!
+  items(after: ItemWhereUniqueInput, before: ItemWhereUniqueInput, first: Int, last: Int, skip: Int): [Item!]!
+
+  """Get One Orders"""
+  Order(orderId: String!): Order!
+  seller(where: SellerWhereUniqueInput!): Seller
+  sellers(after: SellerWhereUniqueInput, before: SellerWhereUniqueInput, first: Int, last: Int, skip: Int): [Seller!]!
+  user(where: UserWhereUniqueInput!): User
+
+  """Users Orders"""
+  UserOrder: Order!
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int): [User!]!
+}
+
+type Review {
+  author: User!
+  authorId: String!
+  id: String!
+  item: Item!
+  itemId: String!
+  rating: Float!
+  text: String!
 }
 
 input ReviewCreateManyWithoutAuthorInput {
@@ -2881,6 +3393,23 @@ enum Role {
   USER
 }
 
+type Seller {
+  Brand: [String!]!
+  email: String!
+  EmailIsVerified: Boolean
+  id: String!
+  items(after: ItemWhereUniqueInput, before: ItemWhereUniqueInput, first: Int, last: Int, skip: Int): [Item!]!
+  name: String!
+  permissions: Permission
+  phone: [String!]!
+  PickupLocations(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+  role: Role
+  sellerIdentification: String!
+  SellerItemsCout: Int
+  sellerNationality: String!
+  storeName: String!
+}
+
 input SellerCreateBrandInput {
   set: [String!]
 }
@@ -2895,32 +3424,28 @@ input SellerCreateOneWithoutPickupLocationsInput {
   create: SellerCreateWithoutPickupLocationsInput
 }
 
-input SellerCreatepermissionsInput {
-  set: [Permission!]
-}
-
 input SellerCreatephoneInput {
   set: [String!]
 }
 
 input SellerCreateWithoutItemsInput {
   Brand: SellerCreateBrandInput
-  confirmPassword: String!
+  confirmPassword: String
   createdAt: DateTime
   email: String!
   EmailIsVerified: Boolean
-  EmailVarificationHash: String!
+  EmailVarificationHash: String
   id: String
   name: String!
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: SellerCreatepermissionsInput
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
   phone: SellerCreatephoneInput
   PickupLocations: AddressCreateManyWithoutSellerInput
   role: Role
   sellerIdentification: String!
-  SellerItemsCout: Int!
+  SellerItemsCout: Int
   sellerNationality: String!
   storeName: String!
   updatedAt: DateTime
@@ -2928,22 +3453,22 @@ input SellerCreateWithoutItemsInput {
 
 input SellerCreateWithoutPickupLocationsInput {
   Brand: SellerCreateBrandInput
-  confirmPassword: String!
+  confirmPassword: String
   createdAt: DateTime
   email: String!
   EmailIsVerified: Boolean
-  EmailVarificationHash: String!
+  EmailVarificationHash: String
   id: String
   items: ItemCreateManyWithoutSellerInput
   name: String!
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: SellerCreatepermissionsInput
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
   phone: SellerCreatephoneInput
   role: Role
   sellerIdentification: String!
-  SellerItemsCout: Int!
+  SellerItemsCout: Int
   sellerNationality: String!
   storeName: String!
   updatedAt: DateTime
@@ -2971,10 +3496,6 @@ input SellerUpdateOneWithoutPickupLocationsInput {
   upsert: SellerUpsertWithoutPickupLocationsInput
 }
 
-input SellerUpdatepermissionsInput {
-  set: [Permission!]
-}
-
 input SellerUpdatephoneInput {
   set: [String!]
 }
@@ -2991,7 +3512,7 @@ input SellerUpdateWithoutItemsDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: SellerUpdatepermissionsInput
+  permissions: Permission
   phone: SellerUpdatephoneInput
   PickupLocations: AddressUpdateManyWithoutSellerInput
   role: Role
@@ -3015,7 +3536,7 @@ input SellerUpdateWithoutPickupLocationsDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: SellerUpdatepermissionsInput
+  permissions: Permission
   phone: SellerUpdatephoneInput
   role: Role
   sellerIdentification: String
@@ -3037,23 +3558,24 @@ input SellerUpsertWithoutPickupLocationsInput {
 
 input SellerWhereInput {
   AND: [SellerWhereInput!]
-  confirmPassword: StringFilter
+  confirmPassword: NullableStringFilter
   createdAt: DateTimeFilter
   email: StringFilter
-  EmailIsVerified: BooleanFilter
-  EmailVarificationHash: StringFilter
+  EmailIsVerified: NullableBooleanFilter
+  EmailVarificationHash: NullableStringFilter
   id: StringFilter
   items: ItemFilter
   name: StringFilter
   NOT: [SellerWhereInput!]
   OR: [SellerWhereInput!]
   password: StringFilter
-  PasswordResetToken: StringFilter
-  PasswordResetTokenExpiry: FloatFilter
+  PasswordResetToken: NullableStringFilter
+  PasswordResetTokenExpiry: NullableFloatFilter
+  permissions: Permission
   PickupLocations: AddressFilter
   role: Role
   sellerIdentification: StringFilter
-  SellerItemsCout: IntFilter
+  SellerItemsCout: NullableIntFilter
   sellerNationality: StringFilter
   storeName: StringFilter
   updatedAt: DateTimeFilter
@@ -3080,6 +3602,13 @@ input StringFilter {
   startsWith: String
 }
 
+type Tags {
+  id: String!
+  item: Item!
+  itemId: String!
+  text: String!
+}
+
 input TagsCreateManyWithoutItemInput {
   connect: [TagsWhereUniqueInput!]
   create: [TagsCreateWithoutItemInput!]
@@ -3091,15 +3620,19 @@ input TagsCreateManyWithoutOrderItemInput {
 }
 
 input TagsCreateWithoutItemInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutTagsInput
   text: String!
+  updatedAt: DateTime
 }
 
 input TagsCreateWithoutOrderItemInput {
+  createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutTagsInput!
   text: String!
+  updatedAt: DateTime
 }
 
 input TagsFilter {
@@ -3110,17 +3643,21 @@ input TagsFilter {
 
 input TagsScalarWhereInput {
   AND: [TagsScalarWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
   NOT: [TagsScalarWhereInput!]
   OR: [TagsScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input TagsUpdateManyDataInput {
+  createdAt: DateTime
   id: String
   text: String
+  updatedAt: DateTime
 }
 
 input TagsUpdateManyWithoutItemInput {
@@ -3153,15 +3690,19 @@ input TagsUpdateManyWithWhereNestedInput {
 }
 
 input TagsUpdateWithoutItemDataInput {
+  createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutTagsInput
   text: String
+  updatedAt: DateTime
 }
 
 input TagsUpdateWithoutOrderItemDataInput {
+  createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutTagsInput
   text: String
+  updatedAt: DateTime
 }
 
 input TagsUpdateWithWhereUniqueWithoutItemInput {
@@ -3188,6 +3729,7 @@ input TagsUpsertWithWhereUniqueWithoutOrderItemInput {
 
 input TagsWhereInput {
   AND: [TagsWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
@@ -3196,6 +3738,7 @@ input TagsWhereInput {
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input TagsWhereUniqueInput {
@@ -3203,7 +3746,18 @@ input TagsWhereUniqueInput {
 }
 
 type User {
+  address(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+  avatar: String
+  cart(after: CartItemWhereUniqueInput, before: CartItemWhereUniqueInput, first: Int, last: Int, skip: Int): [CartItem!]!
+  email: String!
   id: String!
+  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
+  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  likesCount: Int
+  name: String!
+  permissions: Permission
+  reviewCount: Int
+  role: Role
 }
 
 input UserCreateOneWithoutAddressInput {
@@ -3231,10 +3785,6 @@ input UserCreateOneWithoutOrderInput {
   create: UserCreateWithoutOrderInput
 }
 
-input UserCreatepermissionsInput {
-  set: [Permission!]
-}
-
 input UserCreateWithoutAddressInput {
   avatar: String
   cart: CartItemCreateManyWithoutUserInput
@@ -3243,14 +3793,14 @@ input UserCreateWithoutAddressInput {
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
   likes: LikeCreateManyWithoutUserInput
-  likesCount: Int!
+  likesCount: Int
   name: String!
   Order: OrderCreateManyWithoutUserInput
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: UserCreatepermissionsInput
-  reviewCount: Int!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
   role: Role
   updatedAt: DateTime
 }
@@ -3263,14 +3813,14 @@ input UserCreateWithoutCartInput {
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
   likes: LikeCreateManyWithoutUserInput
-  likesCount: Int!
+  likesCount: Int
   name: String!
   Order: OrderCreateManyWithoutUserInput
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: UserCreatepermissionsInput
-  reviewCount: Int!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
   role: Role
   updatedAt: DateTime
 }
@@ -3283,14 +3833,14 @@ input UserCreateWithoutItemReviewInput {
   email: String!
   id: String
   likes: LikeCreateManyWithoutUserInput
-  likesCount: Int!
+  likesCount: Int
   name: String!
   Order: OrderCreateManyWithoutUserInput
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: UserCreatepermissionsInput
-  reviewCount: Int!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
   role: Role
   updatedAt: DateTime
 }
@@ -3303,14 +3853,14 @@ input UserCreateWithoutLikesInput {
   email: String!
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
-  likesCount: Int!
+  likesCount: Int
   name: String!
   Order: OrderCreateManyWithoutUserInput
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: UserCreatepermissionsInput
-  reviewCount: Int!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
   role: Role
   updatedAt: DateTime
 }
@@ -3324,33 +3874,12 @@ input UserCreateWithoutOrderInput {
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
   likes: LikeCreateManyWithoutUserInput
-  likesCount: Int!
+  likesCount: Int
   name: String!
   password: String!
-  PasswordResetToken: String!
-  PasswordResetTokenExpiry: Float!
-  permissions: UserCreatepermissionsInput
-  reviewCount: Int!
-  role: Role
-  updatedAt: DateTime
-}
-
-input UserUpdateInput {
-  address: AddressUpdateManyWithoutUserInput
-  avatar: String
-  cart: CartItemUpdateManyWithoutUserInput
-  createdAt: DateTime
-  email: String
-  id: String
-  itemReview: ReviewUpdateManyWithoutAuthorInput
-  likes: LikeUpdateManyWithoutUserInput
-  likesCount: Int
-  name: String
-  Order: OrderUpdateManyWithoutUserInput
-  password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3393,10 +3922,6 @@ input UserUpdateOneWithoutAddressInput {
   upsert: UserUpsertWithoutAddressInput
 }
 
-input UserUpdatepermissionsInput {
-  set: [Permission!]
-}
-
 input UserUpdateWithoutAddressDataInput {
   avatar: String
   cart: CartItemUpdateManyWithoutUserInput
@@ -3411,7 +3936,7 @@ input UserUpdateWithoutAddressDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3431,7 +3956,7 @@ input UserUpdateWithoutCartDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3451,7 +3976,7 @@ input UserUpdateWithoutItemReviewDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3471,7 +3996,7 @@ input UserUpdateWithoutLikesDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3491,7 +4016,7 @@ input UserUpdateWithoutOrderDataInput {
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
-  permissions: UserUpdatepermissionsInput
+  permissions: Permission
   reviewCount: Int
   role: Role
   updatedAt: DateTime
@@ -3532,15 +4057,16 @@ input UserWhereInput {
   id: StringFilter
   itemReview: ReviewFilter
   likes: LikeFilter
-  likesCount: IntFilter
+  likesCount: NullableIntFilter
   name: StringFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   Order: OrderFilter
   password: StringFilter
-  PasswordResetToken: StringFilter
-  PasswordResetTokenExpiry: FloatFilter
-  reviewCount: IntFilter
+  PasswordResetToken: NullableStringFilter
+  PasswordResetTokenExpiry: NullableFloatFilter
+  permissions: Permission
+  reviewCount: NullableIntFilter
   role: Role
   updatedAt: DateTimeFilter
 }

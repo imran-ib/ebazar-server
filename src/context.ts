@@ -18,6 +18,6 @@ export function createContext(
     ...request,
     response,
     pubsub,
-    prisma
+    prisma,
   };
 }

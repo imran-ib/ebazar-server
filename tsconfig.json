@@ -2,9 +2,9 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "lib": ["esnext"],
+    "lib": ["esnext", "ES2020"],
     "esModuleInterop": true,
     "strict": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "@types"]
 }
