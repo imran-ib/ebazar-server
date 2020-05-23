@@ -34,7 +34,7 @@ export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
 
     description: "Create Users Address",
     resolve: UserAuthResolver(
-      async (parent: any, args: any, ctx: Context, info: any) => {
+      async (parent: any, args: any, ctx: any, info: any) => {
         try {
           const ADDRESS: Address = await prisma.address.create({
             data: {
@@ -100,7 +100,7 @@ export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
     description: "Toggle Primary Address",
     //@ts-ignore
     resolve: UserAuthResolver(
-      async (parent: any, args: any, ctx: Context, info: any) => {
+      async (parent: any, args: any, ctx: any, info: any) => {
         if (!ctx.request.userId) {
           throw new Error(`You Must Logged in First`);
         }

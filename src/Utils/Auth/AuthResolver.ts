@@ -3,7 +3,7 @@ import { Context } from "../../context";
 export const UserAuthResolver = (resolverFunctions) => async (
   parent: any,
   args: any,
-  ctx: Context,
+  ctx: any,
   info: any
 ) => {
   const user = ctx.request.user;
@@ -19,7 +19,7 @@ export const UserAuthResolver = (resolverFunctions) => async (
 export const SellerAuthResolver = (resolverFunctions: any) => async (
   parent: any,
   args: any,
-  ctx: Context,
+  ctx: any,
   info: any
 ) => {
   const seller = ctx.request.seller;

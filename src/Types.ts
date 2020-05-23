@@ -16,7 +16,7 @@ export interface ItemArgs {
   catagory?: string[];
   tags?: string[];
   colors?: string[];
-  oherFeatures?: string[];
+  otherFeature?: string[];
 }
 export interface UpdateItemArgs {
   id?: string;
@@ -36,5 +36,5 @@ export interface UpdateItemArgs {
   catagory?: string[];
   tags?: string[];
   colors?: string[];
-  oherFeatures?: string[];
+  otherFeature?: string[];
 }

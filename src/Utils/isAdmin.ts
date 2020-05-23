@@ -1,11 +1,9 @@
-import { Context } from "graphql-yoga/dist/types";
-
-async function IsAdmin(ctx: Context) {
+async function IsAdmin(ctx: any) {
   const user = await ctx.prisma.query.user(
     {
       where: {
-        id: ctx.request.userId
-      }
+        id: ctx.request.userId,
+      },
     },
     `{
               id

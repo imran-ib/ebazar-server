@@ -168,6 +168,13 @@
     {
       "tag": "CreateField",
       "model": "Seller",
+      "field": "confirmPassword",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Seller",
       "field": "EmailIsVerified",
       "type": "Boolean",
       "arity": "Optional"
@@ -639,7 +646,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "\"https://www.freepik.com/free-icon/user-image-with-black-background_751548.htm\""
+      "value": "\"https://image.flaticon.com/icons/png/512/17/17004.png\""
     },
     {
       "tag": "CreateField",
@@ -776,20 +783,6 @@
       },
       "argument": "",
       "value": "\"No Description Provided\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "Item",
-      "field": "price",
-      "type": "Float",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Item",
-      "field": "beforeDiscountPrice",
-      "type": "Float",
-      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -954,52 +947,6 @@
     {
       "tag": "CreateField",
       "model": "Item",
-      "field": "stock",
-      "type": "Int",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Item",
-          "field": "stock"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Item",
-          "field": "stock"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "1"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Item",
-      "field": "likesCount",
-      "type": "Int",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Item",
-      "field": "reviewCount",
-      "type": "Int",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Item",
       "field": "otherInfo",
       "type": "String",
       "arity": "Optional"
@@ -1117,6 +1064,66 @@
     {
       "tag": "CreateField",
       "model": "Item",
+      "field": "price",
+      "type": "Float",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
+      "field": "beforeDiscountPrice",
+      "type": "Float",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
+      "field": "stock",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Item",
+          "field": "stock"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Item",
+          "field": "stock"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "1"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
+      "field": "likesCount",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
+      "field": "reviewCount",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
       "field": "itemReview",
       "type": "Review",
       "arity": "List"
@@ -1139,21 +1146,21 @@
       "tag": "CreateField",
       "model": "Item",
       "field": "tags",
-      "type": "Tags",
+      "type": "Tag",
       "arity": "List"
     },
     {
       "tag": "CreateField",
       "model": "Item",
       "field": "colors",
-      "type": "Colors",
+      "type": "Color",
       "arity": "List"
     },
     {
       "tag": "CreateField",
       "model": "Item",
-      "field": "oherFeatures",
-      "type": "OherFeatures",
+      "field": "OtherFeatures",
+      "type": "OtherFeature",
       "arity": "List"
     },
     {
@@ -1277,9 +1284,9 @@
     {
       "tag": "CreateField",
       "model": "Order",
-      "field": "item",
-      "type": "Item",
-      "arity": "Required"
+      "field": "items",
+      "type": "OrderItem",
+      "arity": "List"
     },
     {
       "tag": "CreateDirective",
@@ -1287,7 +1294,7 @@
         "path": {
           "tag": "Field",
           "model": "Order",
-          "field": "item"
+          "field": "items"
         },
         "directive": "relation"
       }
@@ -1299,33 +1306,12 @@
         "path": {
           "tag": "Field",
           "model": "Order",
-          "field": "item"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[itemId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Order",
-          "field": "item"
+          "field": "items"
         },
         "directive": "relation"
       },
       "argument": "references",
       "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Order",
-      "field": "itemId",
-      "type": "String",
-      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -1475,6 +1461,59 @@
         },
         "directive": "updatedAt"
       }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Order",
+      "field": "Item",
+      "type": "Item",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Order",
+          "field": "Item"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Order",
+          "field": "Item"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[itemId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Order",
+          "field": "Item"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Order",
+      "field": "itemId",
+      "type": "String",
+      "arity": "Optional"
     },
     {
       "tag": "CreateModel",
@@ -1864,21 +1903,21 @@
       "tag": "CreateField",
       "model": "OrderItem",
       "field": "tags",
-      "type": "Tags",
+      "type": "Tag",
       "arity": "List"
     },
     {
       "tag": "CreateField",
       "model": "OrderItem",
       "field": "colors",
-      "type": "Colors",
+      "type": "Color",
       "arity": "List"
     },
     {
       "tag": "CreateField",
       "model": "OrderItem",
-      "field": "oherFeatures",
-      "type": "OherFeatures",
+      "field": "OtherFeatures",
+      "type": "OtherFeature",
       "arity": "List"
     },
     {
@@ -1930,6 +1969,38 @@
         },
         "directive": "updatedAt"
       }
+    },
+    {
+      "tag": "CreateField",
+      "model": "OrderItem",
+      "field": "Order",
+      "type": "Order",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "OrderItem",
+          "field": "Order"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "OrderItem",
+          "field": "Order"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
     },
     {
       "tag": "CreateModel",
@@ -3750,11 +3821,11 @@
     },
     {
       "tag": "CreateModel",
-      "model": "Tags"
+      "model": "Tag"
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "id",
       "type": "String",
       "arity": "Required"
@@ -3764,7 +3835,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "id"
         },
         "directive": "default"
@@ -3776,7 +3847,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "id"
         },
         "directive": "default"
@@ -3789,7 +3860,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "id"
         },
         "directive": "id"
@@ -3797,14 +3868,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "text",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "item",
       "type": "Item",
       "arity": "Required"
@@ -3814,7 +3885,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "item"
         },
         "directive": "relation"
@@ -3826,7 +3897,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "item"
         },
         "directive": "relation"
@@ -3840,7 +3911,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "item"
         },
         "directive": "relation"
@@ -3850,14 +3921,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "itemId",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -3867,7 +3938,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "createdAt"
         },
         "directive": "default"
@@ -3879,7 +3950,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "createdAt"
         },
         "directive": "default"
@@ -3889,7 +3960,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "updatedAt",
       "type": "DateTime",
       "arity": "Required"
@@ -3899,7 +3970,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "updatedAt"
         },
         "directive": "updatedAt"
@@ -3907,7 +3978,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "OrderItem",
       "type": "OrderItem",
       "arity": "Optional"
@@ -3917,7 +3988,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -3929,7 +4000,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -3943,7 +4014,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Tags",
+          "model": "Tag",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -3953,18 +4024,18 @@
     },
     {
       "tag": "CreateField",
-      "model": "Tags",
+      "model": "Tag",
       "field": "orderItemId",
       "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateModel",
-      "model": "Colors"
+      "model": "Color"
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "id",
       "type": "String",
       "arity": "Required"
@@ -3974,7 +4045,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "id"
         },
         "directive": "default"
@@ -3986,7 +4057,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "id"
         },
         "directive": "default"
@@ -3999,7 +4070,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "id"
         },
         "directive": "id"
@@ -4007,14 +4078,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "text",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "item",
       "type": "Item",
       "arity": "Required"
@@ -4024,7 +4095,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "item"
         },
         "directive": "relation"
@@ -4036,7 +4107,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "item"
         },
         "directive": "relation"
@@ -4050,7 +4121,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "item"
         },
         "directive": "relation"
@@ -4060,14 +4131,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "itemId",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -4077,7 +4148,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "createdAt"
         },
         "directive": "default"
@@ -4089,7 +4160,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "createdAt"
         },
         "directive": "default"
@@ -4099,7 +4170,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "updatedAt",
       "type": "DateTime",
       "arity": "Required"
@@ -4109,7 +4180,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "updatedAt"
         },
         "directive": "updatedAt"
@@ -4117,7 +4188,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "OrderItem",
       "type": "OrderItem",
       "arity": "Optional"
@@ -4127,7 +4198,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4139,7 +4210,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4153,7 +4224,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Colors",
+          "model": "Color",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4163,18 +4234,18 @@
     },
     {
       "tag": "CreateField",
-      "model": "Colors",
+      "model": "Color",
       "field": "orderItemId",
       "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateModel",
-      "model": "OherFeatures"
+      "model": "OtherFeature"
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "id",
       "type": "String",
       "arity": "Required"
@@ -4184,7 +4255,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "id"
         },
         "directive": "default"
@@ -4196,7 +4267,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "id"
         },
         "directive": "default"
@@ -4209,7 +4280,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "id"
         },
         "directive": "id"
@@ -4217,14 +4288,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "text",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "item",
       "type": "Item",
       "arity": "Required"
@@ -4234,7 +4305,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "item"
         },
         "directive": "relation"
@@ -4246,7 +4317,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "item"
         },
         "directive": "relation"
@@ -4260,7 +4331,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "item"
         },
         "directive": "relation"
@@ -4270,14 +4341,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "itemId",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -4287,7 +4358,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "createdAt"
         },
         "directive": "default"
@@ -4299,7 +4370,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "createdAt"
         },
         "directive": "default"
@@ -4309,7 +4380,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "updatedAt",
       "type": "DateTime",
       "arity": "Required"
@@ -4319,7 +4390,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "updatedAt"
         },
         "directive": "updatedAt"
@@ -4327,7 +4398,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "OrderItem",
       "type": "OrderItem",
       "arity": "Optional"
@@ -4337,7 +4408,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4349,7 +4420,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4363,7 +4434,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "OherFeatures",
+          "model": "OtherFeature",
           "field": "OrderItem"
         },
         "directive": "relation"
@@ -4373,7 +4444,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "OherFeatures",
+      "model": "OtherFeature",
       "field": "orderItemId",
       "type": "String",
       "arity": "Optional"

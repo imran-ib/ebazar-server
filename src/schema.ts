@@ -1,5 +1,6 @@
 import { nexusPrismaPlugin } from "nexus-prisma";
-import { makeSchema, subscriptionField, connectionPlugin } from "@nexus/schema";
+import { makeSchema } from "@nexus/schema";
+
 import {
   User,
   Seller,
@@ -10,9 +11,9 @@ import {
   Item,
   OrderItem,
   Catagory,
-  Tags,
-  Colors,
-  OherFeatures,
+  Tag,
+  Color,
+  OtherFeature,
   Review,
   Address,
 } from "./api/Models/Modles";
@@ -32,39 +33,22 @@ export const schema = makeSchema({
     Item,
     OrderItem,
     Catagory,
-    Tags,
-    Colors,
-    OherFeatures,
+    Tag,
+    Color,
+    OtherFeature,
     Review,
     Address,
   ],
-  plugins: [
-    nexusPrismaPlugin(),
-
-    connectionPlugin({
-      typePrefix: "Analytics",
-      nexusFieldName: "analyticsConnection",
-      extendConnection: {
-        totalCount: { type: "Int" },
-        avgDuration: { type: "Int" },
-      },
-    }),
-    connectionPlugin({}),
-  ],
+  plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: __dirname + "/../schema.graphql",
     typegen: __dirname + "/generated/nexus.ts",
   },
   typegenAutoConfig: {
-    contextType: "Context.Context",
     sources: [
       {
         source: "@prisma/client",
         alias: "prisma",
-      },
-      {
-        source: require.resolve("./context"),
-        alias: "Context",
       },
     ],
   },

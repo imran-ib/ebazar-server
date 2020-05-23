@@ -95,9 +95,9 @@ model Item {
   itemReview          Review[]
   images              ItemImage[]
   catagory            Catagory[]
-  tags                Tags[]
-  colors              Colors[]
-  oherFeatures        OherFeatures[]
+  tags                Tag[]
+  colors              Color[]
+  OtherFeatures       OtherFeature[]
   likes               Like[]
   Order               Order[]
   CartItem            CartItem[]
@@ -137,9 +137,9 @@ model OrderItem {
   itemReview          Review[]
   images              ItemImage[]
   catagory            Catagory[]
-  tags                Tags[]
-  colors              Colors[]
-  oherFeatures        OherFeatures[]
+  tags                Tag[]
+  colors              Color[]
+  OtherFeatures       OtherFeature[]
   createdAt           DateTime       @default(now())
   updatedAt           DateTime       @updatedAt
   Order               Order[]        @relation(references: [id])
@@ -231,7 +231,7 @@ model Catagory {
   orderItemId String?
 }
 
-model Tags {
+model Tag {
   id          String     @default(cuid()) @id
   text        String
   item        Item       @relation(fields: [itemId], references: [id])
@@ -242,7 +242,7 @@ model Tags {
   orderItemId String?
 }
 
-model Colors {
+model Color {
   id          String     @default(cuid()) @id
   text        String
   item        Item       @relation(fields: [itemId], references: [id])
@@ -253,7 +253,7 @@ model Colors {
   orderItemId String?
 }
 
-model OherFeatures {
+model OtherFeature {
   id          String     @default(cuid()) @id
   text        String
   item        Item       @relation(fields: [itemId], references: [id])

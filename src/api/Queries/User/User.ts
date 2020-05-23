@@ -13,12 +13,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     description: "Currently Logged in User",
     nullable: true,
     resolve: UserAuthResolver(
-      async (
-        __: any,
-        _args: any,
-        ctx: Context,
-        _: any
-      ): Promise<User | null> => {
+      async (__: any, _args: any, ctx: any, _: any): Promise<User | null> => {
         try {
           if (!ctx.request.user) throw new Error(`You Are Not Authenticated`);
 
@@ -39,7 +34,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     type: "Seller",
     description: "Currently Logged in Seller",
     resolve: SellerAuthResolver(
-      async (__: any, _args: any, ctx: Context, _: any) => {
+      async (__: any, _args: any, ctx: any, _: any) => {
         try {
           const { sellerId } = ctx.request;
           return prisma.seller.findOne({
@@ -57,22 +52,20 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     //TODO Test This Query
     type: "Order",
     description: "Users Orders",
-    resolve: UserAuthResolver(
-      async (__: any, _args: any, ctx: Context, _: any) => {
-        try {
-          const { userId } = ctx.request;
-          const orders = await prisma.order.findMany({
-            where: {
-              userId,
-            },
-          });
+    resolve: UserAuthResolver(async (__: any, _args: any, ctx: any, _: any) => {
+      try {
+        const { userId } = ctx.request;
+        const orders = await prisma.order.findMany({
+          where: {
+            userId,
+          },
+        });
 
-          return orders;
-        } catch (error) {
-          console.log("UserOrder -> error", error.message);
-        }
+        return orders;
+      } catch (error) {
+        console.log("UserOrder -> error", error.message);
       }
-    ),
+    }),
   });
   t.field("Order", {
     //TODO Test This Query
@@ -80,7 +73,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     args: { orderId: stringArg({ required: true }) },
     description: "Get One Orders",
     resolve: UserAuthResolver(
-      async (__: any, args: { orderId: string }, ctx: Context, _: any) => {
+      async (__: any, args: { orderId: string }, ctx: any, _: any) => {
         try {
           const { userId } = ctx.request;
           const Order = await prisma.order.findOne({
@@ -101,12 +94,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     list: true,
     description: "Item Reviews",
     //@ts-ignore
-    resolve: async (
-      __: any,
-      args: { itemId: string },
-      ctx: Context,
-      _: any
-    ) => {
+    resolve: async (__: any, args: { itemId: string }, ctx: any, _: any) => {
       try {
         const Reviews = await prisma.review.findMany({
           where: {

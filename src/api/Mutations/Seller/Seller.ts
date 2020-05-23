@@ -25,7 +25,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "Create New Seller Account",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // Validate Email
         let email: string = args.email;
@@ -81,7 +81,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     args: { SellerVerificationToken: stringArg({ required: true }) },
     description: "Verify Seller Account",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         ctx.response.clearCookie("token");
         const [Seller] = await prisma.seller.findMany({
@@ -117,7 +117,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "Seller Request Email verification",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // Validate Email
         let email: string = args.email;
@@ -165,7 +165,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "Seller Login",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       ctx.response.clearCookie("token");
       try {
         const SellerExists = await prisma.seller.findOne({
@@ -200,7 +200,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "Request A Password Reset",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         ctx.response.clearCookie("token");
 
@@ -243,7 +243,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "Reset Password",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // check if there is any token clear it
         ctx.response.clearCookie("token");
@@ -300,7 +300,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { sellerId: stringArg({ required: true }) },
     resolve: SellerAuthResolver(
-      async (__: any, args: { sellerId: string }, ctx: Context, _: any) => {
+      async (__: any, args: { sellerId: string }, ctx: any, _: any) => {
         try {
           //TODO Test This Mutation
           const { sellerId } = args;

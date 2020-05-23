@@ -35,11 +35,11 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       catagory: stringArg({ list: true }),
       tags: stringArg({ list: true }),
       colors: stringArg({ list: true }),
-      oherFeatures: stringArg({ list: true }),
+      otherFeature: stringArg({ list: true }),
     },
     description: "Create New Item",
     resolve: SellerAuthResolver(
-      async (__: any, args: ItemArgs, ctx: Context, _: any) => {
+      async (__: any, args: ItemArgs, ctx: any, _: any) => {
         try {
           const ITEM: Item = await prisma.item.create({
             data: {
@@ -96,7 +96,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
 
           args.tags &&
             args.tags.forEach(async (tag) => {
-              await prisma.tags.create({
+              await prisma.tag.create({
                 data: {
                   text: tag,
                   item: {
@@ -110,7 +110,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           // colors
           args.colors &&
             args.colors.forEach(async (color) => {
-              await prisma.colors.create({
+              await prisma.color.create({
                 data: {
                   text: color,
                   item: {
@@ -121,10 +121,10 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
                 },
               });
             });
-          // oherFeatures
-          args.oherFeatures &&
-            args.oherFeatures.forEach(async (text) => {
-              await prisma.oherFeatures.create({
+          // otherFeature
+          args.otherFeature &&
+            args.otherFeature.forEach(async (text) => {
+              await prisma.otherFeature.create({
                 data: {
                   text: text,
                   item: {
@@ -166,11 +166,11 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       catagory: stringArg({ list: true, nullable: true }),
       tags: stringArg({ list: true, nullable: true }),
       colors: stringArg({ list: true, nullable: true }),
-      oherFeatures: stringArg({ list: true, nullable: true }),
+      otherFeature: stringArg({ list: true, nullable: true }),
     },
     description: "Update Item",
     resolve: SellerAuthResolver(
-      async (__: any, args: UpdateItemArgs, ctx: Context, _: any) => {
+      async (__: any, args: UpdateItemArgs, ctx: any, _: any) => {
         try {
           const ITEM = await prisma.item.findOne({
             include: { Seller: true },
@@ -251,14 +251,14 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
 
             // tags
             if (args.tags && args.tags.length > 0) {
-              await prisma.tags.deleteMany({
+              await prisma.tag.deleteMany({
                 where: {
                   itemId: UPDATED_ITEM.id,
                 },
               });
 
               args.tags.forEach(async (tag) => {
-                await prisma.tags.create({
+                await prisma.tag.create({
                   data: {
                     text: tag,
                     item: {
@@ -273,14 +273,14 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
 
             // colors
             if (args.colors && args.colors.length > 0) {
-              await prisma.colors.deleteMany({
+              await prisma.color.deleteMany({
                 where: {
                   itemId: UPDATED_ITEM.id,
                 },
               });
 
               args.colors.forEach(async (color) => {
-                await prisma.colors.create({
+                await prisma.color.create({
                   data: {
                     text: color,
                     item: {
@@ -292,16 +292,16 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
                 });
               });
             }
-            // oherFeatures
-            if (args.oherFeatures && args.oherFeatures.length > 0) {
-              await prisma.oherFeatures.deleteMany({
+            // otherFeature
+            if (args.otherFeature && args.otherFeature.length > 0) {
+              await prisma.otherFeature.deleteMany({
                 where: {
                   id: UPDATED_ITEM.id,
                 },
               });
 
-              args.oherFeatures.forEach(async (text) => {
-                await prisma.oherFeatures.create({
+              args.otherFeature.forEach(async (text) => {
+                await prisma.otherFeature.create({
                   data: {
                     text: text,
                     item: {
@@ -328,7 +328,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     args: { itemId: stringArg({ required: true }) },
     description: "Delete Item",
     resolve: SellerAuthResolver(
-      async (__: any, args: { itemId: string }, ctx: Context, _: any) => {
+      async (__: any, args: { itemId: string }, ctx: any, _: any) => {
         try {
           const ITEM = await prisma.item.findOne({
             include: { Seller: true },
@@ -348,15 +348,15 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
               await prisma.itemImage.deleteMany({
                 where: { itemId: args.itemId },
               });
-              await prisma.tags.deleteMany({ where: { itemId: args.itemId } });
+              await prisma.tag.deleteMany({ where: { itemId: args.itemId } });
 
-              await prisma.colors.deleteMany({
+              await prisma.color.deleteMany({
                 where: { itemId: args.itemId },
               });
               await prisma.catagory.deleteMany({
                 where: { itemId: args.itemId },
               });
-              await prisma.oherFeatures.deleteMany({
+              await prisma.otherFeature.deleteMany({
                 where: { itemId: args.itemId },
               });
 
@@ -367,11 +367,13 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
               });
             } catch (error) {
               console.log(
-                "Items -> Delete Item itemImage tags colors catagory oherFeatures ->  error",
+                "Items -> Delete Item itemImage tags colors catagory otherFeature ->  error",
                 error.message
               );
               throw new Error(
-                `"Items -> Delete Item itemImage tags colors catagory oherFeatures ->  error", ${error.message}`
+                `"Items -> Delete Item itemImage tags colors catagory otherFeature ->  error", ${
+                  error.message
+                }`
               );
             }
           }
@@ -389,12 +391,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     args: { itemId: stringArg({ required: true }) },
     description: "Like Or Remove Like From Item",
     resolve: UserAuthResolver(
-      async (
-        parent: any,
-        args: { itemId: string },
-        ctx: Context,
-        info: any
-      ) => {
+      async (parent: any, args: { itemId: string }, ctx: any, info: any) => {
         try {
           const userId: string = ctx.request.userId;
 
@@ -446,7 +443,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       async (
         parent: any,
         args: { itemId: string; text: string; rating: number },
-        ctx: Context,
+        ctx: any,
         info: any
       ) => {
         try {
@@ -492,7 +489,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       async (
         __: any,
         args: { itemId: string; quantity: number },
-        ctx: Context,
+        ctx: any,
         _: any
       ) => {
         try {
@@ -532,7 +529,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "",
     resolve: UserAuthResolver(
-      async (__: any, args: { cartItemId: string }, ctx: Context, _: any) => {
+      async (__: any, args: { cartItemId: string }, ctx: any, _: any) => {
         try {
           const [ITEM] = await prisma.cartItem.findMany({
             where: {
@@ -557,7 +554,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     args: { userId: stringArg({ required: true }) },
     description: "",
     resolve: UserAuthResolver(
-      async (__: any, args: { userId: string }, ctx: Context, _: any) => {
+      async (__: any, args: { userId: string }, ctx: any, _: any) => {
         try {
           const { userId } = args;
           if (userId !== ctx.request.userId)
@@ -580,7 +577,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     args: { token: stringArg({ required: true }) },
     description: "",
     resolve: UserAuthResolver(
-      async (__: any, args: { token: string }, ctx: Context, _: any) => {
+      async (__: any, args: { token: string }, ctx: any, _: any) => {
         try {
           // Get Current User
           const CurrentUserCart = await prisma.cartItem.findMany({

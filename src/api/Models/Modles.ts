@@ -119,15 +119,7 @@ export const Item = objectType({
     t.model.catagory({
       type: "Catagory",
     });
-    t.model.tags({
-      type: "Tags",
-    });
-    t.model.colors({
-      type: "Colors",
-    });
-    t.model.oherFeatures({
-      type: "OherFeatures",
-    });
+
     t.model.title();
     t.model.description();
     t.model.overview();
@@ -158,15 +150,7 @@ export const OrderItem = objectType({
     t.model.catagory({
       type: "Catagory",
     });
-    t.model.tags({
-      type: "Tags",
-    });
-    t.model.colors({
-      type: "Colors",
-    });
-    t.model.oherFeatures({
-      type: "OherFeatures",
-    });
+
     t.model.title();
     t.model.description();
     t.model.overview();
@@ -192,8 +176,8 @@ export const Catagory = objectType({
     t.model.itemId();
   },
 });
-export const Tags = objectType({
-  name: "Tags",
+export const Tag = objectType({
+  name: "Tag",
   definition(t) {
     t.model.id();
     t.model.text();
@@ -203,8 +187,8 @@ export const Tags = objectType({
     t.model.itemId();
   },
 });
-export const Colors = objectType({
-  name: "Colors",
+export const Color = objectType({
+  name: "Color",
   definition(t) {
     t.model.id();
     t.model.text();
@@ -214,8 +198,8 @@ export const Colors = objectType({
     t.model.itemId();
   },
 });
-export const OherFeatures = objectType({
-  name: "OherFeatures",
+export const OtherFeature = objectType({
+  name: "OtherFeature",
   definition(t) {
     t.model.id();
     t.model.text();

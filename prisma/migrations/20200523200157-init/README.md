@@ -1,17 +1,17 @@
-# Migration `20200519195255-init`
+# Migration `20200523200157-init`
 
-This migration has been generated at 5/19/2020, 7:52:57 PM.
+This migration has been generated at 5/23/2020, 8:01:59 PM.
 You can check out the [state of the schema](./schema.prisma) after the migration.
 
 ## Database Steps
 
 ```sql
 CREATE TABLE "public"."Seller" (
-"Brand" text []  ,"EmailIsVerified" boolean   DEFAULT false,"EmailVarificationHash" text   ,"PasswordResetToken" text   ,"PasswordResetTokenExpiry" Decimal(65,30)   ,"SellerItemsCout" integer   ,"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"email" text  NOT NULL ,"id" text  NOT NULL ,"name" text  NOT NULL ,"password" text  NOT NULL ,"permissions" "Permission"  DEFAULT 'ADD_ITEM',"phone" text []  ,"role" "Role"  DEFAULT 'SELLER',"sellerIdentification" text  NOT NULL ,"sellerNationality" text  NOT NULL ,"storeName" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
+"Brand" text []  ,"EmailIsVerified" boolean   DEFAULT false,"EmailVarificationHash" text   ,"PasswordResetToken" text   ,"PasswordResetTokenExpiry" Decimal(65,30)   ,"SellerItemsCout" integer   ,"confirmPassword" text   ,"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"email" text  NOT NULL ,"id" text  NOT NULL ,"name" text  NOT NULL ,"password" text  NOT NULL ,"permissions" "Permission"  DEFAULT 'ADD_ITEM',"phone" text []  ,"role" "Role"  DEFAULT 'SELLER',"sellerIdentification" text  NOT NULL ,"sellerNationality" text  NOT NULL ,"storeName" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
 CREATE TABLE "public"."User" (
-"PasswordResetToken" text   ,"PasswordResetTokenExpiry" Decimal(65,30)   ,"avatar" text   DEFAULT 'https://www.freepik.com/free-icon/user-image-with-black-background_751548.htm',"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"email" text  NOT NULL ,"id" text  NOT NULL ,"likesCount" integer   ,"name" text  NOT NULL ,"password" text  NOT NULL ,"permissions" "Permission"  DEFAULT 'NONE',"reviewCount" integer   ,"role" "Role"  DEFAULT 'USER',"updatedAt" timestamp(3)  NOT NULL ,
+"PasswordResetToken" text   ,"PasswordResetTokenExpiry" Decimal(65,30)   ,"avatar" text   DEFAULT 'https://image.flaticon.com/icons/png/512/17/17004.png',"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"email" text  NOT NULL ,"id" text  NOT NULL ,"likesCount" integer   ,"name" text  NOT NULL ,"password" text  NOT NULL ,"permissions" "Permission"  DEFAULT 'NONE',"reviewCount" integer   ,"role" "Role"  DEFAULT 'USER',"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
 CREATE TABLE "public"."Item" (
@@ -19,7 +19,7 @@ CREATE TABLE "public"."Item" (
     PRIMARY KEY ("id"))
 
 CREATE TABLE "public"."Order" (
-"charge" text  NOT NULL ,"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text  NOT NULL ,"status" "OrderStatus" NOT NULL DEFAULT 'PENDING',"total" integer  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,"userId" text  NOT NULL ,
+"charge" text  NOT NULL ,"createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text   ,"status" "OrderStatus" NOT NULL DEFAULT 'PENDING',"total" integer  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,"userId" text  NOT NULL ,
     PRIMARY KEY ("id"))
 
 CREATE TABLE "public"."OrderItem" (
@@ -50,15 +50,15 @@ CREATE TABLE "public"."Catagory" (
 "createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text  NOT NULL ,"orderItemId" text   ,"text" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
-CREATE TABLE "public"."Tags" (
+CREATE TABLE "public"."Tag" (
 "createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text  NOT NULL ,"orderItemId" text   ,"text" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
-CREATE TABLE "public"."Colors" (
+CREATE TABLE "public"."Color" (
 "createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text  NOT NULL ,"orderItemId" text   ,"text" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
-CREATE TABLE "public"."OherFeatures" (
+CREATE TABLE "public"."OtherFeature" (
 "createdAt" timestamp(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP,"id" text  NOT NULL ,"itemId" text  NOT NULL ,"orderItemId" text   ,"text" text  NOT NULL ,"updatedAt" timestamp(3)  NOT NULL ,
     PRIMARY KEY ("id"))
 
@@ -72,9 +72,9 @@ CREATE UNIQUE INDEX "User.email" ON "public"."User"("email")
 
 ALTER TABLE "public"."Item" ADD FOREIGN KEY ("sellerId")REFERENCES "public"."Seller"("id") ON DELETE SET NULL  ON UPDATE CASCADE
 
-ALTER TABLE "public"."Order" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
-
 ALTER TABLE "public"."Order" ADD FOREIGN KEY ("userId")REFERENCES "public"."User"("id") ON DELETE CASCADE  ON UPDATE CASCADE
+
+ALTER TABLE "public"."Order" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE SET NULL  ON UPDATE CASCADE
 
 ALTER TABLE "public"."CartItem" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
 
@@ -104,27 +104,31 @@ ALTER TABLE "public"."Catagory" ADD FOREIGN KEY ("itemId")REFERENCES "public"."I
 
 ALTER TABLE "public"."Catagory" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
 
-ALTER TABLE "public"."Tags" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
+ALTER TABLE "public"."Tag" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
 
-ALTER TABLE "public"."Tags" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
+ALTER TABLE "public"."Tag" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
 
-ALTER TABLE "public"."Colors" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
+ALTER TABLE "public"."Color" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
 
-ALTER TABLE "public"."Colors" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
+ALTER TABLE "public"."Color" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
 
-ALTER TABLE "public"."OherFeatures" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
+ALTER TABLE "public"."OtherFeature" ADD FOREIGN KEY ("itemId")REFERENCES "public"."Item"("id") ON DELETE CASCADE  ON UPDATE CASCADE
 
-ALTER TABLE "public"."OherFeatures" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
+ALTER TABLE "public"."OtherFeature" ADD FOREIGN KEY ("orderItemId")REFERENCES "public"."OrderItem"("id") ON DELETE SET NULL  ON UPDATE CASCADE
+
+ALTER TABLE "public"."_OrderToOrderItem" ADD FOREIGN KEY ("A")REFERENCES "public"."Order"("id") ON DELETE CASCADE  ON UPDATE CASCADE
+
+ALTER TABLE "public"."_OrderToOrderItem" ADD FOREIGN KEY ("B")REFERENCES "public"."OrderItem"("id") ON DELETE CASCADE  ON UPDATE CASCADE
 ```
 
 ## Changes
 
 ```diff
 diff --git schema.prisma schema.prisma
-migration ..20200519195255-init
+migration ..20200523200157-init
 --- datamodel.dml
 +++ datamodel.dml
-@@ -1,0 +1,262 @@
+@@ -1,0 +1,265 @@
 +generator client {
 +  provider = "prisma-client-js"
 +}
@@ -164,6 +168,7 @@ migration ..20200519195255-init
 +  storeName                String
 +  sellerNationality        String
 +  sellerIdentification     String      @unique
++  confirmPassword          String?
 +  EmailIsVerified          Boolean?    @default(false)
 +  EmailVarificationHash    String?
 +  PasswordResetToken       String?
@@ -195,7 +200,7 @@ migration ..20200519195255-init
 +  likesCount               Int?
 +  PasswordResetToken       String?
 +  Order                    Order[]
-+  avatar                   String?     @default("https://www.freepik.com/free-icon/user-image-with-black-background_751548.htm")
++  avatar                   String?     @default("https://image.flaticon.com/icons/png/512/17/17004.png")
 +  createdAt                DateTime    @default(now())
 +  updatedAt                DateTime    @updatedAt
 +}
@@ -204,26 +209,26 @@ migration ..20200519195255-init
 +  id                  String         @default(cuid()) @id
 +  title               String
 +  description         String         @default("No Description Provided")
-+  price               Float
-+  beforeDiscountPrice Float
 +  overview            String?        @default("No Overview Provided")
 +  brand               String?        @default("No brand Provided")
 +  weight              String?        @default("No weight Provided")
 +  dimensions          String?        @default("No dimensions Provided")
 +  materials           String?        @default("No materials Provided")
-+  stock               Int?           @default(1)
-+  likesCount          Int?
-+  reviewCount         Int?
 +  otherInfo           String?        @default("No Other Info Provided")
 +  videoLink           String?        @default("No Video Link Provided")
 +  Seller              Seller?        @relation(fields: [sellerId], references: [id])
 +  sellerId            String?
++  price               Float
++  beforeDiscountPrice Float
++  stock               Int?           @default(1)
++  likesCount          Int?
++  reviewCount         Int?
 +  itemReview          Review[]
 +  images              ItemImage[]
 +  catagory            Catagory[]
-+  tags                Tags[]
-+  colors              Colors[]
-+  oherFeatures        OherFeatures[]
++  tags                Tag[]
++  colors              Color[]
++  OtherFeatures       OtherFeature[]
 +  likes               Like[]
 +  Order               Order[]
 +  CartItem            CartItem[]
@@ -233,8 +238,7 @@ migration ..20200519195255-init
 +
 +model Order {
 +  id        String      @default(cuid()) @id
-+  item      Item        @relation(fields: [itemId], references: [id])
-+  itemId    String
++  items     OrderItem[] @relation(references: [id])
 +  total     Int
 +  user      User        @relation(fields: [userId], references: [id])
 +  userId    String
@@ -242,6 +246,8 @@ migration ..20200519195255-init
 +  status    OrderStatus @default(PENDING)
 +  createdAt DateTime    @default(now())
 +  updatedAt DateTime    @updatedAt
++  Item      Item?       @relation(fields: [itemId], references: [id])
++  itemId    String?
 +}
 +
 +model OrderItem {
@@ -262,11 +268,12 @@ migration ..20200519195255-init
 +  itemReview          Review[]
 +  images              ItemImage[]
 +  catagory            Catagory[]
-+  tags                Tags[]
-+  colors              Colors[]
-+  oherFeatures        OherFeatures[]
++  tags                Tag[]
++  colors              Color[]
++  OtherFeatures       OtherFeature[]
 +  createdAt           DateTime       @default(now())
 +  updatedAt           DateTime       @updatedAt
++  Order               Order[]        @relation(references: [id])
 +}
 +
 +model CartItem {
@@ -355,7 +362,7 @@ migration ..20200519195255-init
 +  orderItemId String?
 +}
 +
-+model Tags {
++model Tag {
 +  id          String     @default(cuid()) @id
 +  text        String
 +  item        Item       @relation(fields: [itemId], references: [id])
@@ -366,7 +373,7 @@ migration ..20200519195255-init
 +  orderItemId String?
 +}
 +
-+model Colors {
++model Color {
 +  id          String     @default(cuid()) @id
 +  text        String
 +  item        Item       @relation(fields: [itemId], references: [id])
@@ -377,7 +384,7 @@ migration ..20200519195255-init
 +  orderItemId String?
 +}
 +
-+model OherFeatures {
++model OtherFeature {
 +  id          String     @default(cuid()) @id
 +  text        String
 +  item        Item       @relation(fields: [itemId], references: [id])

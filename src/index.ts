@@ -8,6 +8,8 @@ import createServer from "./server";
 import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 
+// process.env.NODE_ENV = "production";
+
 const server: GraphQLServer = createServer();
 server.express.use(cookieParser());
 server.express.use(helmet());

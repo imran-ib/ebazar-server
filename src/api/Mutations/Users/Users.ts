@@ -23,7 +23,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     description: "Create New User",
 
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // Validate Email
         let email: string = args.email;
@@ -78,7 +78,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
       password: stringArg({ required: true, description: "User Password" }),
     },
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // if user or seller is already logged log them out
         ctx.response.clearCookie("token");
@@ -113,7 +113,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
   t.field("UserLogout", {
     type: "String",
     description: "Log User Out",
-    resolve: (__, args, ctx: Context, _) => {
+    resolve: (__, args, ctx: any, _) => {
       ctx.response.clearCookie("token");
       return "Goodbye!";
     },
@@ -125,7 +125,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "User Request A Password Reset",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         ctx.response.clearCookie("token");
 
@@ -167,7 +167,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
     description: "User Reset Password",
     //@ts-ignore
-    resolve: async (parent: any, args, ctx: Context, info: any) => {
+    resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // check if there is any token clear it
         ctx.response.clearCookie("token");
@@ -226,12 +226,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { userId: stringArg({ required: true }) },
     resolve: UserAuthResolver(
-      async (
-        parent: any,
-        args: { userId: string },
-        ctx: Context,
-        info: any
-      ) => {
+      async (parent: any, args: { userId: string }, ctx: any, info: any) => {
         try {
           const { userId } = args;
           await prisma.cartItem.deleteMany({ where: { userId } });

@@ -582,24 +582,24 @@ input CatagoryWhereUniqueInput {
   id: String
 }
 
-type Colors {
+type Color {
   id: String!
   item: Item!
   itemId: String!
   text: String!
 }
 
-input ColorsCreateManyWithoutItemInput {
-  connect: [ColorsWhereUniqueInput!]
-  create: [ColorsCreateWithoutItemInput!]
+input ColorCreateManyWithoutItemInput {
+  connect: [ColorWhereUniqueInput!]
+  create: [ColorCreateWithoutItemInput!]
 }
 
-input ColorsCreateManyWithoutOrderItemInput {
-  connect: [ColorsWhereUniqueInput!]
-  create: [ColorsCreateWithoutOrderItemInput!]
+input ColorCreateManyWithoutOrderItemInput {
+  connect: [ColorWhereUniqueInput!]
+  create: [ColorCreateWithoutOrderItemInput!]
 }
 
-input ColorsCreateWithoutItemInput {
+input ColorCreateWithoutItemInput {
   createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutColorsInput
@@ -607,7 +607,7 @@ input ColorsCreateWithoutItemInput {
   updatedAt: DateTime
 }
 
-input ColorsCreateWithoutOrderItemInput {
+input ColorCreateWithoutOrderItemInput {
   createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutColorsInput!
@@ -615,61 +615,61 @@ input ColorsCreateWithoutOrderItemInput {
   updatedAt: DateTime
 }
 
-input ColorsFilter {
-  every: ColorsWhereInput
-  none: ColorsWhereInput
-  some: ColorsWhereInput
+input ColorFilter {
+  every: ColorWhereInput
+  none: ColorWhereInput
+  some: ColorWhereInput
 }
 
-input ColorsScalarWhereInput {
-  AND: [ColorsScalarWhereInput!]
+input ColorScalarWhereInput {
+  AND: [ColorScalarWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
-  NOT: [ColorsScalarWhereInput!]
-  OR: [ColorsScalarWhereInput!]
+  NOT: [ColorScalarWhereInput!]
+  OR: [ColorScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
   updatedAt: DateTimeFilter
 }
 
-input ColorsUpdateManyDataInput {
+input ColorUpdateManyDataInput {
   createdAt: DateTime
   id: String
   text: String
   updatedAt: DateTime
 }
 
-input ColorsUpdateManyWithoutItemInput {
-  connect: [ColorsWhereUniqueInput!]
-  create: [ColorsCreateWithoutItemInput!]
-  delete: [ColorsWhereUniqueInput!]
-  deleteMany: [ColorsScalarWhereInput!]
-  disconnect: [ColorsWhereUniqueInput!]
-  set: [ColorsWhereUniqueInput!]
-  update: [ColorsUpdateWithWhereUniqueWithoutItemInput!]
-  updateMany: [ColorsUpdateManyWithWhereNestedInput!]
-  upsert: [ColorsUpsertWithWhereUniqueWithoutItemInput!]
+input ColorUpdateManyWithoutItemInput {
+  connect: [ColorWhereUniqueInput!]
+  create: [ColorCreateWithoutItemInput!]
+  delete: [ColorWhereUniqueInput!]
+  deleteMany: [ColorScalarWhereInput!]
+  disconnect: [ColorWhereUniqueInput!]
+  set: [ColorWhereUniqueInput!]
+  update: [ColorUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [ColorUpdateManyWithWhereNestedInput!]
+  upsert: [ColorUpsertWithWhereUniqueWithoutItemInput!]
 }
 
-input ColorsUpdateManyWithoutOrderItemInput {
-  connect: [ColorsWhereUniqueInput!]
-  create: [ColorsCreateWithoutOrderItemInput!]
-  delete: [ColorsWhereUniqueInput!]
-  deleteMany: [ColorsScalarWhereInput!]
-  disconnect: [ColorsWhereUniqueInput!]
-  set: [ColorsWhereUniqueInput!]
-  update: [ColorsUpdateWithWhereUniqueWithoutOrderItemInput!]
-  updateMany: [ColorsUpdateManyWithWhereNestedInput!]
-  upsert: [ColorsUpsertWithWhereUniqueWithoutOrderItemInput!]
+input ColorUpdateManyWithoutOrderItemInput {
+  connect: [ColorWhereUniqueInput!]
+  create: [ColorCreateWithoutOrderItemInput!]
+  delete: [ColorWhereUniqueInput!]
+  deleteMany: [ColorScalarWhereInput!]
+  disconnect: [ColorWhereUniqueInput!]
+  set: [ColorWhereUniqueInput!]
+  update: [ColorUpdateWithWhereUniqueWithoutOrderItemInput!]
+  updateMany: [ColorUpdateManyWithWhereNestedInput!]
+  upsert: [ColorUpsertWithWhereUniqueWithoutOrderItemInput!]
 }
 
-input ColorsUpdateManyWithWhereNestedInput {
-  data: ColorsUpdateManyDataInput!
-  where: ColorsScalarWhereInput!
+input ColorUpdateManyWithWhereNestedInput {
+  data: ColorUpdateManyDataInput!
+  where: ColorScalarWhereInput!
 }
 
-input ColorsUpdateWithoutItemDataInput {
+input ColorUpdateWithoutItemDataInput {
   createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutColorsInput
@@ -677,7 +677,7 @@ input ColorsUpdateWithoutItemDataInput {
   updatedAt: DateTime
 }
 
-input ColorsUpdateWithoutOrderItemDataInput {
+input ColorUpdateWithoutOrderItemDataInput {
   createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutColorsInput
@@ -685,43 +685,43 @@ input ColorsUpdateWithoutOrderItemDataInput {
   updatedAt: DateTime
 }
 
-input ColorsUpdateWithWhereUniqueWithoutItemInput {
-  data: ColorsUpdateWithoutItemDataInput!
-  where: ColorsWhereUniqueInput!
+input ColorUpdateWithWhereUniqueWithoutItemInput {
+  data: ColorUpdateWithoutItemDataInput!
+  where: ColorWhereUniqueInput!
 }
 
-input ColorsUpdateWithWhereUniqueWithoutOrderItemInput {
-  data: ColorsUpdateWithoutOrderItemDataInput!
-  where: ColorsWhereUniqueInput!
+input ColorUpdateWithWhereUniqueWithoutOrderItemInput {
+  data: ColorUpdateWithoutOrderItemDataInput!
+  where: ColorWhereUniqueInput!
 }
 
-input ColorsUpsertWithWhereUniqueWithoutItemInput {
-  create: ColorsCreateWithoutItemInput!
-  update: ColorsUpdateWithoutItemDataInput!
-  where: ColorsWhereUniqueInput!
+input ColorUpsertWithWhereUniqueWithoutItemInput {
+  create: ColorCreateWithoutItemInput!
+  update: ColorUpdateWithoutItemDataInput!
+  where: ColorWhereUniqueInput!
 }
 
-input ColorsUpsertWithWhereUniqueWithoutOrderItemInput {
-  create: ColorsCreateWithoutOrderItemInput!
-  update: ColorsUpdateWithoutOrderItemDataInput!
-  where: ColorsWhereUniqueInput!
+input ColorUpsertWithWhereUniqueWithoutOrderItemInput {
+  create: ColorCreateWithoutOrderItemInput!
+  update: ColorUpdateWithoutOrderItemDataInput!
+  where: ColorWhereUniqueInput!
 }
 
-input ColorsWhereInput {
-  AND: [ColorsWhereInput!]
+input ColorWhereInput {
+  AND: [ColorWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
-  NOT: [ColorsWhereInput!]
-  OR: [ColorsWhereInput!]
+  NOT: [ColorWhereInput!]
+  OR: [ColorWhereInput!]
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
   updatedAt: DateTimeFilter
 }
 
-input ColorsWhereUniqueInput {
+input ColorWhereUniqueInput {
   id: String
 }
 
@@ -764,7 +764,6 @@ type Item {
   beforeDiscountPrice: Float!
   brand: String
   catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
-  colors(after: ColorsWhereUniqueInput, before: ColorsWhereUniqueInput, first: Int, last: Int, skip: Int): [Colors!]!
   description: String!
   dimensions: String
   id: String!
@@ -773,13 +772,11 @@ type Item {
   likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
   likesCount: Int
   materials: String
-  oherFeatures(after: OherFeaturesWhereUniqueInput, before: OherFeaturesWhereUniqueInput, first: Int, last: Int, skip: Int): [OherFeatures!]!
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   stock: Int
-  tags(after: TagsWhereUniqueInput, before: TagsWhereUniqueInput, first: Int, last: Int, skip: Int): [Tags!]!
   title: String!
   videoLink: String
   weight: String
@@ -820,14 +817,14 @@ input ItemCreateOneWithoutLikesInput {
   create: ItemCreateWithoutLikesInput
 }
 
-input ItemCreateOneWithoutOherFeaturesInput {
-  connect: ItemWhereUniqueInput
-  create: ItemCreateWithoutOherFeaturesInput
-}
-
 input ItemCreateOneWithoutOrderInput {
   connect: ItemWhereUniqueInput
   create: ItemCreateWithoutOrderInput
+}
+
+input ItemCreateOneWithoutOtherFeaturesInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutOtherFeaturesInput
 }
 
 input ItemCreateOneWithoutTagsInput {
@@ -839,7 +836,7 @@ input ItemCreateWithoutCartItemInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -849,15 +846,15 @@ input ItemCreateWithoutCartItemInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -868,7 +865,7 @@ input ItemCreateWithoutCatagoryInput {
   beforeDiscountPrice: Float!
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -878,15 +875,15 @@ input ItemCreateWithoutCatagoryInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -907,15 +904,15 @@ input ItemCreateWithoutColorsInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -927,7 +924,7 @@ input ItemCreateWithoutImagesInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -936,15 +933,15 @@ input ItemCreateWithoutImagesInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -956,7 +953,7 @@ input ItemCreateWithoutItemReviewInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -965,15 +962,15 @@ input ItemCreateWithoutItemReviewInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -985,7 +982,7 @@ input ItemCreateWithoutLikesInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -994,44 +991,15 @@ input ItemCreateWithoutLikesInput {
   itemReview: ReviewCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
-  title: String!
-  updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input ItemCreateWithoutOherFeaturesInput {
-  beforeDiscountPrice: Float!
-  brand: String
-  CartItem: CartItemCreateManyWithoutItemInput
-  catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  id: String
-  images: ItemImageCreateManyWithoutItemInput
-  itemReview: ReviewCreateManyWithoutItemInput
-  likes: LikeCreateManyWithoutItemInput
-  likesCount: Int
-  materials: String
-  Order: OrderCreateManyWithoutItemInput
-  otherInfo: String
-  overview: String
-  price: Float!
-  reviewCount: Int
-  Seller: SellerCreateOneWithoutItemsInput
-  stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -1043,7 +1011,7 @@ input ItemCreateWithoutOrderInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1053,14 +1021,43 @@ input ItemCreateWithoutOrderInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   Seller: SellerCreateOneWithoutItemsInput
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
+  title: String!
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input ItemCreateWithoutOtherFeaturesInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  CartItem: CartItemCreateManyWithoutItemInput
+  catagory: CatagoryCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageCreateManyWithoutItemInput
+  itemReview: ReviewCreateManyWithoutItemInput
+  likes: LikeCreateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderCreateManyWithoutItemInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  reviewCount: Int
+  Seller: SellerCreateOneWithoutItemsInput
+  stock: Int
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -1072,7 +1069,7 @@ input ItemCreateWithoutSellerInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1082,14 +1079,14 @@ input ItemCreateWithoutSellerInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
   reviewCount: Int
   stock: Int
-  tags: TagsCreateManyWithoutItemInput
+  tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -1101,7 +1098,7 @@ input ItemCreateWithoutTagsInput {
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
   catagory: CatagoryCreateManyWithoutItemInput
-  colors: ColorsCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1111,8 +1108,8 @@ input ItemCreateWithoutTagsInput {
   likes: LikeCreateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutItemInput
   Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float!
@@ -1288,7 +1285,7 @@ input ItemScalarWhereInput {
   brand: NullableStringFilter
   CartItem: CartItemFilter
   catagory: CatagoryFilter
-  colors: ColorsFilter
+  colors: ColorFilter
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
@@ -1299,16 +1296,16 @@ input ItemScalarWhereInput {
   likesCount: NullableIntFilter
   materials: NullableStringFilter
   NOT: [ItemScalarWhereInput!]
-  oherFeatures: OherFeaturesFilter
   OR: [ItemScalarWhereInput!]
   Order: OrderFilter
+  OtherFeatures: OtherFeatureFilter
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
   reviewCount: NullableIntFilter
   sellerId: NullableStringFilter
   stock: NullableIntFilter
-  tags: TagsFilter
+  tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
@@ -1394,11 +1391,11 @@ input ItemUpdateOneRequiredWithoutLikesInput {
   upsert: ItemUpsertWithoutLikesInput
 }
 
-input ItemUpdateOneRequiredWithoutOherFeaturesInput {
+input ItemUpdateOneRequiredWithoutOtherFeaturesInput {
   connect: ItemWhereUniqueInput
-  create: ItemCreateWithoutOherFeaturesInput
-  update: ItemUpdateWithoutOherFeaturesDataInput
-  upsert: ItemUpsertWithoutOherFeaturesInput
+  create: ItemCreateWithoutOtherFeaturesInput
+  update: ItemUpdateWithoutOtherFeaturesDataInput
+  upsert: ItemUpsertWithoutOtherFeaturesInput
 }
 
 input ItemUpdateOneRequiredWithoutTagsInput {
@@ -1421,7 +1418,7 @@ input ItemUpdateWithoutCartItemDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1431,15 +1428,15 @@ input ItemUpdateWithoutCartItemDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1450,7 +1447,7 @@ input ItemUpdateWithoutCatagoryDataInput {
   beforeDiscountPrice: Float
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1460,15 +1457,15 @@ input ItemUpdateWithoutCatagoryDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1489,15 +1486,15 @@ input ItemUpdateWithoutColorsDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1509,7 +1506,7 @@ input ItemUpdateWithoutImagesDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1518,15 +1515,15 @@ input ItemUpdateWithoutImagesDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1538,7 +1535,7 @@ input ItemUpdateWithoutItemReviewDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1547,15 +1544,15 @@ input ItemUpdateWithoutItemReviewDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1567,7 +1564,7 @@ input ItemUpdateWithoutLikesDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1576,44 +1573,15 @@ input ItemUpdateWithoutLikesDataInput {
   itemReview: ReviewUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
-  title: String
-  updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input ItemUpdateWithoutOherFeaturesDataInput {
-  beforeDiscountPrice: Float
-  brand: String
-  CartItem: CartItemUpdateManyWithoutItemInput
-  catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  id: String
-  images: ItemImageUpdateManyWithoutItemInput
-  itemReview: ReviewUpdateManyWithoutItemInput
-  likes: LikeUpdateManyWithoutItemInput
-  likesCount: Int
-  materials: String
-  Order: OrderUpdateManyWithoutItemInput
-  otherInfo: String
-  overview: String
-  price: Float
-  reviewCount: Int
-  Seller: SellerUpdateOneWithoutItemsInput
-  stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1625,7 +1593,7 @@ input ItemUpdateWithoutOrderDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1635,14 +1603,43 @@ input ItemUpdateWithoutOrderDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input ItemUpdateWithoutOtherFeaturesDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  CartItem: CartItemUpdateManyWithoutItemInput
+  catagory: CatagoryUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageUpdateManyWithoutItemInput
+  itemReview: ReviewUpdateManyWithoutItemInput
+  likes: LikeUpdateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderUpdateManyWithoutItemInput
+  otherInfo: String
+  overview: String
+  price: Float
+  reviewCount: Int
+  Seller: SellerUpdateOneWithoutItemsInput
+  stock: Int
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1654,7 +1651,7 @@ input ItemUpdateWithoutSellerDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1664,14 +1661,14 @@ input ItemUpdateWithoutSellerDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
   reviewCount: Int
   stock: Int
-  tags: TagsUpdateManyWithoutItemInput
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1683,7 +1680,7 @@ input ItemUpdateWithoutTagsDataInput {
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
   catagory: CatagoryUpdateManyWithoutItemInput
-  colors: ColorsUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -1693,8 +1690,8 @@ input ItemUpdateWithoutTagsDataInput {
   likes: LikeUpdateManyWithoutItemInput
   likesCount: Int
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutItemInput
   Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutItemInput
   otherInfo: String
   overview: String
   price: Float
@@ -1742,14 +1739,14 @@ input ItemUpsertWithoutLikesInput {
   update: ItemUpdateWithoutLikesDataInput!
 }
 
-input ItemUpsertWithoutOherFeaturesInput {
-  create: ItemCreateWithoutOherFeaturesInput!
-  update: ItemUpdateWithoutOherFeaturesDataInput!
-}
-
 input ItemUpsertWithoutOrderInput {
   create: ItemCreateWithoutOrderInput!
   update: ItemUpdateWithoutOrderDataInput!
+}
+
+input ItemUpsertWithoutOtherFeaturesInput {
+  create: ItemCreateWithoutOtherFeaturesInput!
+  update: ItemUpdateWithoutOtherFeaturesDataInput!
 }
 
 input ItemUpsertWithoutTagsInput {
@@ -1769,7 +1766,7 @@ input ItemWhereInput {
   brand: NullableStringFilter
   CartItem: CartItemFilter
   catagory: CatagoryFilter
-  colors: ColorsFilter
+  colors: ColorFilter
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
@@ -1780,9 +1777,9 @@ input ItemWhereInput {
   likesCount: NullableIntFilter
   materials: NullableStringFilter
   NOT: [ItemWhereInput!]
-  oherFeatures: OherFeaturesFilter
   OR: [ItemWhereInput!]
   Order: OrderFilter
+  OtherFeatures: OtherFeatureFilter
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
@@ -1790,7 +1787,7 @@ input ItemWhereInput {
   Seller: SellerWhereInput
   sellerId: NullableStringFilter
   stock: NullableIntFilter
-  tags: TagsFilter
+  tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
@@ -1997,7 +1994,7 @@ type Mutation {
   ContactUs(email: String!, message: String!, subject: String!): String!
 
   """Create New Item"""
-  CreateItem(beforeDiscountPrice: Float!, brand: String, catagory: [String!], colors: [String!], description: String!, dimensions: String, images: [String!], likesCount: Int, materials: String, oherFeatures: [String!], otherInfo: String, overview: String, price: Float!, reviewCount: Int, stock: Int, tags: [String!], title: String!, videoLink: String, weight: String): Item!
+  CreateItem(beforeDiscountPrice: Float!, brand: String, catagory: [String!], colors: [String!], description: String!, dimensions: String, images: [String!], likesCount: Int, materials: String, otherFeature: [String!], otherInfo: String, overview: String, price: Float!, reviewCount: Int, stock: Int, tags: [String!], title: String!, videoLink: String, weight: String): Item!
 
   """Create Item Review"""
   CreateItemReview(itemId: String!, rating: Float!, text: String!): Review!
@@ -2042,7 +2039,7 @@ type Mutation {
   TogglePrimaryAddress(addressId: String!): Address!
 
   """Update Item"""
-  UpdateItem(beforeDiscountPrice: Float, brand: String, catagory: [String!], colors: [String!], description: String, dimensions: String, id: String, images: [String!], likesCount: Int, materials: String, oherFeatures: [String!], otherInfo: String, overview: String, price: Float, reviewCount: Int, stock: Int, tags: [String!], title: String, videoLink: String, weight: String): Item!
+  UpdateItem(beforeDiscountPrice: Float, brand: String, catagory: [String!], colors: [String!], description: String, dimensions: String, id: String, images: [String!], likesCount: Int, materials: String, otherFeature: [String!], otherInfo: String, overview: String, price: Float, reviewCount: Int, stock: Int, tags: [String!], title: String, videoLink: String, weight: String): Item!
   updateOneAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
 
   """User Request A Password Reset"""
@@ -2101,149 +2098,6 @@ input NullableStringFilter {
   not: String
   notIn: [String!]
   startsWith: String
-}
-
-type OherFeatures {
-  id: String!
-  item: Item!
-  itemId: String!
-  text: String!
-}
-
-input OherFeaturesCreateManyWithoutItemInput {
-  connect: [OherFeaturesWhereUniqueInput!]
-  create: [OherFeaturesCreateWithoutItemInput!]
-}
-
-input OherFeaturesCreateManyWithoutOrderItemInput {
-  connect: [OherFeaturesWhereUniqueInput!]
-  create: [OherFeaturesCreateWithoutOrderItemInput!]
-}
-
-input OherFeaturesCreateWithoutItemInput {
-  createdAt: DateTime
-  id: String
-  OrderItem: OrderItemCreateOneWithoutOherFeaturesInput
-  text: String!
-  updatedAt: DateTime
-}
-
-input OherFeaturesCreateWithoutOrderItemInput {
-  createdAt: DateTime
-  id: String
-  item: ItemCreateOneWithoutOherFeaturesInput!
-  text: String!
-  updatedAt: DateTime
-}
-
-input OherFeaturesFilter {
-  every: OherFeaturesWhereInput
-  none: OherFeaturesWhereInput
-  some: OherFeaturesWhereInput
-}
-
-input OherFeaturesScalarWhereInput {
-  AND: [OherFeaturesScalarWhereInput!]
-  createdAt: DateTimeFilter
-  id: StringFilter
-  itemId: StringFilter
-  NOT: [OherFeaturesScalarWhereInput!]
-  OR: [OherFeaturesScalarWhereInput!]
-  orderItemId: NullableStringFilter
-  text: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input OherFeaturesUpdateManyDataInput {
-  createdAt: DateTime
-  id: String
-  text: String
-  updatedAt: DateTime
-}
-
-input OherFeaturesUpdateManyWithoutItemInput {
-  connect: [OherFeaturesWhereUniqueInput!]
-  create: [OherFeaturesCreateWithoutItemInput!]
-  delete: [OherFeaturesWhereUniqueInput!]
-  deleteMany: [OherFeaturesScalarWhereInput!]
-  disconnect: [OherFeaturesWhereUniqueInput!]
-  set: [OherFeaturesWhereUniqueInput!]
-  update: [OherFeaturesUpdateWithWhereUniqueWithoutItemInput!]
-  updateMany: [OherFeaturesUpdateManyWithWhereNestedInput!]
-  upsert: [OherFeaturesUpsertWithWhereUniqueWithoutItemInput!]
-}
-
-input OherFeaturesUpdateManyWithoutOrderItemInput {
-  connect: [OherFeaturesWhereUniqueInput!]
-  create: [OherFeaturesCreateWithoutOrderItemInput!]
-  delete: [OherFeaturesWhereUniqueInput!]
-  deleteMany: [OherFeaturesScalarWhereInput!]
-  disconnect: [OherFeaturesWhereUniqueInput!]
-  set: [OherFeaturesWhereUniqueInput!]
-  update: [OherFeaturesUpdateWithWhereUniqueWithoutOrderItemInput!]
-  updateMany: [OherFeaturesUpdateManyWithWhereNestedInput!]
-  upsert: [OherFeaturesUpsertWithWhereUniqueWithoutOrderItemInput!]
-}
-
-input OherFeaturesUpdateManyWithWhereNestedInput {
-  data: OherFeaturesUpdateManyDataInput!
-  where: OherFeaturesScalarWhereInput!
-}
-
-input OherFeaturesUpdateWithoutItemDataInput {
-  createdAt: DateTime
-  id: String
-  OrderItem: OrderItemUpdateOneWithoutOherFeaturesInput
-  text: String
-  updatedAt: DateTime
-}
-
-input OherFeaturesUpdateWithoutOrderItemDataInput {
-  createdAt: DateTime
-  id: String
-  item: ItemUpdateOneRequiredWithoutOherFeaturesInput
-  text: String
-  updatedAt: DateTime
-}
-
-input OherFeaturesUpdateWithWhereUniqueWithoutItemInput {
-  data: OherFeaturesUpdateWithoutItemDataInput!
-  where: OherFeaturesWhereUniqueInput!
-}
-
-input OherFeaturesUpdateWithWhereUniqueWithoutOrderItemInput {
-  data: OherFeaturesUpdateWithoutOrderItemDataInput!
-  where: OherFeaturesWhereUniqueInput!
-}
-
-input OherFeaturesUpsertWithWhereUniqueWithoutItemInput {
-  create: OherFeaturesCreateWithoutItemInput!
-  update: OherFeaturesUpdateWithoutItemDataInput!
-  where: OherFeaturesWhereUniqueInput!
-}
-
-input OherFeaturesUpsertWithWhereUniqueWithoutOrderItemInput {
-  create: OherFeaturesCreateWithoutOrderItemInput!
-  update: OherFeaturesUpdateWithoutOrderItemDataInput!
-  where: OherFeaturesWhereUniqueInput!
-}
-
-input OherFeaturesWhereInput {
-  AND: [OherFeaturesWhereInput!]
-  createdAt: DateTimeFilter
-  id: StringFilter
-  item: ItemWhereInput
-  itemId: StringFilter
-  NOT: [OherFeaturesWhereInput!]
-  OR: [OherFeaturesWhereInput!]
-  OrderItem: OrderItemWhereInput
-  orderItemId: NullableStringFilter
-  text: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input OherFeaturesWhereUniqueInput {
-  id: String
 }
 
 type Order {
@@ -2315,7 +2169,6 @@ type OrderItem {
   beforeDiscountPrice: Float!
   brand: String
   catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
-  colors(after: ColorsWhereUniqueInput, before: ColorsWhereUniqueInput, first: Int, last: Int, skip: Int): [Colors!]!
   description: String!
   dimensions: String
   id: String!
@@ -2323,12 +2176,10 @@ type OrderItem {
   itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
   likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
   materials: String
-  oherFeatures(after: OherFeaturesWhereUniqueInput, before: OherFeaturesWhereUniqueInput, first: Int, last: Int, skip: Int): [OherFeatures!]!
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags(after: TagsWhereUniqueInput, before: TagsWhereUniqueInput, first: Int, last: Int, skip: Int): [Tags!]!
   title: String!
   videoLink: String
   weight: String
@@ -2364,9 +2215,9 @@ input OrderItemCreateOneWithoutLikesInput {
   create: OrderItemCreateWithoutLikesInput
 }
 
-input OrderItemCreateOneWithoutOherFeaturesInput {
+input OrderItemCreateOneWithoutOtherFeaturesInput {
   connect: OrderItemWhereUniqueInput
-  create: OrderItemCreateWithoutOherFeaturesInput
+  create: OrderItemCreateWithoutOtherFeaturesInput
 }
 
 input OrderItemCreateOneWithoutTagsInput {
@@ -2377,7 +2228,7 @@ input OrderItemCreateOneWithoutTagsInput {
 input OrderItemCreateWithoutCatagoryInput {
   beforeDiscountPrice: Float!
   brand: String
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2386,13 +2237,13 @@ input OrderItemCreateWithoutCatagoryInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2411,13 +2262,13 @@ input OrderItemCreateWithoutColorsInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2428,7 +2279,7 @@ input OrderItemCreateWithoutImagesInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2436,13 +2287,13 @@ input OrderItemCreateWithoutImagesInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2453,7 +2304,7 @@ input OrderItemCreateWithoutItemReviewInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2461,13 +2312,13 @@ input OrderItemCreateWithoutItemReviewInput {
   images: ItemImageCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2478,7 +2329,7 @@ input OrderItemCreateWithoutLikesInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2486,38 +2337,13 @@ input OrderItemCreateWithoutLikesInput {
   images: ItemImageCreateManyWithoutOrderItemInput
   itemReview: ReviewCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
-  title: String!
-  updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input OrderItemCreateWithoutOherFeaturesInput {
-  beforeDiscountPrice: Float!
-  brand: String
-  catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  id: String
-  images: ItemImageCreateManyWithoutOrderItemInput
-  itemReview: ReviewCreateManyWithoutOrderItemInput
-  likes: LikeCreateManyWithoutOrderItemInput
-  materials: String
-  Order: OrderCreateManyWithoutItemsInput
-  otherInfo: String
-  overview: String
-  price: Float!
-  stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2528,7 +2354,7 @@ input OrderItemCreateWithoutOrderInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2537,12 +2363,37 @@ input OrderItemCreateWithoutOrderInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
   stock: Int
-  tags: TagsCreateManyWithoutOrderItemInput
+  tags: TagCreateManyWithoutOrderItemInput
+  title: String!
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input OrderItemCreateWithoutOtherFeaturesInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  catagory: CatagoryCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageCreateManyWithoutOrderItemInput
+  itemReview: ReviewCreateManyWithoutOrderItemInput
+  likes: LikeCreateManyWithoutOrderItemInput
+  materials: String
+  Order: OrderCreateManyWithoutItemsInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  stock: Int
+  tags: TagCreateManyWithoutOrderItemInput
   title: String!
   updatedAt: DateTime
   videoLink: String
@@ -2553,7 +2404,7 @@ input OrderItemCreateWithoutTagsInput {
   beforeDiscountPrice: Float!
   brand: String
   catagory: CatagoryCreateManyWithoutOrderItemInput
-  colors: ColorsCreateManyWithoutOrderItemInput
+  colors: ColorCreateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2562,8 +2413,8 @@ input OrderItemCreateWithoutTagsInput {
   itemReview: ReviewCreateManyWithoutOrderItemInput
   likes: LikeCreateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesCreateManyWithoutOrderItemInput
   Order: OrderCreateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureCreateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float!
@@ -2585,7 +2436,7 @@ input OrderItemScalarWhereInput {
   beforeDiscountPrice: FloatFilter
   brand: NullableStringFilter
   catagory: CatagoryFilter
-  colors: ColorsFilter
+  colors: ColorFilter
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
@@ -2595,14 +2446,14 @@ input OrderItemScalarWhereInput {
   likes: LikeFilter
   materials: NullableStringFilter
   NOT: [OrderItemScalarWhereInput!]
-  oherFeatures: OherFeaturesFilter
   OR: [OrderItemScalarWhereInput!]
   Order: OrderFilter
+  OtherFeatures: OtherFeatureFilter
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
   stock: NullableIntFilter
-  tags: TagsFilter
+  tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
@@ -2689,13 +2540,13 @@ input OrderItemUpdateOneWithoutLikesInput {
   upsert: OrderItemUpsertWithoutLikesInput
 }
 
-input OrderItemUpdateOneWithoutOherFeaturesInput {
+input OrderItemUpdateOneWithoutOtherFeaturesInput {
   connect: OrderItemWhereUniqueInput
-  create: OrderItemCreateWithoutOherFeaturesInput
+  create: OrderItemCreateWithoutOtherFeaturesInput
   delete: Boolean
   disconnect: Boolean
-  update: OrderItemUpdateWithoutOherFeaturesDataInput
-  upsert: OrderItemUpsertWithoutOherFeaturesInput
+  update: OrderItemUpdateWithoutOtherFeaturesDataInput
+  upsert: OrderItemUpsertWithoutOtherFeaturesInput
 }
 
 input OrderItemUpdateOneWithoutTagsInput {
@@ -2710,7 +2561,7 @@ input OrderItemUpdateOneWithoutTagsInput {
 input OrderItemUpdateWithoutCatagoryDataInput {
   beforeDiscountPrice: Float
   brand: String
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2719,13 +2570,13 @@ input OrderItemUpdateWithoutCatagoryDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2744,13 +2595,13 @@ input OrderItemUpdateWithoutColorsDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2761,7 +2612,7 @@ input OrderItemUpdateWithoutImagesDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2769,13 +2620,13 @@ input OrderItemUpdateWithoutImagesDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2786,7 +2637,7 @@ input OrderItemUpdateWithoutItemReviewDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2794,13 +2645,13 @@ input OrderItemUpdateWithoutItemReviewDataInput {
   images: ItemImageUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2811,7 +2662,7 @@ input OrderItemUpdateWithoutLikesDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2819,38 +2670,13 @@ input OrderItemUpdateWithoutLikesDataInput {
   images: ItemImageUpdateManyWithoutOrderItemInput
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
-  title: String
-  updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input OrderItemUpdateWithoutOherFeaturesDataInput {
-  beforeDiscountPrice: Float
-  brand: String
-  catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  id: String
-  images: ItemImageUpdateManyWithoutOrderItemInput
-  itemReview: ReviewUpdateManyWithoutOrderItemInput
-  likes: LikeUpdateManyWithoutOrderItemInput
-  materials: String
-  Order: OrderUpdateManyWithoutItemsInput
-  otherInfo: String
-  overview: String
-  price: Float
-  stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2861,7 +2687,7 @@ input OrderItemUpdateWithoutOrderDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2870,12 +2696,37 @@ input OrderItemUpdateWithoutOrderDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
   stock: Int
-  tags: TagsUpdateManyWithoutOrderItemInput
+  tags: TagUpdateManyWithoutOrderItemInput
+  title: String
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+input OrderItemUpdateWithoutOtherFeaturesDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  catagory: CatagoryUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  id: String
+  images: ItemImageUpdateManyWithoutOrderItemInput
+  itemReview: ReviewUpdateManyWithoutOrderItemInput
+  likes: LikeUpdateManyWithoutOrderItemInput
+  materials: String
+  Order: OrderUpdateManyWithoutItemsInput
+  otherInfo: String
+  overview: String
+  price: Float
+  stock: Int
+  tags: TagUpdateManyWithoutOrderItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -2886,7 +2737,7 @@ input OrderItemUpdateWithoutTagsDataInput {
   beforeDiscountPrice: Float
   brand: String
   catagory: CatagoryUpdateManyWithoutOrderItemInput
-  colors: ColorsUpdateManyWithoutOrderItemInput
+  colors: ColorUpdateManyWithoutOrderItemInput
   createdAt: DateTime
   description: String
   dimensions: String
@@ -2895,8 +2746,8 @@ input OrderItemUpdateWithoutTagsDataInput {
   itemReview: ReviewUpdateManyWithoutOrderItemInput
   likes: LikeUpdateManyWithoutOrderItemInput
   materials: String
-  oherFeatures: OherFeaturesUpdateManyWithoutOrderItemInput
   Order: OrderUpdateManyWithoutItemsInput
+  OtherFeatures: OtherFeatureUpdateManyWithoutOrderItemInput
   otherInfo: String
   overview: String
   price: Float
@@ -2937,9 +2788,9 @@ input OrderItemUpsertWithoutLikesInput {
   update: OrderItemUpdateWithoutLikesDataInput!
 }
 
-input OrderItemUpsertWithoutOherFeaturesInput {
-  create: OrderItemCreateWithoutOherFeaturesInput!
-  update: OrderItemUpdateWithoutOherFeaturesDataInput!
+input OrderItemUpsertWithoutOtherFeaturesInput {
+  create: OrderItemCreateWithoutOtherFeaturesInput!
+  update: OrderItemUpdateWithoutOtherFeaturesDataInput!
 }
 
 input OrderItemUpsertWithoutTagsInput {
@@ -2958,7 +2809,7 @@ input OrderItemWhereInput {
   beforeDiscountPrice: FloatFilter
   brand: NullableStringFilter
   catagory: CatagoryFilter
-  colors: ColorsFilter
+  colors: ColorFilter
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
@@ -2968,14 +2819,14 @@ input OrderItemWhereInput {
   likes: LikeFilter
   materials: NullableStringFilter
   NOT: [OrderItemWhereInput!]
-  oherFeatures: OherFeaturesFilter
   OR: [OrderItemWhereInput!]
   Order: OrderFilter
+  OtherFeatures: OtherFeatureFilter
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
   stock: NullableIntFilter
-  tags: TagsFilter
+  tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   videoLink: NullableStringFilter
@@ -3143,6 +2994,149 @@ input OrderWhereInput {
 }
 
 input OrderWhereUniqueInput {
+  id: String
+}
+
+type OtherFeature {
+  id: String!
+  item: Item!
+  itemId: String!
+  text: String!
+}
+
+input OtherFeatureCreateManyWithoutItemInput {
+  connect: [OtherFeatureWhereUniqueInput!]
+  create: [OtherFeatureCreateWithoutItemInput!]
+}
+
+input OtherFeatureCreateManyWithoutOrderItemInput {
+  connect: [OtherFeatureWhereUniqueInput!]
+  create: [OtherFeatureCreateWithoutOrderItemInput!]
+}
+
+input OtherFeatureCreateWithoutItemInput {
+  createdAt: DateTime
+  id: String
+  OrderItem: OrderItemCreateOneWithoutOtherFeaturesInput
+  text: String!
+  updatedAt: DateTime
+}
+
+input OtherFeatureCreateWithoutOrderItemInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateOneWithoutOtherFeaturesInput!
+  text: String!
+  updatedAt: DateTime
+}
+
+input OtherFeatureFilter {
+  every: OtherFeatureWhereInput
+  none: OtherFeatureWhereInput
+  some: OtherFeatureWhereInput
+}
+
+input OtherFeatureScalarWhereInput {
+  AND: [OtherFeatureScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  itemId: StringFilter
+  NOT: [OtherFeatureScalarWhereInput!]
+  OR: [OtherFeatureScalarWhereInput!]
+  orderItemId: NullableStringFilter
+  text: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input OtherFeatureUpdateManyDataInput {
+  createdAt: DateTime
+  id: String
+  text: String
+  updatedAt: DateTime
+}
+
+input OtherFeatureUpdateManyWithoutItemInput {
+  connect: [OtherFeatureWhereUniqueInput!]
+  create: [OtherFeatureCreateWithoutItemInput!]
+  delete: [OtherFeatureWhereUniqueInput!]
+  deleteMany: [OtherFeatureScalarWhereInput!]
+  disconnect: [OtherFeatureWhereUniqueInput!]
+  set: [OtherFeatureWhereUniqueInput!]
+  update: [OtherFeatureUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [OtherFeatureUpdateManyWithWhereNestedInput!]
+  upsert: [OtherFeatureUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input OtherFeatureUpdateManyWithoutOrderItemInput {
+  connect: [OtherFeatureWhereUniqueInput!]
+  create: [OtherFeatureCreateWithoutOrderItemInput!]
+  delete: [OtherFeatureWhereUniqueInput!]
+  deleteMany: [OtherFeatureScalarWhereInput!]
+  disconnect: [OtherFeatureWhereUniqueInput!]
+  set: [OtherFeatureWhereUniqueInput!]
+  update: [OtherFeatureUpdateWithWhereUniqueWithoutOrderItemInput!]
+  updateMany: [OtherFeatureUpdateManyWithWhereNestedInput!]
+  upsert: [OtherFeatureUpsertWithWhereUniqueWithoutOrderItemInput!]
+}
+
+input OtherFeatureUpdateManyWithWhereNestedInput {
+  data: OtherFeatureUpdateManyDataInput!
+  where: OtherFeatureScalarWhereInput!
+}
+
+input OtherFeatureUpdateWithoutItemDataInput {
+  createdAt: DateTime
+  id: String
+  OrderItem: OrderItemUpdateOneWithoutOtherFeaturesInput
+  text: String
+  updatedAt: DateTime
+}
+
+input OtherFeatureUpdateWithoutOrderItemDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateOneRequiredWithoutOtherFeaturesInput
+  text: String
+  updatedAt: DateTime
+}
+
+input OtherFeatureUpdateWithWhereUniqueWithoutItemInput {
+  data: OtherFeatureUpdateWithoutItemDataInput!
+  where: OtherFeatureWhereUniqueInput!
+}
+
+input OtherFeatureUpdateWithWhereUniqueWithoutOrderItemInput {
+  data: OtherFeatureUpdateWithoutOrderItemDataInput!
+  where: OtherFeatureWhereUniqueInput!
+}
+
+input OtherFeatureUpsertWithWhereUniqueWithoutItemInput {
+  create: OtherFeatureCreateWithoutItemInput!
+  update: OtherFeatureUpdateWithoutItemDataInput!
+  where: OtherFeatureWhereUniqueInput!
+}
+
+input OtherFeatureUpsertWithWhereUniqueWithoutOrderItemInput {
+  create: OtherFeatureCreateWithoutOrderItemInput!
+  update: OtherFeatureUpdateWithoutOrderItemDataInput!
+  where: OtherFeatureWhereUniqueInput!
+}
+
+input OtherFeatureWhereInput {
+  AND: [OtherFeatureWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: ItemWhereInput
+  itemId: StringFilter
+  NOT: [OtherFeatureWhereInput!]
+  OR: [OtherFeatureWhereInput!]
+  OrderItem: OrderItemWhereInput
+  orderItemId: NullableStringFilter
+  text: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input OtherFeatureWhereUniqueInput {
   id: String
 }
 
@@ -3602,24 +3596,24 @@ input StringFilter {
   startsWith: String
 }
 
-type Tags {
+type Tag {
   id: String!
   item: Item!
   itemId: String!
   text: String!
 }
 
-input TagsCreateManyWithoutItemInput {
-  connect: [TagsWhereUniqueInput!]
-  create: [TagsCreateWithoutItemInput!]
+input TagCreateManyWithoutItemInput {
+  connect: [TagWhereUniqueInput!]
+  create: [TagCreateWithoutItemInput!]
 }
 
-input TagsCreateManyWithoutOrderItemInput {
-  connect: [TagsWhereUniqueInput!]
-  create: [TagsCreateWithoutOrderItemInput!]
+input TagCreateManyWithoutOrderItemInput {
+  connect: [TagWhereUniqueInput!]
+  create: [TagCreateWithoutOrderItemInput!]
 }
 
-input TagsCreateWithoutItemInput {
+input TagCreateWithoutItemInput {
   createdAt: DateTime
   id: String
   OrderItem: OrderItemCreateOneWithoutTagsInput
@@ -3627,7 +3621,7 @@ input TagsCreateWithoutItemInput {
   updatedAt: DateTime
 }
 
-input TagsCreateWithoutOrderItemInput {
+input TagCreateWithoutOrderItemInput {
   createdAt: DateTime
   id: String
   item: ItemCreateOneWithoutTagsInput!
@@ -3635,61 +3629,61 @@ input TagsCreateWithoutOrderItemInput {
   updatedAt: DateTime
 }
 
-input TagsFilter {
-  every: TagsWhereInput
-  none: TagsWhereInput
-  some: TagsWhereInput
+input TagFilter {
+  every: TagWhereInput
+  none: TagWhereInput
+  some: TagWhereInput
 }
 
-input TagsScalarWhereInput {
-  AND: [TagsScalarWhereInput!]
+input TagScalarWhereInput {
+  AND: [TagScalarWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
   itemId: StringFilter
-  NOT: [TagsScalarWhereInput!]
-  OR: [TagsScalarWhereInput!]
+  NOT: [TagScalarWhereInput!]
+  OR: [TagScalarWhereInput!]
   orderItemId: NullableStringFilter
   text: StringFilter
   updatedAt: DateTimeFilter
 }
 
-input TagsUpdateManyDataInput {
+input TagUpdateManyDataInput {
   createdAt: DateTime
   id: String
   text: String
   updatedAt: DateTime
 }
 
-input TagsUpdateManyWithoutItemInput {
-  connect: [TagsWhereUniqueInput!]
-  create: [TagsCreateWithoutItemInput!]
-  delete: [TagsWhereUniqueInput!]
-  deleteMany: [TagsScalarWhereInput!]
-  disconnect: [TagsWhereUniqueInput!]
-  set: [TagsWhereUniqueInput!]
-  update: [TagsUpdateWithWhereUniqueWithoutItemInput!]
-  updateMany: [TagsUpdateManyWithWhereNestedInput!]
-  upsert: [TagsUpsertWithWhereUniqueWithoutItemInput!]
+input TagUpdateManyWithoutItemInput {
+  connect: [TagWhereUniqueInput!]
+  create: [TagCreateWithoutItemInput!]
+  delete: [TagWhereUniqueInput!]
+  deleteMany: [TagScalarWhereInput!]
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [TagUpdateManyWithWhereNestedInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutItemInput!]
 }
 
-input TagsUpdateManyWithoutOrderItemInput {
-  connect: [TagsWhereUniqueInput!]
-  create: [TagsCreateWithoutOrderItemInput!]
-  delete: [TagsWhereUniqueInput!]
-  deleteMany: [TagsScalarWhereInput!]
-  disconnect: [TagsWhereUniqueInput!]
-  set: [TagsWhereUniqueInput!]
-  update: [TagsUpdateWithWhereUniqueWithoutOrderItemInput!]
-  updateMany: [TagsUpdateManyWithWhereNestedInput!]
-  upsert: [TagsUpsertWithWhereUniqueWithoutOrderItemInput!]
+input TagUpdateManyWithoutOrderItemInput {
+  connect: [TagWhereUniqueInput!]
+  create: [TagCreateWithoutOrderItemInput!]
+  delete: [TagWhereUniqueInput!]
+  deleteMany: [TagScalarWhereInput!]
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutOrderItemInput!]
+  updateMany: [TagUpdateManyWithWhereNestedInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutOrderItemInput!]
 }
 
-input TagsUpdateManyWithWhereNestedInput {
-  data: TagsUpdateManyDataInput!
-  where: TagsScalarWhereInput!
+input TagUpdateManyWithWhereNestedInput {
+  data: TagUpdateManyDataInput!
+  where: TagScalarWhereInput!
 }
 
-input TagsUpdateWithoutItemDataInput {
+input TagUpdateWithoutItemDataInput {
   createdAt: DateTime
   id: String
   OrderItem: OrderItemUpdateOneWithoutTagsInput
@@ -3697,7 +3691,7 @@ input TagsUpdateWithoutItemDataInput {
   updatedAt: DateTime
 }
 
-input TagsUpdateWithoutOrderItemDataInput {
+input TagUpdateWithoutOrderItemDataInput {
   createdAt: DateTime
   id: String
   item: ItemUpdateOneRequiredWithoutTagsInput
@@ -3705,43 +3699,43 @@ input TagsUpdateWithoutOrderItemDataInput {
   updatedAt: DateTime
 }
 
-input TagsUpdateWithWhereUniqueWithoutItemInput {
-  data: TagsUpdateWithoutItemDataInput!
-  where: TagsWhereUniqueInput!
+input TagUpdateWithWhereUniqueWithoutItemInput {
+  data: TagUpdateWithoutItemDataInput!
+  where: TagWhereUniqueInput!
 }
 
-input TagsUpdateWithWhereUniqueWithoutOrderItemInput {
-  data: TagsUpdateWithoutOrderItemDataInput!
-  where: TagsWhereUniqueInput!
+input TagUpdateWithWhereUniqueWithoutOrderItemInput {
+  data: TagUpdateWithoutOrderItemDataInput!
+  where: TagWhereUniqueInput!
 }
 
-input TagsUpsertWithWhereUniqueWithoutItemInput {
-  create: TagsCreateWithoutItemInput!
-  update: TagsUpdateWithoutItemDataInput!
-  where: TagsWhereUniqueInput!
+input TagUpsertWithWhereUniqueWithoutItemInput {
+  create: TagCreateWithoutItemInput!
+  update: TagUpdateWithoutItemDataInput!
+  where: TagWhereUniqueInput!
 }
 
-input TagsUpsertWithWhereUniqueWithoutOrderItemInput {
-  create: TagsCreateWithoutOrderItemInput!
-  update: TagsUpdateWithoutOrderItemDataInput!
-  where: TagsWhereUniqueInput!
+input TagUpsertWithWhereUniqueWithoutOrderItemInput {
+  create: TagCreateWithoutOrderItemInput!
+  update: TagUpdateWithoutOrderItemDataInput!
+  where: TagWhereUniqueInput!
 }
 
-input TagsWhereInput {
-  AND: [TagsWhereInput!]
+input TagWhereInput {
+  AND: [TagWhereInput!]
   createdAt: DateTimeFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
-  NOT: [TagsWhereInput!]
-  OR: [TagsWhereInput!]
+  NOT: [TagWhereInput!]
+  OR: [TagWhereInput!]
   OrderItem: OrderItemWhereInput
   orderItemId: NullableStringFilter
   text: StringFilter
   updatedAt: DateTimeFilter
 }
 
-input TagsWhereUniqueInput {
+input TagWhereUniqueInput {
   id: String
 }
 
