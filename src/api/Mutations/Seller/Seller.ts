@@ -22,13 +22,24 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
       storeName: stringArg({ required: true }),
       sellerNationality: stringArg({ required: true }),
       sellerIdentification: stringArg({ required: true }),
+      Brand: stringArg({ list: true, nullable: true }),
+      AddressName: stringArg({ required: true }),
+      AddressAddress: stringArg({ required: true }),
+      AddressCountry: stringArg({ nullable: true }),
+      AddressState: stringArg({ nullable: true }),
+      AddressCity: stringArg({ nullable: true }),
+      AddressZipCode: stringArg({ nullable: true }),
+      AddressMaincontactNubmer: stringArg({ required: true }),
+      AddressStreetAddress1: stringArg({ nullable: true }),
+      AddressStreetAddress2: stringArg({ nullable: true }),
+      AddressCompany: stringArg({ nullable: true }),
     },
     description: "Create New Seller Account",
     //@ts-ignore
     resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // Validate Email
-        let email: string = args.email;
+        let email: string = args.email.toLowerCase();
         const ValidEmail: Boolean = validateEmail(email);
         if (!ValidEmail) {
           throw new Error(`The Email Address You Provided is Invalid.`);
@@ -36,7 +47,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
 
         const [SellerExists] = await prisma.seller.findMany({
           where: {
-            AND: [
+            OR: [
               { email: args.email },
               { sellerIdentification: args.sellerIdentification },
             ],
@@ -65,6 +76,24 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
             sellerNationality: args.sellerNationality,
             sellerIdentification: args.sellerIdentification,
             EmailVarificationHash: SellerVerificationToken,
+            Brand: {
+              set: args.Brand,
+            },
+            PickupLocations: {
+              //@ts-ignore
+              //TODO Change Name To Title
+              create: {
+                name: args.AddressName,
+                address: args.AddressAddress,
+                country: args.AddressCountry,
+                state: args.AddressState,
+                city: args.AddressCity,
+                zipCode: args.AddressZipCode,
+                MaincontactNubmer: args.AddressMaincontactNubmer,
+                streetAddress1: args.AddressStreetAddress1,
+                streetAddress2: args.AddressStreetAddress2,
+              },
+            },
           },
         });
         Mails.SellerVerificationToken(Seller, SellerVerificationToken);
@@ -170,7 +199,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
       try {
         const SellerExists = await prisma.seller.findOne({
           where: {
-            email: args.email,
+            email: args.email.toLowerCase(),
           },
         });
 
@@ -299,11 +328,27 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
   t.field("DeleteSellersAccount", {
     type: "String",
     args: { sellerId: stringArg({ required: true }) },
+    //@ts-ignore
     resolve: SellerAuthResolver(
       async (__: any, args: { sellerId: string }, ctx: any, _: any) => {
         try {
           //TODO Test This Mutation
           const { sellerId } = args;
+          await prisma.itemImage.deleteMany({
+            where: { item: { sellerId: sellerId } },
+          });
+          await prisma.catagory.deleteMany({
+            where: { item: { sellerId: sellerId } },
+          });
+          await prisma.tag.deleteMany({
+            where: { item: { sellerId: sellerId } },
+          });
+          await prisma.color.deleteMany({
+            where: { item: { sellerId: sellerId } },
+          });
+          await prisma.otherFeature.deleteMany({
+            where: { item: { sellerId: sellerId } },
+          });
           await prisma.item.deleteMany({ where: { sellerId } });
           await prisma.address.deleteMany({ where: { sellerId } });
           await prisma.seller.delete({ where: { id: sellerId } });

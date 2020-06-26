@@ -1,0 +1,51 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteModel",
+      "model": "ItemImage"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "OtherFeature"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Item",
+      "field": "eagerImages",
+      "type": "String",
+      "arity": "List"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Item",
+      "field": "images",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Item",
+      "field": "OtherFeatures",
+      "type": "String"
+    },
+    {
+      "tag": "CreateField",
+      "model": "OrderItem",
+      "field": "eagerImages",
+      "type": "String",
+      "arity": "List"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "OrderItem",
+      "field": "images",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "OrderItem",
+      "field": "OtherFeatures",
+      "type": "String"
+    }
+  ]
+}

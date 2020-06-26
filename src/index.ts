@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import createServer from "./server";
 import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
+import { Request, Response } from "express-serve-static-core";
 
 // process.env.NODE_ENV = "production";
 
@@ -15,25 +16,50 @@ server.express.use(cookieParser());
 server.express.use(helmet());
 server.express.use(logger("dev"));
 
-// TODO Change this and get token from cookie
-server.express.use((req, res, next) => {
-  const Authorization = req.get("Authorization");
-  if (Authorization) {
-    const token = Authorization.replace("Bearer ", "");
+export const getTokenFromReq = (req: Request) => {
+  try {
+    const Authorization = req.headers["authorization"];
+    if (Authorization) {
+      let token = Authorization.replace("Bearer ", "");
 
-    if (token) {
-      const { sellerId }: any = jwt.verify(token, process.env.APP_SECRET || "");
-      const { userId }: any = jwt.verify(token, process.env.APP_SECRET || "");
-      req.sellerId = sellerId;
-      req.userId = userId;
+      return token;
     }
+  } catch (error) {
+    return "";
   }
+};
+
+export const getCookieFromReq = (req: Request, cookieKey: string): string => {
+  try {
+    const cookie = req.cookies[cookieKey];
+    const signedCookie = req.signedCookies[cookieKey];
+
+    if (cookie) return cookie;
+    if (signedCookie) return signedCookie;
+    return "";
+  } catch (error) {
+    return "";
+  }
+};
+
+server.express.use((req, res, next) => {
+  // const { token } = req.cookies;
+  let token = getTokenFromReq(req);
+  if (!token) token = getCookieFromReq(req, "token") || "";
+
+  if (token) {
+    const { sellerId }: any = jwt.verify(token, process.env.APP_SECRET || "");
+    const { userId }: any = jwt.verify(token, process.env.APP_SECRET || "");
+    req.sellerId = sellerId;
+
+    req.userId = userId;
+  }
+
   next();
 });
 
 server.express.use(async (req, res, next) => {
   if (!req.sellerId) return next();
-
   const seller = await prisma.seller.findOne({ where: { id: req.sellerId } });
   req.seller = seller;
 

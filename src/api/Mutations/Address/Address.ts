@@ -33,6 +33,7 @@ export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
 
     description: "Create Users Address",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (parent: any, args: any, ctx: any, info: any) => {
         try {

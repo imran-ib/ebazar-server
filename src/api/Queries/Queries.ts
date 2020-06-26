@@ -5,8 +5,11 @@ import { USERS } from "./User/User";
 export const Query = objectType({
   name: "Query",
   definition(t) {
-    t.crud.item();
-    t.crud.items();
+    t.crud.item(); // being used
+    t.crud.items({
+      filtering: true,
+      ordering: true,
+    });
     t.crud.seller(),
       t.crud.sellers(),
       t.crud.user(),

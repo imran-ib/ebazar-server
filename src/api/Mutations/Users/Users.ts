@@ -26,7 +26,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     resolve: async (parent: any, args, ctx: any, info: any) => {
       try {
         // Validate Email
-        let email: string = args.email;
+        let email: string = args.email.toLowerCase();
         const ValidEmail: Boolean = validateEmail(email);
         if (!ValidEmail) {
           throw new Error(`The Email Address You Provided is Invalid.`);
@@ -173,7 +173,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
         ctx.response.clearCookie("token");
         // check if token is valid
         // 1. check if the passwords match
-        if (args.password.length < 4) {
+        if (args.password.length < 5) {
           throw new Error(
             `Password is Too Short. It Should Not Be Less then 4 characters`
           );
@@ -199,6 +199,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
         });
         if (!User) throw new Error(`Your Token is Either invalid or expired`);
         const hashedPassword = await Hash(args.password);
+
         const UpdatedUser = await prisma.user.update({
           where: {
             id: User.id,
@@ -222,9 +223,9 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
     },
   });
   t.field("DeleteUserAccount", {
-    // TODO Test This Mutation
     type: "String",
     args: { userId: stringArg({ required: true }) },
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (parent: any, args: { userId: string }, ctx: any, info: any) => {
         try {

@@ -11,6 +11,9 @@ export const User = objectType({
     t.model.address({
       type: "Address",
     });
+    t.model.Order({
+      type: "Order",
+    });
     t.model.permissions();
     t.model.cart({
       type: "CartItem",
@@ -42,9 +45,7 @@ export const Seller = objectType({
       type: "Address",
     });
     t.model.Brand();
-    t.model.items({
-      type: "Item",
-    });
+    t.model.items();
     t.model.permissions();
   },
 });
@@ -55,21 +56,7 @@ export const Like = objectType({
     t.model.id();
     t.model.user();
     t.model.userId();
-    t.model.item({
-      type: "Item",
-    });
-    t.model.itemId();
-  },
-});
-export const ItemImage = objectType({
-  name: "ItemImage",
-  definition(t) {
-    t.model.id();
-    t.model.url();
-    t.model.largeUrl();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
   },
 });
@@ -78,9 +65,7 @@ export const CartItem = objectType({
   definition(t) {
     t.model.id();
     t.model.quantity();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
     t.model.user();
     t.model.userId();
@@ -90,9 +75,8 @@ export const Order = objectType({
   name: "Order",
   definition(t) {
     t.model.id();
-    t.model.items({
-      type: "OrderItem",
-    });
+    t.model.items();
+    t.model.Item();
     t.model.itemId();
     t.model.total();
     t.model.user();
@@ -113,11 +97,18 @@ export const Item = objectType({
       type: "Review",
     });
     t.model.reviewCount();
-    t.model.images({
-      type: "ItemImage",
-    });
+    t.model.images();
+    t.model.eagerImages();
+    t.model.OtherFeatures();
+
     t.model.catagory({
       type: "Catagory",
+    });
+    t.model.tags({
+      type: "Tag",
+    });
+    t.model.colors({
+      type: "Color",
     });
 
     t.model.title();
@@ -144,9 +135,9 @@ export const OrderItem = objectType({
     t.model.itemReview({
       type: "Review",
     });
-    t.model.images({
-      type: "ItemImage",
-    });
+    t.model.images();
+    t.model.eagerImages();
+    t.model.OtherFeatures();
     t.model.catagory({
       type: "Catagory",
     });
@@ -170,9 +161,7 @@ export const Catagory = objectType({
   definition(t) {
     t.model.id();
     t.model.text();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
   },
 });
@@ -181,9 +170,7 @@ export const Tag = objectType({
   definition(t) {
     t.model.id();
     t.model.text();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
   },
 });
@@ -192,30 +179,16 @@ export const Color = objectType({
   definition(t) {
     t.model.id();
     t.model.text();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
   },
 });
-export const OtherFeature = objectType({
-  name: "OtherFeature",
-  definition(t) {
-    t.model.id();
-    t.model.text();
-    t.model.item({
-      type: "Item",
-    });
-    t.model.itemId();
-  },
-});
+
 export const Review = objectType({
   name: "Review",
   definition(t) {
     t.model.id();
-    t.model.item({
-      type: "Item",
-    });
+    t.model.item();
     t.model.itemId();
     t.model.author();
     t.model.authorId();

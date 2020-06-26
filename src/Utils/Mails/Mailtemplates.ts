@@ -35,7 +35,9 @@ function ForgotPasswordUser(user: User, token: string) {
     <div>
       <h1>Click On The Link To Reset Your Password 
       <a className="btn btn-info btn-block" 
-      href='${process.env.FRONTEND_URL}/user-password-reset?token=${token}'>Click Here</a> </h1>
+      href='${
+        process.env.FRONTEND_URL
+      }/user/reset-password?token=${token}'>Click Here</a> </h1>
       </div>
   
   </div> 
@@ -53,7 +55,9 @@ function ForgotPasswordSeller(seller: Seller, token: string) {
     <div>
    <h1>Click On The Link To Reset Your Password 
    <a className="btn btn-info btn-block" 
-   href='${process.env.FRONTEND_URL}/seller-password-reset?token=${token}'>Click Here</a> </h1>
+   href='${
+     process.env.FRONTEND_URL
+   }/seller/password-reset?token=${token}'>Click Here</a> </h1>
    </div>
   </div> 
   `;
@@ -67,7 +71,9 @@ function SellerVerification(seller: Seller, token: string) {
     <h1>Hello ${seller.name}</h1>
     <h2>Welcome in ebazar.</h2>
     <div>
-      <h1>Click On The Link To Verify Your Account <a href='${process.env.FRONTEND_URL}/sellerverification?token=${token}'>Click Here</a> </h1>
+      <h1>Click On The Link To Verify Your Account <a href='${
+        process.env.FRONTEND_URL
+      }/seller/verification?token=${token}'>Click Here</a> </h1>
       </div>
   
   </div> 

@@ -13,6 +13,7 @@ export interface ItemArgs {
   beforeDiscountPrice: number;
   stock?: number;
   images?: string[];
+  eagerImages?: string[];
   catagory?: string[];
   tags?: string[];
   colors?: string[];
@@ -33,6 +34,7 @@ export interface UpdateItemArgs {
   beforeDiscountPrice?: number;
   stock?: number;
   images?: string[];
+  eagerImages?: string[];
   catagory?: string[];
   tags?: string[];
   colors?: string[];

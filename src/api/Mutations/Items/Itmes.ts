@@ -29,15 +29,15 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       price: floatArg({ required: true }),
       beforeDiscountPrice: floatArg({ required: true }),
       stock: intArg({ nullable: true }),
-      likesCount: intArg({ nullable: true }),
-      reviewCount: intArg({ nullable: true }),
       images: stringArg({ list: true }),
+      eagerImages: stringArg({ list: true }),
       catagory: stringArg({ list: true }),
       tags: stringArg({ list: true }),
       colors: stringArg({ list: true }),
       otherFeature: stringArg({ list: true }),
     },
     description: "Create New Item",
+    //@ts-ignore
     resolve: SellerAuthResolver(
       async (__: any, args: ItemArgs, ctx: any, _: any) => {
         try {
@@ -55,6 +55,15 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
               price: args.price,
               beforeDiscountPrice: args.beforeDiscountPrice,
               stock: args.stock,
+              images: {
+                set: args.images,
+              },
+              eagerImages: {
+                set: args.eagerImages,
+              },
+              OtherFeatures: {
+                set: args.otherFeature,
+              },
               Seller: {
                 connect: {
                   id: ctx.request.sellerId,
@@ -63,22 +72,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
             },
           });
 
-          // images
-          args.images &&
-            args.images.forEach(async (image) => {
-              await prisma.itemImage.create({
-                data: {
-                  url: image,
-                  item: {
-                    connect: {
-                      id: ITEM.id,
-                    },
-                  },
-                },
-              });
-            });
-
-          // catagory
+          // category
           args.catagory &&
             args.catagory.forEach(async (item) => {
               await prisma.catagory.create({
@@ -121,20 +115,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
                 },
               });
             });
-          // otherFeature
-          args.otherFeature &&
-            args.otherFeature.forEach(async (text) => {
-              await prisma.otherFeature.create({
-                data: {
-                  text: text,
-                  item: {
-                    connect: {
-                      id: ITEM.id,
-                    },
-                  },
-                },
-              });
-            });
+
           return ITEM;
         } catch (error) {
           console.log("Items -> CreateItem -> error", error.message);
@@ -160,15 +141,15 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       price: floatArg({ nullable: true }),
       beforeDiscountPrice: floatArg({ nullable: true }),
       stock: intArg({ nullable: true }),
-      likesCount: intArg({ nullable: true }),
-      reviewCount: intArg({ nullable: true }),
       images: stringArg({ list: true, nullable: true }),
+      eagerImages: stringArg({ list: true, nullable: true }),
       catagory: stringArg({ list: true, nullable: true }),
       tags: stringArg({ list: true, nullable: true }),
       colors: stringArg({ list: true, nullable: true }),
       otherFeature: stringArg({ list: true, nullable: true }),
     },
     description: "Update Item",
+    //@ts-ignore
     resolve: SellerAuthResolver(
       async (__: any, args: UpdateItemArgs, ctx: any, _: any) => {
         try {
@@ -204,29 +185,17 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
                 price: args.price,
                 beforeDiscountPrice: args.beforeDiscountPrice,
                 stock: args.stock,
+                images: {
+                  set: args.images,
+                },
+                eagerImages: {
+                  set: args.eagerImages,
+                },
+                OtherFeatures: {
+                  set: args.otherFeature,
+                },
               },
             });
-
-            // images
-            if (args.images && args.images.length > 0) {
-              await prisma.itemImage.deleteMany({
-                where: {
-                  itemId: UPDATED_ITEM.id,
-                },
-              });
-              args.images.forEach(async (image) => {
-                await prisma.itemImage.create({
-                  data: {
-                    url: image,
-                    item: {
-                      connect: {
-                        id: UPDATED_ITEM.id,
-                      },
-                    },
-                  },
-                });
-              });
-            }
 
             if (args.catagory && args.catagory.length > 0) {
               await prisma.catagory.deleteMany({
@@ -292,27 +261,6 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
                 });
               });
             }
-            // otherFeature
-            if (args.otherFeature && args.otherFeature.length > 0) {
-              await prisma.otherFeature.deleteMany({
-                where: {
-                  id: UPDATED_ITEM.id,
-                },
-              });
-
-              args.otherFeature.forEach(async (text) => {
-                await prisma.otherFeature.create({
-                  data: {
-                    text: text,
-                    item: {
-                      connect: {
-                        id: UPDATED_ITEM.id,
-                      },
-                    },
-                  },
-                });
-              });
-            }
 
             return UPDATED_ITEM;
           }
@@ -327,6 +275,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { itemId: stringArg({ required: true }) },
     description: "Delete Item",
+    //@ts-ignore
     resolve: SellerAuthResolver(
       async (__: any, args: { itemId: string }, ctx: any, _: any) => {
         try {
@@ -344,19 +293,12 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
             (ITEM.Seller && ITEM.Seller.role === "ADMIN")
           ) {
             try {
-              // TODO Check Prisma bulk Operations
-              await prisma.itemImage.deleteMany({
-                where: { itemId: args.itemId },
-              });
               await prisma.tag.deleteMany({ where: { itemId: args.itemId } });
 
               await prisma.color.deleteMany({
                 where: { itemId: args.itemId },
               });
               await prisma.catagory.deleteMany({
-                where: { itemId: args.itemId },
-              });
-              await prisma.otherFeature.deleteMany({
                 where: { itemId: args.itemId },
               });
 
@@ -390,6 +332,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { itemId: stringArg({ required: true }) },
     description: "Like Or Remove Like From Item",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (parent: any, args: { itemId: string }, ctx: any, info: any) => {
         try {
@@ -439,6 +382,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       rating: floatArg({ required: true }),
     },
     description: "Create Item Review",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (
         parent: any,
@@ -485,6 +429,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       quantity: intArg({ required: true }),
     },
     description: "Add Item To Cart",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (
         __: any,
@@ -528,6 +473,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       cartItemId: stringArg({ required: true }),
     },
     description: "",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (__: any, args: { cartItemId: string }, ctx: any, _: any) => {
         try {
@@ -553,6 +499,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { userId: stringArg({ required: true }) },
     description: "",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (__: any, args: { userId: string }, ctx: any, _: any) => {
         try {
@@ -576,6 +523,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     type: "String",
     args: { token: stringArg({ required: true }) },
     description: "",
+    //@ts-ignore
     resolve: UserAuthResolver(
       async (__: any, args: { token: string }, ctx: any, _: any) => {
         try {
@@ -586,11 +534,11 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           });
 
           //2 recalculate total amount
-          //@ts-ignore
 
           const [CurrentUser] = CurrentUserCart.map((user) => user.user);
 
           const cart = CurrentUserCart;
+
           const totalPrice = cart.reduce((tally, cartItem) => {
             if (!cartItem.item) return tally;
             return tally + cartItem.quantity * cartItem.item.price;
@@ -607,8 +555,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           });
 
           // convert Cart items to order items
-
-          const OrderItems = CurrentUserCart.map((cartItem) => {
+          const OrderItems = cart.map((cartItem) => {
             const OrderItem = {
               ...cartItem.item,
               quantity: cartItem.quantity,
@@ -628,6 +575,8 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
               status: "PENDING",
               user: { connect: { id: ctx.request.userId } },
               items: {
+                //@ts-ignore
+                //TODO Fix It
                 create: OrderItems,
               },
             },

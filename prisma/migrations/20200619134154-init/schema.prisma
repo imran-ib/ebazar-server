@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 enum Role {
@@ -69,7 +69,7 @@ model User {
   likesCount               Int?
   PasswordResetToken       String?
   Order                    Order[]
-  avatar                   String?     @default("https://res.cloudinary.com/iib-webdevs/image/upload/v1592764770/DontDeleteMe/no-image.png")
+  avatar                   String?     @default("https://image.flaticon.com/icons/png/512/17/17004.png")
   createdAt                DateTime    @default(now())
   updatedAt                DateTime    @updatedAt
 }
