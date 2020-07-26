@@ -995,16 +995,16 @@ input IntFilter {
 type Item {
   beforeDiscountPrice: Float!
   brand: String
-  CartItem(after: CartItemWhereUniqueInput, before: CartItemWhereUniqueInput, first: Int, last: Int, skip: Int): [CartItem!]!
-  catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
-  colors(after: ColorWhereUniqueInput, before: ColorWhereUniqueInput, first: Int, last: Int, skip: Int): [Color!]!
+  CartItem(skip: Int): [CartItem!]!
+  catagory(skip: Int): [Catagory!]!
+  colors(skip: Int): [Color!]!
   description: String!
   dimensions: String
   eagerImages: [String!]!
   id: String!
   images: [String!]!
-  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
-  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  itemReview(skip: Int): [Review!]!
+  likes(skip: Int): [Like!]!
   likesCount: Int
   materials: String
   OtherFeatures: [String!]!
@@ -1013,7 +1013,7 @@ type Item {
   price: Float!
   reviewCount: Int
   stock: Int
-  tags(after: TagWhereUniqueInput, before: TagWhereUniqueInput, first: Int, last: Int, skip: Int): [Tag!]!
+  tags(skip: Int): [Tag!]!
   title: String!
   videoLink: String
   weight: String
@@ -2336,7 +2336,7 @@ type Order {
   id: String!
   Item: Item
   itemId: String
-  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, skip: Int): [OrderItem!]!
+  items(skip: Int): [OrderItem!]!
   status: OrderStatus!
   total: Int!
   user: User!
@@ -2405,14 +2405,14 @@ input OrderFilter {
 type OrderItem {
   beforeDiscountPrice: Float!
   brand: String
-  catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
+  catagory(skip: Int): [Catagory!]!
   description: String!
   dimensions: String
   eagerImages: [String!]!
   id: String!
   images: [String!]!
-  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
-  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  itemReview(skip: Int): [Review!]!
+  likes(skip: Int): [Like!]!
   materials: String
   OtherFeatures: [String!]!
   otherInfo: String
@@ -3183,7 +3183,7 @@ enum Permission {
 }
 
 type Query {
-  AllAddress(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, orderBy: AddressOrderByInput, skip: Int, where: AddressWhereInput): [Address!]!
+  AllAddress(orderBy: AddressOrderByInput, skip: Int, where: AddressWhereInput): [Address!]!
   AllItems(
     """Returns the elements in the list that come after the specified cursor"""
     after: String
@@ -3228,7 +3228,7 @@ type Query {
 
   """Item Reviews"""
   ITemRevives(itemId: String!): [Review!]!
-  items(after: ItemWhereUniqueInput, before: ItemWhereUniqueInput, first: Int, last: Int, orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): [Item!]!
+  items(orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): [Item!]!
 
   """Get One Orders"""
   Order(orderId: String!): Order!
@@ -3252,14 +3252,14 @@ type Query {
 type Review {
   author: User!
   authorId: String!
-  downVote(after: DownReviewWhereUniqueInput, before: DownReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [DownReview!]!
+  downVote(skip: Int): [DownReview!]!
   downVoteCount: Int!
   id: String!
   item: Item!
   itemId: String!
   rating: Float!
   text: String!
-  upVote(after: UpReviewWhereUniqueInput, before: UpReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [UpReview!]!
+  upVote(skip: Int): [UpReview!]!
   upVoteCount: Int!
 }
 
@@ -3596,11 +3596,11 @@ type Seller {
   email: String!
   EmailIsVerified: Boolean
   id: String!
-  items(after: ItemWhereUniqueInput, before: ItemWhereUniqueInput, first: Int, last: Int, skip: Int): [Item!]!
+  items(skip: Int): [Item!]!
   name: String!
   permissions: Permission
   phone: [String!]!
-  PickupLocations(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+  PickupLocations(skip: Int): [Address!]!
   role: Role
   sellerIdentification: String!
   SellerItemsCout: Int
@@ -4169,16 +4169,16 @@ input UpReviewWhereUniqueInput {
 }
 
 type User {
-  address(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+  address(skip: Int): [Address!]!
   avatar: String
-  cart(after: CartItemWhereUniqueInput, before: CartItemWhereUniqueInput, first: Int, last: Int, skip: Int): [CartItem!]!
+  cart(skip: Int): [CartItem!]!
   email: String!
   id: String!
-  itemReview(after: ReviewWhereUniqueInput, before: ReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [Review!]!
-  likes(after: LikeWhereUniqueInput, before: LikeWhereUniqueInput, first: Int, last: Int, skip: Int): [Like!]!
+  itemReview(skip: Int): [Review!]!
+  likes(skip: Int): [Like!]!
   likesCount: Int
   name: String!
-  Order(after: OrderWhereUniqueInput, before: OrderWhereUniqueInput, first: Int, last: Int, skip: Int): [Order!]!
+  Order(skip: Int): [Order!]!
   permissions: Permission
   reviewCount: Int
   role: Role
