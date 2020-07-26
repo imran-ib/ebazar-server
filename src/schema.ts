@@ -41,11 +41,17 @@ export const schema = makeSchema({
     ItemsQueryField,
     SearchTermResults,
   ],
-  plugins: [nexusPrismaPlugin(), connectionPlugin()],
+  plugins: [
+    nexusPrismaPlugin({
+      shouldGenerateArtifacts: true,
+    }),
+    connectionPlugin(),
+  ],
   outputs: {
     schema: __dirname + "/../schema.graphql",
     typegen: __dirname + "/generated/nexus.ts",
   },
+  shouldGenerateArtifacts: true,
   typegenAutoConfig: {
     sources: [
       {
