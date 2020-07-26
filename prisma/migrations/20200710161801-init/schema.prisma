@@ -48,61 +48,67 @@ model Seller {
   PickupLocations          Address[]   @relation("ItemSeller")
   Brand                    String[]
   items                    Item[]
+  itemCount                Int         @default(1)
   permissions              Permission? @default(ADD_ITEM)
   createdAt                DateTime    @default(now())
   updatedAt                DateTime    @updatedAt
 }
 
 model User {
-  id                       String      @default(cuid()) @id
-  email                    String      @unique
+  id                       String       @default(cuid()) @id
+  email                    String       @unique
   name                     String
   password                 String
-  role                     Role?       @default(USER)
+  role                     Role?        @default(USER)
   address                  Address[]
-  permissions              Permission? @default(NONE)
+  permissions              Permission?  @default(NONE)
   cart                     CartItem[]
   likes                    Like[]
   itemReview               Review[]
   PasswordResetTokenExpiry Float?
-  reviewCount              Int?
-  likesCount               Int?
+  reviewCount              Int?         @default(0)
+  likesCount               Int?         @default(0)
   PasswordResetToken       String?
   Order                    Order[]
-  avatar                   String?     @default("https://image.flaticon.com/icons/png/512/17/17004.png")
-  createdAt                DateTime    @default(now())
-  updatedAt                DateTime    @updatedAt
+  avatar                   String?      @default("https://res.cloudinary.com/iib-webdevs/image/upload/v1592764770/DontDeleteMe/no-image.png")
+  createdAt                DateTime     @default(now())
+  updatedAt                DateTime     @updatedAt
+  UpReview                 UpReview[]
+  DownReview               DownReview[]
 }
 
 model Item {
-  id                  String         @default(cuid()) @id
+  id                  String       @default(cuid()) @id
   title               String
-  description         String         @default("No Description Provided")
-  overview            String?        @default("No Overview Provided")
-  brand               String?        @default("No brand Provided")
-  weight              String?        @default("No weight Provided")
-  dimensions          String?        @default("No dimensions Provided")
-  materials           String?        @default("No materials Provided")
-  otherInfo           String?        @default("No Other Info Provided")
-  videoLink           String?        @default("No Video Link Provided")
-  Seller              Seller?        @relation(fields: [sellerId], references: [id])
+  description         String       @default("No Description Provided")
+  overview            String?      @default("No Overview Provided")
+  brand               String?      @default("No brand Provided")
+  weight              String?      @default("No weight Provided")
+  dimensions          String?      @default("No dimensions Provided")
+  materials           String?      @default("No materials Provided")
+  otherInfo           String?      @default("No Other Info Provided")
+  videoLink           String?      @default("No Video Link Provided")
+  Seller              Seller?      @relation(fields: [sellerId], references: [id])
   sellerId            String?
   price               Float
   beforeDiscountPrice Float
-  stock               Int?           @default(1)
-  likesCount          Int?
-  reviewCount         Int?
+  stock               Int?         @default(1)
+  likesCount          Int?         @default(0)
+  reviewCount         Int?         @default(0)
   itemReview          Review[]
-  images              ItemImage[]
+  images              String[]
+  eagerImages         String[]
   catagory            Catagory[]
   tags                Tag[]
   colors              Color[]
-  OtherFeatures       OtherFeature[]
+  OtherFeatures       String[]
   likes               Like[]
   Order               Order[]
   CartItem            CartItem[]
-  createdAt           DateTime       @default(now())
-  updatedAt           DateTime       @updatedAt
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  UpReview            UpReview[]
+  DownReview          DownReview[]
 }
 
 model Order {
@@ -120,29 +126,31 @@ model Order {
 }
 
 model OrderItem {
-  id                  String         @default(cuid()) @id
+  id                  String     @default(cuid()) @id
   title               String
-  description         String         @default("No Description Provided")
+  description         String     @default("No Description Provided")
   price               Float
   beforeDiscountPrice Float
-  overview            String?        @default("No Overview Provided")
-  otherInfo           String?        @default("No Other Info Provided")
-  videoLink           String?        @default("No Video Link Provided")
-  brand               String?        @default("No brand Provided")
-  weight              String?        @default("No weight Provided")
-  dimensions          String?        @default("No dimensions Provided")
-  materials           String?        @default("No materials Provided")
-  stock               Int?           @default(1)
+  quantity            Int        @default(1)
+  overview            String?    @default("No Overview Provided")
+  otherInfo           String?    @default("No Other Info Provided")
+  videoLink           String?    @default("No Video Link Provided")
+  brand               String?    @default("No brand Provided")
+  weight              String?    @default("No weight Provided")
+  dimensions          String?    @default("No dimensions Provided")
+  materials           String?    @default("No materials Provided")
+  stock               Int?       @default(1)
   likes               Like[]
   itemReview          Review[]
-  images              ItemImage[]
+  images              String[]
+  eagerImages         String[]
   catagory            Catagory[]
   tags                Tag[]
   colors              Color[]
-  OtherFeatures       OtherFeature[]
-  createdAt           DateTime       @default(now())
-  updatedAt           DateTime       @updatedAt
-  Order               Order[]        @relation(references: [id])
+  OtherFeatures       String[]
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  Order               Order[]    @relation(references: [id])
 }
 
 model CartItem {
@@ -154,18 +162,6 @@ model CartItem {
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model ItemImage {
-  id          String     @default(cuid()) @id
-  url         String
-  largeUrl    String?
-  item        Item       @relation(fields: [itemId], references: [id])
-  itemId      String
-  OrderItem   OrderItem? @relation(fields: [orderItemId], references: [id])
-  orderItemId String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
 }
 
 model Address {
@@ -195,17 +191,47 @@ model Address {
 }
 
 model Review {
-  id          String     @default(cuid()) @id
-  item        Item       @relation(fields: [itemId], references: [id])
-  itemId      String
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    String
-  rating      Float      @default(0)
-  text        String
-  OrderItem   OrderItem? @relation(fields: [orderItemId], references: [id])
-  orderItemId String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id            String       @default(cuid()) @id
+  item          Item         @relation(fields: [itemId], references: [id])
+  itemId        String
+  author        User         @relation(fields: [authorId], references: [id])
+  authorId      String
+  rating        Float        @default(0)
+  text          String
+  upVote        UpReview[]
+  downVote      DownReview[]
+  upVoteCount   Int          @default(0)
+  downVoteCount Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  OrderItem     OrderItem?   @relation(fields: [orderItemId], references: [id])
+  orderItemId   String?
+}
+
+model UpReview {
+  id         String   @default(cuid()) @id
+  voteUp     Boolean  @default(false)
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String
+  item       Item     @relation(fields: [itemId], references: [id])
+  itemId     String
+  Review     Review   @relation(fields: [reviewUpId], references: [id])
+  reviewUpId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DownReview {
+  id           String   @default(cuid()) @id
+  voteDown     Boolean  @default(false)
+  author       User     @relation(fields: [authorId], references: [id])
+  authorId     String
+  item         Item     @relation(fields: [itemId], references: [id])
+  itemId       String
+  Review       Review   @relation(fields: [reviewDownId], references: [id])
+  reviewDownId String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Like {
@@ -243,17 +269,6 @@ model Tag {
 }
 
 model Color {
-  id          String     @default(cuid()) @id
-  text        String
-  item        Item       @relation(fields: [itemId], references: [id])
-  itemId      String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  OrderItem   OrderItem? @relation(fields: [orderItemId], references: [id])
-  orderItemId String?
-}
-
-model OtherFeature {
   id          String     @default(cuid()) @id
   text        String
   item        Item       @relation(fields: [itemId], references: [id])

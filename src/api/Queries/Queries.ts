@@ -1,20 +1,22 @@
 import { objectType } from "@nexus/schema";
-
 import { USERS } from "./User/User";
+import { ITEMS } from "./Item/Item";
 
 export const Query = objectType({
   name: "Query",
   definition(t) {
-    t.crud.item(); // being used
-    t.crud.items({
+    t.crud.addresses({
+      alias: "AllAddress",
+      type: "Address",
       filtering: true,
       ordering: true,
-    });
-    t.crud.seller(),
-      t.crud.sellers(),
-      t.crud.user(),
-      t.crud.addresses(),
-      t.crud.users(),
-      USERS(t);
+    }),
+      t.crud.address({
+        alias: "SingleAddress",
+        type: "Address",
+      }); //in use
+
+    USERS(t);
+    ITEMS(t);
   },
 });

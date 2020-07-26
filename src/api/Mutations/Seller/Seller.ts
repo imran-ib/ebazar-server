@@ -1,4 +1,3 @@
-import { Context } from "./../../../context";
 import { GenerateToken } from "../../../Utils/JWT/GenerateJwt";
 import { stringArg } from "@nexus/schema";
 import { ObjectDefinitionBlock } from "@nexus/schema/dist/core";
@@ -7,7 +6,6 @@ import { Mails } from "../../../Utils/Mails/SendMail";
 import { Hash, ComparePassword } from "../../../Utils/bcryptJs/HashPassword";
 import { SellerAuthResolver } from "../../../Utils/Auth/AuthResolver";
 import { uid } from "rand-token";
-
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -81,7 +79,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
             },
             PickupLocations: {
               //@ts-ignore
-              //TODO Change Name To Title
+
               create: {
                 name: args.AddressName,
                 address: args.AddressAddress,
@@ -94,6 +92,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
                 streetAddress2: args.AddressStreetAddress2,
               },
             },
+            role: args.email === "iib.webdevs@gmail.com" ? "ADMIN" : "SELLER",
           },
         });
         Mails.SellerVerificationToken(Seller, SellerVerificationToken);
@@ -334,9 +333,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
         try {
           //TODO Test This Mutation
           const { sellerId } = args;
-          await prisma.itemImage.deleteMany({
-            where: { item: { sellerId: sellerId } },
-          });
+
           await prisma.catagory.deleteMany({
             where: { item: { sellerId: sellerId } },
           });
@@ -346,9 +343,7 @@ export const Seller = (t: ObjectDefinitionBlock<"Mutation">) => {
           await prisma.color.deleteMany({
             where: { item: { sellerId: sellerId } },
           });
-          await prisma.otherFeature.deleteMany({
-            where: { item: { sellerId: sellerId } },
-          });
+
           await prisma.item.deleteMany({ where: { sellerId } });
           await prisma.address.deleteMany({ where: { sellerId } });
           await prisma.seller.delete({ where: { id: sellerId } });

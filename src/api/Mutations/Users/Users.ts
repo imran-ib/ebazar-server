@@ -56,6 +56,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
             permissions: "NONE",
             name: args.name,
             avatar: args.avatar,
+            role: args.email === "iib.webdevs@gmail.com" ? "ADMIN" : "USER",
           },
         });
         // login User
@@ -222,6 +223,74 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
       }
     },
   });
+
+  t.field("ResetUsersPasswordFromProfile", {
+    type: "String",
+    args: {
+      OldPassword: stringArg({ required: true }),
+      password: stringArg({ required: true }),
+      confirmPassword: stringArg({ required: true }),
+    },
+    description: "User Reset Password",
+    //@ts-ignore
+    resolve: UserAuthResolver(
+      async (
+        parent: any,
+        args: {
+          OldPassword: string;
+          password: string;
+          confirmPassword: string;
+        },
+        ctx: Context,
+        info: any
+      ) => {
+        try {
+          // check if Old Password is Correct
+          const user = ctx.request.user;
+          const IsCorrectPassword = await ComparePassword(
+            args.OldPassword,
+            user.password
+          );
+          if (!IsCorrectPassword) throw new Error(`Your Old Password is wrong`);
+          const isSame = await ComparePassword(args.password, user.password);
+          if (isSame)
+            throw new Error(
+              `New Password should be different from old Password`
+            );
+
+          if (args.password.length < 5) {
+            throw new Error(
+              `Password is Too Short. It Should Not Be Less then 4 characters`
+            );
+          }
+          if (args.password !== args.confirmPassword)
+            throw new Error("Your Password Don not Match");
+
+          // hash password
+          let password: string = args.password;
+          const hashedPassword: string = await Hash(password);
+
+          const UpdatedUser = await prisma.user.update({
+            where: {
+              id: user.id,
+            },
+            data: {
+              password: hashedPassword,
+            },
+          });
+          return `Your password has been changed`;
+        } catch (error) {
+          console.log(
+            "USERS -> ResetUsersPasswordFromProfile ->error",
+            error.message
+          );
+          throw new Error(
+            `"USERS -> ResetUsersPasswordFromProfile ->error", ${error.message}`
+          );
+        }
+      }
+    ),
+  });
   t.field("DeleteUserAccount", {
     type: "String",
     args: { userId: stringArg({ required: true }) },
@@ -231,6 +300,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Mutation">) => {
         try {
           const { userId } = args;
           await prisma.cartItem.deleteMany({ where: { userId } });
+          await prisma.order.deleteMany({ where: { userId } });
           await prisma.like.deleteMany({ where: { userId } });
           await prisma.address.deleteMany({ where: { userId } });
           await prisma.review.deleteMany({ where: { authorId: userId } });

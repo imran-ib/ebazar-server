@@ -11,8 +11,6 @@ const prisma = new PrismaClient();
 import { ItemArgs, UpdateItemArgs } from "../../../Types";
 import { Context } from "./../../../context";
 
-// TODO Test CreateOrder
-
 export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
   t.field("CreateItem", {
     type: "Item",
@@ -128,7 +126,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
   t.field("UpdateItem", {
     type: "Item",
     args: {
-      id: stringArg({ nullable: true }),
+      id: stringArg({ required: true }),
       title: stringArg({ nullable: true }),
       description: stringArg({ nullable: true }),
       overview: stringArg({ nullable: true }),
@@ -157,8 +155,6 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
             include: { Seller: true },
             where: { id: args.id },
           });
-          // TODO test These Conditions
-
           if (!ITEM) throw new Error(`Item Not Found`);
 
           if (ITEM.Seller && ITEM.Seller.id !== ctx.request.sellerId)
@@ -271,6 +267,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       }
     ),
   });
+  //TODO Copy UpdateItem and create it with admin auth(give admin access of update item)
   t.field("DeleteItem", {
     type: "String",
     args: { itemId: stringArg({ required: true }) },
@@ -283,7 +280,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
             include: { Seller: true },
             where: { id: args.itemId },
           });
-          // TODO test These Conditions
+
           if (!ITEM) throw new Error(`Item Not Found`);
           if (ITEM.Seller && ITEM.Seller.id !== ctx.request.sellerId)
             throw new Error(`You Don't Own This Item`);
@@ -328,6 +325,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       }
     ),
   });
+  //TODO Copy DeleteItem and create it with admin auth(give admin access of delete item)
   t.field("ToggleLikeItem", {
     type: "String",
     args: { itemId: stringArg({ required: true }) },
@@ -370,6 +368,33 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           return "Success";
         } catch (error) {
           throw new Error(`Unable To Complete The Action ${error.message}`);
+        }
+      }
+    ),
+  });
+  t.field("RemoveAllLikes", {
+    type: "String",
+    args: { userId: stringArg({ required: true }) },
+    description: "Remove All Items From Wishlist",
+    //@ts-ignore
+    resolve: UserAuthResolver(
+      async (
+        parent: any,
+        args: { userId: string },
+        ctx: Context,
+        info: any
+      ) => {
+        try {
+          const userId = ctx.request.userId;
+          const Items = await prisma.like.deleteMany({
+            where: {
+              userId: args.userId,
+            },
+          });
+
+          return `Your Wishlist is Empty now`;
+        } catch (error) {
+          throw new Error(error.message);
         }
       }
     ),
@@ -422,6 +447,155 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
       }
     ),
   });
+  t.field("ToggleReviewUpVote", {
+    type: "String",
+    args: {
+      reviewId: stringArg({ required: true }),
+      itemId: stringArg({ required: true }),
+    },
+    description: "Toggle Vote Up For Review",
+    //@ts-ignore
+    resolve: UserAuthResolver(
+      async (
+        parent: any,
+        args: { itemId: string; reviewId: string },
+        ctx: any,
+        info: any
+      ) => {
+        try {
+          const userId: string = ctx.request.userId;
+          const [ExistsUpVote] = await prisma.upReview.findMany({
+            where: {
+              AND: [
+                {
+                  authorId: userId,
+                },
+                {
+                  Review: {
+                    id: args.reviewId,
+                  },
+                  itemId: args.itemId,
+                },
+              ],
+            },
+          });
+
+          if (ExistsUpVote) {
+            await prisma.upReview.delete({
+              where: {
+                id: ExistsUpVote.id,
+              },
+            });
+          } else {
+            await prisma.upReview.create({
+              data: {
+                author: {
+                  connect: { id: userId },
+                },
+                item: {
+                  connect: { id: args.itemId },
+                },
+                Review: {
+                  connect: { id: args.reviewId },
+                },
+                voteUp: true,
+              },
+            });
+          }
+          const UpdateCount = await prisma.review.update({
+            where: { id: args.reviewId },
+            data: {
+              upVoteCount: await prisma.upReview.count({
+                where: {
+                  Review: {
+                    id: args.reviewId,
+                  },
+                },
+              }),
+            },
+          });
+          return `Success! Thank Your For Voting`;
+        } catch (error) {
+          console.log("error", error);
+          throw new Error(`${error.message}`);
+        }
+      }
+    ),
+  });
+  t.field("ToggleReviewDownVote", {
+    type: "String",
+    args: {
+      reviewId: stringArg({ required: true }),
+      itemId: stringArg({ required: true }),
+    },
+    description: "Toggle Vote Down For Review",
+    //@ts-ignore
+    resolve: UserAuthResolver(
+      async (
+        parent: any,
+        args: { itemId: string; reviewId: string },
+        ctx: any,
+        info: any
+      ) => {
+        try {
+          const userId: string = ctx.request.userId;
+          const [ExistsDownVote] = await prisma.downReview.findMany({
+            where: {
+              AND: [
+                {
+                  authorId: userId,
+                },
+                {
+                  Review: {
+                    id: args.reviewId,
+                  },
+                  itemId: args.itemId,
+                },
+              ],
+            },
+          });
+          if (ExistsDownVote) {
+            await prisma.downReview.delete({
+              where: {
+                id: ExistsDownVote.id,
+              },
+            });
+          } else {
+            await prisma.downReview.create({
+              data: {
+                author: {
+                  connect: { id: userId },
+                },
+                item: {
+                  connect: { id: args.itemId },
+                },
+                Review: {
+                  connect: { id: args.reviewId },
+                },
+                voteDown: true,
+              },
+            });
+          }
+          const UpdateCount = await prisma.review.update({
+            where: { id: args.reviewId },
+            data: {
+              downVoteCount: await prisma.downReview.count({
+                where: {
+                  Review: {
+                    id: args.reviewId,
+                  },
+                },
+              }),
+            },
+          });
+          return `Success! Your Vote Has Been Cancled`;
+        } catch (error) {
+          console.log("error", error);
+          throw new Error(`${error.message}`);
+        }
+      }
+    ),
+  });
   t.field("AddItemToTheCart", {
     type: "String",
     args: {
@@ -468,7 +642,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     ),
   });
   t.field("DeleteCartItem", {
-    type: "String",
+    type: "CartItem",
     args: {
       cartItemId: stringArg({ required: true }),
     },
@@ -477,17 +651,22 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     resolve: UserAuthResolver(
       async (__: any, args: { cartItemId: string }, ctx: any, _: any) => {
         try {
+          let Item;
           const [ITEM] = await prisma.cartItem.findMany({
             where: {
-              AND: [{ id: args.cartItemId }, { userId: ctx.request.userId }],
+              AND: [
+                { itemId: args.cartItemId },
+                { userId: ctx.request.userId },
+              ],
             },
           });
+
           if (ITEM) {
-            await prisma.cartItem.delete({ where: { id: ITEM.id } });
+            Item = await prisma.cartItem.delete({ where: { id: ITEM.id } });
           } else {
             throw new Error(`Item Not Found`);
           }
-          return `Success! Item Has been removed From Cart`;
+          return Item;
         } catch (error) {
           console.log("error  -> DeleteCartItem", error.message);
           throw new Error(`"error  -> DeleteCartItem",${error.message}`);
@@ -520,7 +699,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
     ),
   });
   t.field("CreateOrder", {
-    type: "String",
+    type: "Order",
     args: { token: stringArg({ required: true }) },
     description: "",
     //@ts-ignore
@@ -534,11 +713,8 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           });
 
           //2 recalculate total amount
-
           const [CurrentUser] = CurrentUserCart.map((user) => user.user);
-
           const cart = CurrentUserCart;
-
           const totalPrice = cart.reduce((tally, cartItem) => {
             if (!cartItem.item) return tally;
             return tally + cartItem.quantity * cartItem.item.price;
@@ -557,13 +733,26 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
           // convert Cart items to order items
           const OrderItems = cart.map((cartItem) => {
             const OrderItem = {
-              ...cartItem.item,
+              title: cartItem.item.title,
+              description: cartItem.item.description,
+              price: cartItem.item.price,
+              beforeDiscountPrice: cartItem.item.beforeDiscountPrice,
+              images: {
+                set: cartItem.item.images,
+              },
+              eagerImages: {
+                set: cartItem.item.eagerImages,
+              },
+              overview: cartItem.item.overview,
+              otherInfo: cartItem.item.otherInfo,
+              videoLink: cartItem.item.videoLink,
+              brand: cartItem.item.brand,
+              weight: cartItem.item.weight,
+              dimensions: cartItem.item.dimensions,
+              materials: cartItem.item.materials,
+              stock: cartItem.item.stock,
               quantity: cartItem.quantity,
-              user: { connect: { id: ctx.request.userId } },
-              seller: { connect: { id: cartItem.item.sellerId } },
             };
-            delete OrderItem.id;
-
             return OrderItem;
           });
 
@@ -575,8 +764,6 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
               status: "PENDING",
               user: { connect: { id: ctx.request.userId } },
               items: {
-                //@ts-ignore
-                //TODO Fix It
                 create: OrderItems,
               },
             },
@@ -591,7 +778,7 @@ export const Items = (t: ObjectDefinitionBlock<"Mutation">) => {
             },
           });
 
-          return `Thank You For The Purchase`;
+          return orders;
         } catch (error) {
           console.log("error -> CreateOrder", error.message);
           throw new Error(`"error -> CreateOrder", ${error.message}`);

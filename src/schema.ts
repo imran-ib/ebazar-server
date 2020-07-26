@@ -1,11 +1,9 @@
 import { nexusPrismaPlugin } from "nexus-prisma";
-import { makeSchema } from "@nexus/schema";
-
+import { makeSchema, connectionPlugin } from "@nexus/schema";
 import {
   User,
   Seller,
   Like,
-  ItemImage,
   CartItem,
   Order,
   Item,
@@ -13,12 +11,14 @@ import {
   Catagory,
   Tag,
   Color,
-  OtherFeature,
   Review,
   Address,
+  UpReview,
+  DownReview,
 } from "./api/Models/Modles";
 import { Query } from "./api/Queries/Queries";
 import { Mutation } from "./api/Mutations/Mutations";
+import { ItemsQueryField, SearchTermResults } from "./api/Queries/Item/Item";
 
 export const schema = makeSchema({
   types: [
@@ -27,7 +27,6 @@ export const schema = makeSchema({
     User,
     Seller,
     Like,
-    ItemImage,
     CartItem,
     Order,
     Item,
@@ -35,11 +34,14 @@ export const schema = makeSchema({
     Catagory,
     Tag,
     Color,
-    OtherFeature,
     Review,
     Address,
+    UpReview,
+    DownReview,
+    ItemsQueryField,
+    SearchTermResults,
   ],
-  plugins: [nexusPrismaPlugin()],
+  plugins: [nexusPrismaPlugin(), connectionPlugin()],
   outputs: {
     schema: __dirname + "/../schema.graphql",
     typegen: __dirname + "/generated/nexus.ts",

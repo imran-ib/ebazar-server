@@ -1,7 +1,12 @@
 import { ObjectDefinitionBlock, stringArg } from "@nexus/schema/dist/core";
 import { User, Seller } from "@prisma/client";
 import { prisma } from "../../Primsa/Prisma";
-import { UserAuthResolver } from "../../../Utils/Auth/AuthResolver";
+import {
+  UserAuthResolver,
+  AdminAuthResolver,
+} from "../../../Utils/Auth/AuthResolver";
+import { Context } from "../../../context";
+import { connectionFromArray } from "graphql-relay";
 
 export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
   t.field("CurrentUser", {
@@ -55,7 +60,6 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     },
   });
   t.field("UserOrder", {
-    //TODO Test This Query
     type: "Order",
     description: "Users Orders",
     list: true,
@@ -77,7 +81,6 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     }),
   });
   t.field("Order", {
-    //TODO Test This Query
     type: "Order",
     args: { orderId: stringArg({ required: true }) },
     description: "Get One Orders",
@@ -107,6 +110,7 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
     resolve: async (__: any, args: { itemId: string }, ctx: any, _: any) => {
       try {
         const Reviews = await prisma.review.findMany({
+          include: { upVote: true, downVote: true },
           where: {
             itemId: args.itemId,
           },
@@ -119,31 +123,100 @@ export const USERS = (t: ObjectDefinitionBlock<"Query">) => {
       }
     },
   });
+  t.field("UserLikes", {
+    type: "Item",
+    args: { userId: stringArg({ required: true }) },
+    description: "Users Whish List",
+    List: true,
+    //@ts-ignore
+    resolve: UserAuthResolver(
+      async (
+        parent: any,
+        args: { userId: string },
+        ctx: Context,
+        info: any
+      ) => {
+        try {
+          const Items = await prisma.like.findMany({
+            where: {
+              itemId: args.userId,
+            },
+          });
+          return Items;
+        } catch (error) {
+          console.log("error", error);
+          throw new Error(error.message);
+        }
+      }
+    ),
+  });
+  t.field("isAdmin", {
+    type: "Boolean",
+    description: "Admin Account",
+    //@ts-ignore
+    resolve: async (parent: any, args: any, ctx: Context, info: any) => {
+      try {
+        const userId = ctx.request.userId;
+        const sellerId = ctx.request.sellerId;
 
-  // t.field("SingleItem", {
-  //   type: "Item",
-  //   args: { id: stringArg({ required: true }) },
-  //   description: "Get Single Item Query",
-  //   //@ts-ignore
-  //   resolve: async (__: any, args: any, ctx: any, _: any) => {
-  //     try {
-  //       const Item = await prisma.item.findOne({
-  //         include: {
-  //           tags: true,
-  //           catagory: true,
-  //           colors: true,
-  //           itemReview: true,
-  //           images: true,
-  //           OtherFeatures: true,
-  //           likes: true,
-  //         },
-  //         where: { id: args.id },
-  //       });
-  //       return Item;
-  //     } catch (error) {
-  //       console.log("error", error.message);
-  //       throw new Error(`Query Single Item", ${error.message}`);
-  //     }
-  //   },
-  // });
+        const [UserIsAdmin] = userId
+          ? await prisma.user.findMany({
+              where: {
+                AND: [
+                  {
+                    id: userId,
+                  },
+                  {
+                    role: "ADMIN",
+                  },
+                ],
+              },
+            })
+          : [];
+
+        const [SellerAdmin] = sellerId
+          ? await prisma.seller.findMany({
+              where: {
+                AND: [
+                  {
+                    id: sellerId,
+                  },
+                  {
+                    role: "ADMIN",
+                  },
+                ],
+              },
+            })
+          : [];
+        if (UserIsAdmin) {
+          return true;
+        } else if (SellerAdmin) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+  });
+  t.connectionField("AllUsers", {
+    type: "User",
+    disableBackwardPagination: true,
+    inheritAdditionalArgs: true,
+    //@ts-ignore
+    resolve: AdminAuthResolver(async (root, args, ctx, info) => {
+      return connectionFromArray(await prisma.user.findMany(), args);
+    }),
+  });
+  t.connectionField("AllSeller", {
+    type: "Seller",
+    disableBackwardPagination: true,
+    inheritAdditionalArgs: true,
+
+    //@ts-ignore
+    resolve: AdminAuthResolver(async (root, args, ctx, info) => {
+      return connectionFromArray(await prisma.seller.findMany(), args);
+    }),
+  });
 };

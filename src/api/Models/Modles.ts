@@ -75,7 +75,10 @@ export const Order = objectType({
   name: "Order",
   definition(t) {
     t.model.id();
-    t.model.items();
+    t.model.items({
+      type: "OrderItem",
+    });
+
     t.model.Item();
     t.model.itemId();
     t.model.total();
@@ -83,6 +86,7 @@ export const Order = objectType({
     t.model.userId();
     t.model.charge();
     t.model.status();
+    t.model.createdAt();
   },
 });
 export const Item = objectType({
@@ -109,6 +113,9 @@ export const Item = objectType({
     });
     t.model.colors({
       type: "Color",
+    });
+    t.model.CartItem({
+      type: "CartItem",
     });
 
     t.model.title();
@@ -154,6 +161,7 @@ export const OrderItem = objectType({
     t.model.price();
     t.model.beforeDiscountPrice();
     t.model.stock();
+    t.model.quantity();
   },
 });
 export const Catagory = objectType({
@@ -194,6 +202,12 @@ export const Review = objectType({
     t.model.authorId();
     t.model.rating();
     t.model.text();
+    t.model.downVoteCount();
+    t.model.upVoteCount();
+    //@ts-ignore
+    t.model.upVote();
+    //@ts-ignore
+    t.model.downVote();
   },
 });
 export const Address = objectType({
@@ -219,5 +233,35 @@ export const Address = objectType({
     t.model.User({
       type: "User",
     });
+  },
+});
+export const UpReview = objectType({
+  name: "UpReview",
+  definition(t) {
+    t.model.id();
+    t.model.voteUp();
+    t.model.Review({
+      type: "Review",
+    });
+    t.model.item();
+    t.model.itemId();
+    t.model.author();
+    t.model.authorId();
+    t.model.createdAt();
+  },
+});
+export const DownReview = objectType({
+  name: "DownReview",
+  definition(t) {
+    t.model.id();
+    t.model.voteDown();
+    t.model.Review({
+      type: "Review",
+    });
+    t.model.item();
+    t.model.itemId();
+    t.model.author();
+    t.model.authorId();
+    t.model.createdAt();
   },
 });

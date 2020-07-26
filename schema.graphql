@@ -89,6 +89,29 @@ input AddressFilter {
   some: AddressWhereInput
 }
 
+input AddressOrderByInput {
+  additionalInfo: OrderByArg
+  address: OrderByArg
+  city: OrderByArg
+  company: OrderByArg
+  country: OrderByArg
+  createdAt: OrderByArg
+  id: OrderByArg
+  isPrimary: OrderByArg
+  Lat: OrderByArg
+  Lng: OrderByArg
+  MaincontactNubmer: OrderByArg
+  message: OrderByArg
+  name: OrderByArg
+  sellerId: OrderByArg
+  state: OrderByArg
+  streetAddress1: OrderByArg
+  streetAddress2: OrderByArg
+  updatedAt: OrderByArg
+  userId: OrderByArg
+  zipCode: OrderByArg
+}
+
 input AddressScalarWhereInput {
   additionalInfo: NullableStringFilter
   address: StringFilter
@@ -292,6 +315,15 @@ input AddressWhereInput {
 
 input AddressWhereUniqueInput {
   id: String
+}
+
+type BatchPayload {
+  count: Int!
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: Boolean
 }
 
 type CartItem {
@@ -738,6 +770,206 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+type DownReview {
+  author: User!
+  authorId: String!
+  createdAt: DateTime!
+  id: String!
+  item: Item!
+  itemId: String!
+  Review: Review!
+  voteDown: Boolean!
+}
+
+input DownReviewCreateManyWithoutAuthorInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutAuthorInput!]
+}
+
+input DownReviewCreateManyWithoutItemInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutItemInput!]
+}
+
+input DownReviewCreateManyWithoutReviewInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutReviewInput!]
+}
+
+input DownReviewCreateWithoutAuthorInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateOneWithoutDownReviewInput!
+  Review: ReviewCreateOneWithoutDownVoteInput!
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewCreateWithoutItemInput {
+  author: UserCreateOneWithoutDownReviewInput!
+  createdAt: DateTime
+  id: String
+  Review: ReviewCreateOneWithoutDownVoteInput!
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewCreateWithoutReviewInput {
+  author: UserCreateOneWithoutDownReviewInput!
+  createdAt: DateTime
+  id: String
+  item: ItemCreateOneWithoutDownReviewInput!
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewFilter {
+  every: DownReviewWhereInput
+  none: DownReviewWhereInput
+  some: DownReviewWhereInput
+}
+
+input DownReviewScalarWhereInput {
+  AND: [DownReviewScalarWhereInput!]
+  authorId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  itemId: StringFilter
+  NOT: [DownReviewScalarWhereInput!]
+  OR: [DownReviewScalarWhereInput!]
+  reviewDownId: StringFilter
+  updatedAt: DateTimeFilter
+  voteDown: BooleanFilter
+}
+
+input DownReviewUpdateManyDataInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewUpdateManyWithoutAuthorInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutAuthorInput!]
+  delete: [DownReviewWhereUniqueInput!]
+  deleteMany: [DownReviewScalarWhereInput!]
+  disconnect: [DownReviewWhereUniqueInput!]
+  set: [DownReviewWhereUniqueInput!]
+  update: [DownReviewUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [DownReviewUpdateManyWithWhereNestedInput!]
+  upsert: [DownReviewUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input DownReviewUpdateManyWithoutItemInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutItemInput!]
+  delete: [DownReviewWhereUniqueInput!]
+  deleteMany: [DownReviewScalarWhereInput!]
+  disconnect: [DownReviewWhereUniqueInput!]
+  set: [DownReviewWhereUniqueInput!]
+  update: [DownReviewUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [DownReviewUpdateManyWithWhereNestedInput!]
+  upsert: [DownReviewUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input DownReviewUpdateManyWithoutReviewInput {
+  connect: [DownReviewWhereUniqueInput!]
+  create: [DownReviewCreateWithoutReviewInput!]
+  delete: [DownReviewWhereUniqueInput!]
+  deleteMany: [DownReviewScalarWhereInput!]
+  disconnect: [DownReviewWhereUniqueInput!]
+  set: [DownReviewWhereUniqueInput!]
+  update: [DownReviewUpdateWithWhereUniqueWithoutReviewInput!]
+  updateMany: [DownReviewUpdateManyWithWhereNestedInput!]
+  upsert: [DownReviewUpsertWithWhereUniqueWithoutReviewInput!]
+}
+
+input DownReviewUpdateManyWithWhereNestedInput {
+  data: DownReviewUpdateManyDataInput!
+  where: DownReviewScalarWhereInput!
+}
+
+input DownReviewUpdateWithoutAuthorDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateOneRequiredWithoutDownReviewInput
+  Review: ReviewUpdateOneRequiredWithoutDownVoteInput
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewUpdateWithoutItemDataInput {
+  author: UserUpdateOneRequiredWithoutDownReviewInput
+  createdAt: DateTime
+  id: String
+  Review: ReviewUpdateOneRequiredWithoutDownVoteInput
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewUpdateWithoutReviewDataInput {
+  author: UserUpdateOneRequiredWithoutDownReviewInput
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateOneRequiredWithoutDownReviewInput
+  updatedAt: DateTime
+  voteDown: Boolean
+}
+
+input DownReviewUpdateWithWhereUniqueWithoutAuthorInput {
+  data: DownReviewUpdateWithoutAuthorDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewUpdateWithWhereUniqueWithoutItemInput {
+  data: DownReviewUpdateWithoutItemDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewUpdateWithWhereUniqueWithoutReviewInput {
+  data: DownReviewUpdateWithoutReviewDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewUpsertWithWhereUniqueWithoutAuthorInput {
+  create: DownReviewCreateWithoutAuthorInput!
+  update: DownReviewUpdateWithoutAuthorDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewUpsertWithWhereUniqueWithoutItemInput {
+  create: DownReviewCreateWithoutItemInput!
+  update: DownReviewUpdateWithoutItemDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewUpsertWithWhereUniqueWithoutReviewInput {
+  create: DownReviewCreateWithoutReviewInput!
+  update: DownReviewUpdateWithoutReviewDataInput!
+  where: DownReviewWhereUniqueInput!
+}
+
+input DownReviewWhereInput {
+  AND: [DownReviewWhereInput!]
+  author: UserWhereInput
+  authorId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: ItemWhereInput
+  itemId: StringFilter
+  NOT: [DownReviewWhereInput!]
+  OR: [DownReviewWhereInput!]
+  Review: ReviewWhereInput
+  reviewDownId: StringFilter
+  updatedAt: DateTimeFilter
+  voteDown: BooleanFilter
+}
+
+input DownReviewWhereUniqueInput {
+  id: String
+}
+
 input FloatFilter {
   equals: Float
   gt: Float
@@ -763,6 +995,7 @@ input IntFilter {
 type Item {
   beforeDiscountPrice: Float!
   brand: String
+  CartItem(after: CartItemWhereUniqueInput, before: CartItemWhereUniqueInput, first: Int, last: Int, skip: Int): [CartItem!]!
   catagory(after: CatagoryWhereUniqueInput, before: CatagoryWhereUniqueInput, first: Int, last: Int, skip: Int): [Catagory!]!
   colors(after: ColorWhereUniqueInput, before: ColorWhereUniqueInput, first: Int, last: Int, skip: Int): [Color!]!
   description: String!
@@ -784,6 +1017,18 @@ type Item {
   title: String!
   videoLink: String
   weight: String
+}
+
+type ItemConnection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [ItemEdge]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
 }
 
 input ItemCreateeagerImagesInput {
@@ -814,6 +1059,11 @@ input ItemCreateOneWithoutColorsInput {
   create: ItemCreateWithoutColorsInput
 }
 
+input ItemCreateOneWithoutDownReviewInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutDownReviewInput
+}
+
 input ItemCreateOneWithoutItemReviewInput {
   connect: ItemWhereUniqueInput
   create: ItemCreateWithoutItemReviewInput
@@ -834,6 +1084,11 @@ input ItemCreateOneWithoutTagsInput {
   create: ItemCreateWithoutTagsInput
 }
 
+input ItemCreateOneWithoutUpReviewInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutUpReviewInput
+}
+
 input ItemCreateOtherFeaturesInput {
   set: [String!]
 }
@@ -846,6 +1101,7 @@ input ItemCreateWithoutCartItemInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -864,6 +1120,7 @@ input ItemCreateWithoutCartItemInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -872,6 +1129,71 @@ input ItemCreateWithoutCatagoryInput {
   beforeDiscountPrice: Float!
   brand: String
   CartItem: CartItemCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
+  eagerImages: ItemCreateeagerImagesInput
+  id: String
+  images: ItemCreateimagesInput
+  itemReview: ReviewCreateManyWithoutItemInput
+  likes: LikeCreateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: ItemCreateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  reviewCount: Int
+  Seller: SellerCreateOneWithoutItemsInput
+  stock: Int
+  tags: TagCreateManyWithoutItemInput
+  title: String!
+  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
+  videoLink: String
+  weight: String
+}
+
+input ItemCreateWithoutColorsInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  CartItem: CartItemCreateManyWithoutItemInput
+  catagory: CatagoryCreateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
+  eagerImages: ItemCreateeagerImagesInput
+  id: String
+  images: ItemCreateimagesInput
+  itemReview: ReviewCreateManyWithoutItemInput
+  likes: LikeCreateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: ItemCreateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  reviewCount: Int
+  Seller: SellerCreateOneWithoutItemsInput
+  stock: Int
+  tags: TagCreateManyWithoutItemInput
+  title: String!
+  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
+  videoLink: String
+  weight: String
+}
+
+input ItemCreateWithoutDownReviewInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  CartItem: CartItemCreateManyWithoutItemInput
+  catagory: CatagoryCreateManyWithoutItemInput
   colors: ColorCreateManyWithoutItemInput
   createdAt: DateTime
   description: String
@@ -894,36 +1216,7 @@ input ItemCreateWithoutCatagoryInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input ItemCreateWithoutColorsInput {
-  beforeDiscountPrice: Float!
-  brand: String
-  CartItem: CartItemCreateManyWithoutItemInput
-  catagory: CatagoryCreateManyWithoutItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  eagerImages: ItemCreateeagerImagesInput
-  id: String
-  images: ItemCreateimagesInput
-  itemReview: ReviewCreateManyWithoutItemInput
-  likes: LikeCreateManyWithoutItemInput
-  likesCount: Int
-  materials: String
-  Order: OrderCreateManyWithoutItemInput
-  OtherFeatures: ItemCreateOtherFeaturesInput
-  otherInfo: String
-  overview: String
-  price: Float!
-  reviewCount: Int
-  Seller: SellerCreateOneWithoutItemsInput
-  stock: Int
-  tags: TagCreateManyWithoutItemInput
-  title: String!
-  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -937,6 +1230,7 @@ input ItemCreateWithoutItemReviewInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -954,6 +1248,7 @@ input ItemCreateWithoutItemReviewInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -967,6 +1262,7 @@ input ItemCreateWithoutLikesInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -984,6 +1280,7 @@ input ItemCreateWithoutLikesInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -997,6 +1294,7 @@ input ItemCreateWithoutOrderInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -1014,6 +1312,7 @@ input ItemCreateWithoutOrderInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1027,6 +1326,7 @@ input ItemCreateWithoutSellerInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -1044,6 +1344,7 @@ input ItemCreateWithoutSellerInput {
   tags: TagCreateManyWithoutItemInput
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1057,6 +1358,7 @@ input ItemCreateWithoutTagsInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
   eagerImages: ItemCreateeagerImagesInput
   id: String
   images: ItemCreateimagesInput
@@ -1074,8 +1376,49 @@ input ItemCreateWithoutTagsInput {
   stock: Int
   title: String!
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutItemInput
   videoLink: String
   weight: String
+}
+
+input ItemCreateWithoutUpReviewInput {
+  beforeDiscountPrice: Float!
+  brand: String
+  CartItem: CartItemCreateManyWithoutItemInput
+  catagory: CatagoryCreateManyWithoutItemInput
+  colors: ColorCreateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewCreateManyWithoutItemInput
+  eagerImages: ItemCreateeagerImagesInput
+  id: String
+  images: ItemCreateimagesInput
+  itemReview: ReviewCreateManyWithoutItemInput
+  likes: LikeCreateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderCreateManyWithoutItemInput
+  OtherFeatures: ItemCreateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float!
+  reviewCount: Int
+  Seller: SellerCreateOneWithoutItemsInput
+  stock: Int
+  tags: TagCreateManyWithoutItemInput
+  title: String!
+  updatedAt: DateTime
+  videoLink: String
+  weight: String
+}
+
+type ItemEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: Item!
 }
 
 input ItemFilter {
@@ -1115,6 +1458,7 @@ input ItemScalarWhereInput {
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
+  DownReview: DownReviewFilter
   id: StringFilter
   itemReview: ReviewFilter
   likes: LikeFilter
@@ -1132,6 +1476,7 @@ input ItemScalarWhereInput {
   tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
+  UpReview: UpReviewFilter
   videoLink: NullableStringFilter
   weight: NullableStringFilter
 }
@@ -1205,6 +1550,13 @@ input ItemUpdateOneRequiredWithoutColorsInput {
   upsert: ItemUpsertWithoutColorsInput
 }
 
+input ItemUpdateOneRequiredWithoutDownReviewInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutDownReviewInput
+  update: ItemUpdateWithoutDownReviewDataInput
+  upsert: ItemUpsertWithoutDownReviewInput
+}
+
 input ItemUpdateOneRequiredWithoutItemReviewInput {
   connect: ItemWhereUniqueInput
   create: ItemCreateWithoutItemReviewInput
@@ -1224,6 +1576,13 @@ input ItemUpdateOneRequiredWithoutTagsInput {
   create: ItemCreateWithoutTagsInput
   update: ItemUpdateWithoutTagsDataInput
   upsert: ItemUpsertWithoutTagsInput
+}
+
+input ItemUpdateOneRequiredWithoutUpReviewInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateWithoutUpReviewInput
+  update: ItemUpdateWithoutUpReviewDataInput
+  upsert: ItemUpsertWithoutUpReviewInput
 }
 
 input ItemUpdateOneWithoutOrderInput {
@@ -1247,6 +1606,7 @@ input ItemUpdateWithoutCartItemDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1265,6 +1625,7 @@ input ItemUpdateWithoutCartItemDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1273,6 +1634,71 @@ input ItemUpdateWithoutCatagoryDataInput {
   beforeDiscountPrice: Float
   brand: String
   CartItem: CartItemUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
+  eagerImages: ItemUpdateeagerImagesInput
+  id: String
+  images: ItemUpdateimagesInput
+  itemReview: ReviewUpdateManyWithoutItemInput
+  likes: LikeUpdateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: ItemUpdateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float
+  reviewCount: Int
+  Seller: SellerUpdateOneWithoutItemsInput
+  stock: Int
+  tags: TagUpdateManyWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
+  videoLink: String
+  weight: String
+}
+
+input ItemUpdateWithoutColorsDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  CartItem: CartItemUpdateManyWithoutItemInput
+  catagory: CatagoryUpdateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
+  eagerImages: ItemUpdateeagerImagesInput
+  id: String
+  images: ItemUpdateimagesInput
+  itemReview: ReviewUpdateManyWithoutItemInput
+  likes: LikeUpdateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: ItemUpdateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float
+  reviewCount: Int
+  Seller: SellerUpdateOneWithoutItemsInput
+  stock: Int
+  tags: TagUpdateManyWithoutItemInput
+  title: String
+  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
+  videoLink: String
+  weight: String
+}
+
+input ItemUpdateWithoutDownReviewDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  CartItem: CartItemUpdateManyWithoutItemInput
+  catagory: CatagoryUpdateManyWithoutItemInput
   colors: ColorUpdateManyWithoutItemInput
   createdAt: DateTime
   description: String
@@ -1295,36 +1721,7 @@ input ItemUpdateWithoutCatagoryDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
-  videoLink: String
-  weight: String
-}
-
-input ItemUpdateWithoutColorsDataInput {
-  beforeDiscountPrice: Float
-  brand: String
-  CartItem: CartItemUpdateManyWithoutItemInput
-  catagory: CatagoryUpdateManyWithoutItemInput
-  createdAt: DateTime
-  description: String
-  dimensions: String
-  eagerImages: ItemUpdateeagerImagesInput
-  id: String
-  images: ItemUpdateimagesInput
-  itemReview: ReviewUpdateManyWithoutItemInput
-  likes: LikeUpdateManyWithoutItemInput
-  likesCount: Int
-  materials: String
-  Order: OrderUpdateManyWithoutItemInput
-  OtherFeatures: ItemUpdateOtherFeaturesInput
-  otherInfo: String
-  overview: String
-  price: Float
-  reviewCount: Int
-  Seller: SellerUpdateOneWithoutItemsInput
-  stock: Int
-  tags: TagUpdateManyWithoutItemInput
-  title: String
-  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1338,6 +1735,7 @@ input ItemUpdateWithoutItemReviewDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1355,6 +1753,7 @@ input ItemUpdateWithoutItemReviewDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1368,6 +1767,7 @@ input ItemUpdateWithoutLikesDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1385,6 +1785,7 @@ input ItemUpdateWithoutLikesDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1398,6 +1799,7 @@ input ItemUpdateWithoutOrderDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1415,6 +1817,7 @@ input ItemUpdateWithoutOrderDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1428,6 +1831,7 @@ input ItemUpdateWithoutSellerDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1445,6 +1849,7 @@ input ItemUpdateWithoutSellerDataInput {
   tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
   videoLink: String
   weight: String
 }
@@ -1458,6 +1863,7 @@ input ItemUpdateWithoutTagsDataInput {
   createdAt: DateTime
   description: String
   dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
   eagerImages: ItemUpdateeagerImagesInput
   id: String
   images: ItemUpdateimagesInput
@@ -1473,6 +1879,39 @@ input ItemUpdateWithoutTagsDataInput {
   reviewCount: Int
   Seller: SellerUpdateOneWithoutItemsInput
   stock: Int
+  title: String
+  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutItemInput
+  videoLink: String
+  weight: String
+}
+
+input ItemUpdateWithoutUpReviewDataInput {
+  beforeDiscountPrice: Float
+  brand: String
+  CartItem: CartItemUpdateManyWithoutItemInput
+  catagory: CatagoryUpdateManyWithoutItemInput
+  colors: ColorUpdateManyWithoutItemInput
+  createdAt: DateTime
+  description: String
+  dimensions: String
+  DownReview: DownReviewUpdateManyWithoutItemInput
+  eagerImages: ItemUpdateeagerImagesInput
+  id: String
+  images: ItemUpdateimagesInput
+  itemReview: ReviewUpdateManyWithoutItemInput
+  likes: LikeUpdateManyWithoutItemInput
+  likesCount: Int
+  materials: String
+  Order: OrderUpdateManyWithoutItemInput
+  OtherFeatures: ItemUpdateOtherFeaturesInput
+  otherInfo: String
+  overview: String
+  price: Float
+  reviewCount: Int
+  Seller: SellerUpdateOneWithoutItemsInput
+  stock: Int
+  tags: TagUpdateManyWithoutItemInput
   title: String
   updatedAt: DateTime
   videoLink: String
@@ -1499,6 +1938,11 @@ input ItemUpsertWithoutColorsInput {
   update: ItemUpdateWithoutColorsDataInput!
 }
 
+input ItemUpsertWithoutDownReviewInput {
+  create: ItemCreateWithoutDownReviewInput!
+  update: ItemUpdateWithoutDownReviewDataInput!
+}
+
 input ItemUpsertWithoutItemReviewInput {
   create: ItemCreateWithoutItemReviewInput!
   update: ItemUpdateWithoutItemReviewDataInput!
@@ -1519,6 +1963,11 @@ input ItemUpsertWithoutTagsInput {
   update: ItemUpdateWithoutTagsDataInput!
 }
 
+input ItemUpsertWithoutUpReviewInput {
+  create: ItemCreateWithoutUpReviewInput!
+  update: ItemUpdateWithoutUpReviewDataInput!
+}
+
 input ItemUpsertWithWhereUniqueWithoutSellerInput {
   create: ItemCreateWithoutSellerInput!
   update: ItemUpdateWithoutSellerDataInput!
@@ -1535,6 +1984,7 @@ input ItemWhereInput {
   createdAt: DateTimeFilter
   description: StringFilter
   dimensions: NullableStringFilter
+  DownReview: DownReviewFilter
   id: StringFilter
   itemReview: ReviewFilter
   likes: LikeFilter
@@ -1553,6 +2003,7 @@ input ItemWhereInput {
   tags: TagFilter
   title: StringFilter
   updatedAt: DateTimeFilter
+  UpReview: UpReviewFilter
   videoLink: NullableStringFilter
   weight: NullableStringFilter
 }
@@ -1756,29 +2207,33 @@ type Mutation {
   """Contact Form"""
   ContactUs(email: String!, message: String!, subject: String!): String!
 
+  """Create Users Address"""
+  CreateAddress(additionalInfo: String, address: String!, city: String!, company: String, country: String!, Lat: Float, Lng: Float, MaincontactNubmer: String!, message: String, name: String!, OthercontactNubmers: [String!], state: String!, streetAddress1: String, streetAddress2: String, zipCode: String): Address!
+
   """Create New Item"""
   CreateItem(beforeDiscountPrice: Float!, brand: String, catagory: [String!], colors: [String!], description: String!, dimensions: String, eagerImages: [String!], images: [String!], materials: String, otherFeature: [String!], otherInfo: String, overview: String, price: Float!, stock: Int, tags: [String!], title: String!, videoLink: String, weight: String): Item!
 
   """Create Item Review"""
   CreateItemReview(itemId: String!, rating: Float!, text: String!): Review!
-  CreateOrder(token: String!): String!
+  CreateOrder(token: String!): Order!
 
   """Create New Seller Account"""
   CreateSeller(AddressAddress: String!, AddressCity: String, AddressCompany: String, AddressCountry: String, AddressMaincontactNubmer: String!, AddressName: String!, AddressState: String, AddressStreetAddress1: String, AddressStreetAddress2: String, AddressZipCode: String, Brand: [String!], confirmPassword: String!, email: String!, name: String!, password: String!, sellerIdentification: String!, sellerNationality: String!, storeName: String!): Seller!
 
   """Create New User"""
   CreateUser(avatar: String, email: String!, name: String!, password: String!): String!
-
-  """Create Users Address"""
-  CreateUsersAddress(additionalInfo: String, address: String!, city: String!, company: String, country: String!, Lat: Float, Lng: Float, MaincontactNubmer: String!, message: String, name: String!, OthercontactNubmers: [String!], state: String!, streetAddress1: String, streetAddress2: String, zipCode: String): Address!
-  DeleteCartItem(cartItemId: String!): String!
+  DeleteCartItem(cartItemId: String!): CartItem!
 
   """Delete Item"""
   DeleteItem(itemId: String!): String!
   deleteOneAddress(where: AddressWhereUniqueInput!): Address
   DeleteSellersAccount(sellerId: String!): String!
   DeleteUserAccount(userId: String!): String!
+  deleteUserAddresses(where: AddressWhereInput): BatchPayload!
   EmptyUserCart(userId: String!): String!
+
+  """Remove All Items From Wishlist"""
+  RemoveAllLikes(userId: String!): String!
 
   """Seller Request Email verification"""
   RequestEmailVerificationToken(email: String!): String!
@@ -1788,6 +2243,9 @@ type Mutation {
 
   """User Reset Password"""
   ResetUserPassword(confirmPassword: String!, password: String!, token: String!): String!
+
+  """User Reset Password"""
+  ResetUsersPasswordFromProfile(confirmPassword: String!, OldPassword: String!, password: String!): String!
 
   """Request A Password Reset"""
   SellerForgotPasswordRequest(email: String!): String!
@@ -1801,9 +2259,18 @@ type Mutation {
   """Toggle Primary Address"""
   TogglePrimaryAddress(addressId: String!): Address!
 
+  """Toggle Vote Down For Review"""
+  ToggleReviewDownVote(itemId: String!, reviewId: String!): String!
+
+  """Toggle Vote Up For Review"""
+  ToggleReviewUpVote(itemId: String!, reviewId: String!): String!
+
   """Update Item"""
-  UpdateItem(beforeDiscountPrice: Float, brand: String, catagory: [String!], colors: [String!], description: String, dimensions: String, eagerImages: [String!], id: String, images: [String!], materials: String, otherFeature: [String!], otherInfo: String, overview: String, price: Float, stock: Int, tags: [String!], title: String, videoLink: String, weight: String): Item!
+  UpdateItem(beforeDiscountPrice: Float, brand: String, catagory: [String!], colors: [String!], description: String, dimensions: String, eagerImages: [String!], id: String!, images: [String!], materials: String, otherFeature: [String!], otherInfo: String, overview: String, price: Float, stock: Int, tags: [String!], title: String, videoLink: String, weight: String): Item!
   updateOneAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
+
+  """Update User Or Seller's Roles"""
+  UpdateRole(role: Role, sellerId: String, userId: String): String!
 
   """User Request A Password Reset"""
   UserForgotPasswordRequest(email: String!): String!
@@ -1865,6 +2332,7 @@ input NullableStringFilter {
 
 type Order {
   charge: String!
+  createdAt: DateTime!
   id: String!
   Item: Item
   itemId: String
@@ -1950,6 +2418,7 @@ type OrderItem {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int!
   stock: Int
   title: String!
   videoLink: String
@@ -2016,6 +2485,7 @@ input OrderItemCreateWithoutCatagoryInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   tags: TagCreateManyWithoutOrderItemInput
   title: String!
@@ -2042,6 +2512,7 @@ input OrderItemCreateWithoutColorsInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   tags: TagCreateManyWithoutOrderItemInput
   title: String!
@@ -2068,6 +2539,7 @@ input OrderItemCreateWithoutItemReviewInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   tags: TagCreateManyWithoutOrderItemInput
   title: String!
@@ -2094,6 +2566,7 @@ input OrderItemCreateWithoutLikesInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   tags: TagCreateManyWithoutOrderItemInput
   title: String!
@@ -2120,6 +2593,7 @@ input OrderItemCreateWithoutOrderInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   tags: TagCreateManyWithoutOrderItemInput
   title: String!
@@ -2147,6 +2621,7 @@ input OrderItemCreateWithoutTagsInput {
   otherInfo: String
   overview: String
   price: Float!
+  quantity: Int
   stock: Int
   title: String!
   updatedAt: DateTime
@@ -2179,6 +2654,7 @@ input OrderItemScalarWhereInput {
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
+  quantity: IntFilter
   stock: NullableIntFilter
   tags: TagFilter
   title: StringFilter
@@ -2209,6 +2685,7 @@ input OrderItemUpdateManyDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   title: String
   updatedAt: DateTime
@@ -2300,6 +2777,7 @@ input OrderItemUpdateWithoutCatagoryDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   tags: TagUpdateManyWithoutOrderItemInput
   title: String
@@ -2326,6 +2804,7 @@ input OrderItemUpdateWithoutColorsDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   tags: TagUpdateManyWithoutOrderItemInput
   title: String
@@ -2352,6 +2831,7 @@ input OrderItemUpdateWithoutItemReviewDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   tags: TagUpdateManyWithoutOrderItemInput
   title: String
@@ -2378,6 +2858,7 @@ input OrderItemUpdateWithoutLikesDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   tags: TagUpdateManyWithoutOrderItemInput
   title: String
@@ -2404,6 +2885,7 @@ input OrderItemUpdateWithoutOrderDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   tags: TagUpdateManyWithoutOrderItemInput
   title: String
@@ -2431,6 +2913,7 @@ input OrderItemUpdateWithoutTagsDataInput {
   otherInfo: String
   overview: String
   price: Float
+  quantity: Int
   stock: Int
   title: String
   updatedAt: DateTime
@@ -2493,6 +2976,7 @@ input OrderItemWhereInput {
   otherInfo: NullableStringFilter
   overview: NullableStringFilter
   price: FloatFilter
+  quantity: IntFilter
   stock: NullableIntFilter
   tags: TagFilter
   title: StringFilter
@@ -2665,6 +3149,31 @@ input OrderWhereUniqueInput {
   id: String
 }
 
+"""
+PageInfo cursor, as defined in https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+"""
+type PageInfo {
+  """
+  The cursor corresponding to the last nodes in edges. Null if the connection is empty.
+  """
+  endCursor: String
+
+  """
+  Used to indicate whether more edges exist following the set defined by the clients arguments.
+  """
+  hasNextPage: Boolean!
+
+  """
+  Used to indicate whether more edges exist prior to the set defined by the clients arguments.
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  The cursor corresponding to the first nodes in edges. Null if the connection is empty.
+  """
+  startCursor: String
+}
+
 enum Permission {
   ADD_ITEM
   DELETE_ITEM
@@ -2674,14 +3183,48 @@ enum Permission {
 }
 
 type Query {
-  addresses(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
+  AllAddress(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, orderBy: AddressOrderByInput, skip: Int, where: AddressWhereInput): [Address!]!
+  AllItems(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the first n elements from the list."""
+    first: Int!
+  ): ItemConnection!
+  AllSeller(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the first n elements from the list."""
+    first: Int!
+  ): SellerConnection!
+  AllUsers(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the first n elements from the list."""
+    first: Int!
+  ): UserConnection!
 
   """Currently Logged in Seller"""
   CurrentSeller: Seller
 
   """Currently Logged in User"""
   CurrentUser: User
+
+  """Admin Account"""
+  isAdmin: Boolean!
   item(where: ItemWhereUniqueInput!): Item
+  ItemConnections(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+    category: String
+
+    """Returns the first n elements from the list."""
+    first: Int!
+    tag: String
+  ): ItemConnection!
+  itemCount: Int!
 
   """Item Reviews"""
   ITemRevives(itemId: String!): [Review!]!
@@ -2689,23 +3232,35 @@ type Query {
 
   """Get One Orders"""
   Order(orderId: String!): Order!
-  seller(where: SellerWhereUniqueInput!): Seller
-  sellers(after: SellerWhereUniqueInput, before: SellerWhereUniqueInput, first: Int, last: Int, skip: Int): [Seller!]!
-  user(where: UserWhereUniqueInput!): User
+  SearchTermResults(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the first n elements from the list."""
+    first: Int!
+    term: String!
+  ): ItemConnection!
+  SingleAddress(where: AddressWhereUniqueInput!): Address
+
+  """Users Whish List"""
+  UserLikes(userId: String!): Item!
 
   """Users Orders"""
   UserOrder: [Order!]
-  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, skip: Int): [User!]!
 }
 
 type Review {
   author: User!
   authorId: String!
+  downVote(after: DownReviewWhereUniqueInput, before: DownReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [DownReview!]!
+  downVoteCount: Int!
   id: String!
   item: Item!
   itemId: String!
   rating: Float!
   text: String!
+  upVote(after: UpReviewWhereUniqueInput, before: UpReviewWhereUniqueInput, first: Int, last: Int, skip: Int): [UpReview!]!
+  upVoteCount: Int!
 }
 
 input ReviewCreateManyWithoutAuthorInput {
@@ -2723,34 +3278,84 @@ input ReviewCreateManyWithoutOrderItemInput {
   create: [ReviewCreateWithoutOrderItemInput!]
 }
 
+input ReviewCreateOneWithoutDownVoteInput {
+  connect: ReviewWhereUniqueInput
+  create: ReviewCreateWithoutDownVoteInput
+}
+
+input ReviewCreateOneWithoutUpVoteInput {
+  connect: ReviewWhereUniqueInput
+  create: ReviewCreateWithoutUpVoteInput
+}
+
 input ReviewCreateWithoutAuthorInput {
   createdAt: DateTime
+  downVote: DownReviewCreateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   item: ItemCreateOneWithoutItemReviewInput!
   OrderItem: OrderItemCreateOneWithoutItemReviewInput
   rating: Float
   text: String!
   updatedAt: DateTime
+  upVote: UpReviewCreateManyWithoutReviewInput
+  upVoteCount: Int
+}
+
+input ReviewCreateWithoutDownVoteInput {
+  author: UserCreateOneWithoutItemReviewInput!
+  createdAt: DateTime
+  downVoteCount: Int
+  id: String
+  item: ItemCreateOneWithoutItemReviewInput!
+  OrderItem: OrderItemCreateOneWithoutItemReviewInput
+  rating: Float
+  text: String!
+  updatedAt: DateTime
+  upVote: UpReviewCreateManyWithoutReviewInput
+  upVoteCount: Int
 }
 
 input ReviewCreateWithoutItemInput {
   author: UserCreateOneWithoutItemReviewInput!
   createdAt: DateTime
+  downVote: DownReviewCreateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   OrderItem: OrderItemCreateOneWithoutItemReviewInput
   rating: Float
   text: String!
   updatedAt: DateTime
+  upVote: UpReviewCreateManyWithoutReviewInput
+  upVoteCount: Int
 }
 
 input ReviewCreateWithoutOrderItemInput {
   author: UserCreateOneWithoutItemReviewInput!
   createdAt: DateTime
+  downVote: DownReviewCreateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   item: ItemCreateOneWithoutItemReviewInput!
   rating: Float
   text: String!
   updatedAt: DateTime
+  upVote: UpReviewCreateManyWithoutReviewInput
+  upVoteCount: Int
+}
+
+input ReviewCreateWithoutUpVoteInput {
+  author: UserCreateOneWithoutItemReviewInput!
+  createdAt: DateTime
+  downVote: DownReviewCreateManyWithoutReviewInput
+  downVoteCount: Int
+  id: String
+  item: ItemCreateOneWithoutItemReviewInput!
+  OrderItem: OrderItemCreateOneWithoutItemReviewInput
+  rating: Float
+  text: String!
+  updatedAt: DateTime
+  upVoteCount: Int
 }
 
 input ReviewFilter {
@@ -2763,6 +3368,8 @@ input ReviewScalarWhereInput {
   AND: [ReviewScalarWhereInput!]
   authorId: StringFilter
   createdAt: DateTimeFilter
+  downVote: DownReviewFilter
+  downVoteCount: IntFilter
   id: StringFilter
   itemId: StringFilter
   NOT: [ReviewScalarWhereInput!]
@@ -2771,14 +3378,18 @@ input ReviewScalarWhereInput {
   rating: FloatFilter
   text: StringFilter
   updatedAt: DateTimeFilter
+  upVote: UpReviewFilter
+  upVoteCount: IntFilter
 }
 
 input ReviewUpdateManyDataInput {
   createdAt: DateTime
+  downVoteCount: Int
   id: String
   rating: Float
   text: String
   updatedAt: DateTime
+  upVoteCount: Int
 }
 
 input ReviewUpdateManyWithoutAuthorInput {
@@ -2822,34 +3433,88 @@ input ReviewUpdateManyWithWhereNestedInput {
   where: ReviewScalarWhereInput!
 }
 
+input ReviewUpdateOneRequiredWithoutDownVoteInput {
+  connect: ReviewWhereUniqueInput
+  create: ReviewCreateWithoutDownVoteInput
+  update: ReviewUpdateWithoutDownVoteDataInput
+  upsert: ReviewUpsertWithoutDownVoteInput
+}
+
+input ReviewUpdateOneRequiredWithoutUpVoteInput {
+  connect: ReviewWhereUniqueInput
+  create: ReviewCreateWithoutUpVoteInput
+  update: ReviewUpdateWithoutUpVoteDataInput
+  upsert: ReviewUpsertWithoutUpVoteInput
+}
+
 input ReviewUpdateWithoutAuthorDataInput {
   createdAt: DateTime
+  downVote: DownReviewUpdateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   item: ItemUpdateOneRequiredWithoutItemReviewInput
   OrderItem: OrderItemUpdateOneWithoutItemReviewInput
   rating: Float
   text: String
   updatedAt: DateTime
+  upVote: UpReviewUpdateManyWithoutReviewInput
+  upVoteCount: Int
+}
+
+input ReviewUpdateWithoutDownVoteDataInput {
+  author: UserUpdateOneRequiredWithoutItemReviewInput
+  createdAt: DateTime
+  downVoteCount: Int
+  id: String
+  item: ItemUpdateOneRequiredWithoutItemReviewInput
+  OrderItem: OrderItemUpdateOneWithoutItemReviewInput
+  rating: Float
+  text: String
+  updatedAt: DateTime
+  upVote: UpReviewUpdateManyWithoutReviewInput
+  upVoteCount: Int
 }
 
 input ReviewUpdateWithoutItemDataInput {
   author: UserUpdateOneRequiredWithoutItemReviewInput
   createdAt: DateTime
+  downVote: DownReviewUpdateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   OrderItem: OrderItemUpdateOneWithoutItemReviewInput
   rating: Float
   text: String
   updatedAt: DateTime
+  upVote: UpReviewUpdateManyWithoutReviewInput
+  upVoteCount: Int
 }
 
 input ReviewUpdateWithoutOrderItemDataInput {
   author: UserUpdateOneRequiredWithoutItemReviewInput
   createdAt: DateTime
+  downVote: DownReviewUpdateManyWithoutReviewInput
+  downVoteCount: Int
   id: String
   item: ItemUpdateOneRequiredWithoutItemReviewInput
   rating: Float
   text: String
   updatedAt: DateTime
+  upVote: UpReviewUpdateManyWithoutReviewInput
+  upVoteCount: Int
+}
+
+input ReviewUpdateWithoutUpVoteDataInput {
+  author: UserUpdateOneRequiredWithoutItemReviewInput
+  createdAt: DateTime
+  downVote: DownReviewUpdateManyWithoutReviewInput
+  downVoteCount: Int
+  id: String
+  item: ItemUpdateOneRequiredWithoutItemReviewInput
+  OrderItem: OrderItemUpdateOneWithoutItemReviewInput
+  rating: Float
+  text: String
+  updatedAt: DateTime
+  upVoteCount: Int
 }
 
 input ReviewUpdateWithWhereUniqueWithoutAuthorInput {
@@ -2865,6 +3530,16 @@ input ReviewUpdateWithWhereUniqueWithoutItemInput {
 input ReviewUpdateWithWhereUniqueWithoutOrderItemInput {
   data: ReviewUpdateWithoutOrderItemDataInput!
   where: ReviewWhereUniqueInput!
+}
+
+input ReviewUpsertWithoutDownVoteInput {
+  create: ReviewCreateWithoutDownVoteInput!
+  update: ReviewUpdateWithoutDownVoteDataInput!
+}
+
+input ReviewUpsertWithoutUpVoteInput {
+  create: ReviewCreateWithoutUpVoteInput!
+  update: ReviewUpdateWithoutUpVoteDataInput!
 }
 
 input ReviewUpsertWithWhereUniqueWithoutAuthorInput {
@@ -2890,6 +3565,8 @@ input ReviewWhereInput {
   author: UserWhereInput
   authorId: StringFilter
   createdAt: DateTimeFilter
+  downVote: DownReviewFilter
+  downVoteCount: IntFilter
   id: StringFilter
   item: ItemWhereInput
   itemId: StringFilter
@@ -2900,6 +3577,8 @@ input ReviewWhereInput {
   rating: FloatFilter
   text: StringFilter
   updatedAt: DateTimeFilter
+  upVote: UpReviewFilter
+  upVoteCount: IntFilter
 }
 
 input ReviewWhereUniqueInput {
@@ -2929,6 +3608,18 @@ type Seller {
   storeName: String!
 }
 
+type SellerConnection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [SellerEdge]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+}
+
 input SellerCreateBrandInput {
   set: [String!]
 }
@@ -2955,6 +3646,7 @@ input SellerCreateWithoutItemsInput {
   EmailIsVerified: Boolean
   EmailVarificationHash: String
   id: String
+  itemCount: Int
   name: String!
   password: String!
   PasswordResetToken: String
@@ -2978,6 +3670,7 @@ input SellerCreateWithoutPickupLocationsInput {
   EmailIsVerified: Boolean
   EmailVarificationHash: String
   id: String
+  itemCount: Int
   items: ItemCreateManyWithoutSellerInput
   name: String!
   password: String!
@@ -2991,6 +3684,14 @@ input SellerCreateWithoutPickupLocationsInput {
   sellerNationality: String!
   storeName: String!
   updatedAt: DateTime
+}
+
+type SellerEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: Seller!
 }
 
 input SellerUpdateBrandInput {
@@ -3027,6 +3728,7 @@ input SellerUpdateWithoutItemsDataInput {
   EmailIsVerified: Boolean
   EmailVarificationHash: String
   id: String
+  itemCount: Int
   name: String
   password: String
   PasswordResetToken: String
@@ -3050,6 +3752,7 @@ input SellerUpdateWithoutPickupLocationsDataInput {
   EmailIsVerified: Boolean
   EmailVarificationHash: String
   id: String
+  itemCount: Int
   items: ItemUpdateManyWithoutSellerInput
   name: String
   password: String
@@ -3083,6 +3786,7 @@ input SellerWhereInput {
   EmailIsVerified: NullableBooleanFilter
   EmailVarificationHash: NullableStringFilter
   id: StringFilter
+  itemCount: IntFilter
   items: ItemFilter
   name: StringFilter
   NOT: [SellerWhereInput!]
@@ -3264,6 +3968,206 @@ input TagWhereUniqueInput {
   id: String
 }
 
+type UpReview {
+  author: User!
+  authorId: String!
+  createdAt: DateTime!
+  id: String!
+  item: Item!
+  itemId: String!
+  Review: Review!
+  voteUp: Boolean!
+}
+
+input UpReviewCreateManyWithoutAuthorInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutAuthorInput!]
+}
+
+input UpReviewCreateManyWithoutItemInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutItemInput!]
+}
+
+input UpReviewCreateManyWithoutReviewInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutReviewInput!]
+}
+
+input UpReviewCreateWithoutAuthorInput {
+  createdAt: DateTime
+  id: String
+  item: ItemCreateOneWithoutUpReviewInput!
+  Review: ReviewCreateOneWithoutUpVoteInput!
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewCreateWithoutItemInput {
+  author: UserCreateOneWithoutUpReviewInput!
+  createdAt: DateTime
+  id: String
+  Review: ReviewCreateOneWithoutUpVoteInput!
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewCreateWithoutReviewInput {
+  author: UserCreateOneWithoutUpReviewInput!
+  createdAt: DateTime
+  id: String
+  item: ItemCreateOneWithoutUpReviewInput!
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewFilter {
+  every: UpReviewWhereInput
+  none: UpReviewWhereInput
+  some: UpReviewWhereInput
+}
+
+input UpReviewScalarWhereInput {
+  AND: [UpReviewScalarWhereInput!]
+  authorId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  itemId: StringFilter
+  NOT: [UpReviewScalarWhereInput!]
+  OR: [UpReviewScalarWhereInput!]
+  reviewUpId: StringFilter
+  updatedAt: DateTimeFilter
+  voteUp: BooleanFilter
+}
+
+input UpReviewUpdateManyDataInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewUpdateManyWithoutAuthorInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutAuthorInput!]
+  delete: [UpReviewWhereUniqueInput!]
+  deleteMany: [UpReviewScalarWhereInput!]
+  disconnect: [UpReviewWhereUniqueInput!]
+  set: [UpReviewWhereUniqueInput!]
+  update: [UpReviewUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [UpReviewUpdateManyWithWhereNestedInput!]
+  upsert: [UpReviewUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input UpReviewUpdateManyWithoutItemInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutItemInput!]
+  delete: [UpReviewWhereUniqueInput!]
+  deleteMany: [UpReviewScalarWhereInput!]
+  disconnect: [UpReviewWhereUniqueInput!]
+  set: [UpReviewWhereUniqueInput!]
+  update: [UpReviewUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [UpReviewUpdateManyWithWhereNestedInput!]
+  upsert: [UpReviewUpsertWithWhereUniqueWithoutItemInput!]
+}
+
+input UpReviewUpdateManyWithoutReviewInput {
+  connect: [UpReviewWhereUniqueInput!]
+  create: [UpReviewCreateWithoutReviewInput!]
+  delete: [UpReviewWhereUniqueInput!]
+  deleteMany: [UpReviewScalarWhereInput!]
+  disconnect: [UpReviewWhereUniqueInput!]
+  set: [UpReviewWhereUniqueInput!]
+  update: [UpReviewUpdateWithWhereUniqueWithoutReviewInput!]
+  updateMany: [UpReviewUpdateManyWithWhereNestedInput!]
+  upsert: [UpReviewUpsertWithWhereUniqueWithoutReviewInput!]
+}
+
+input UpReviewUpdateManyWithWhereNestedInput {
+  data: UpReviewUpdateManyDataInput!
+  where: UpReviewScalarWhereInput!
+}
+
+input UpReviewUpdateWithoutAuthorDataInput {
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateOneRequiredWithoutUpReviewInput
+  Review: ReviewUpdateOneRequiredWithoutUpVoteInput
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewUpdateWithoutItemDataInput {
+  author: UserUpdateOneRequiredWithoutUpReviewInput
+  createdAt: DateTime
+  id: String
+  Review: ReviewUpdateOneRequiredWithoutUpVoteInput
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewUpdateWithoutReviewDataInput {
+  author: UserUpdateOneRequiredWithoutUpReviewInput
+  createdAt: DateTime
+  id: String
+  item: ItemUpdateOneRequiredWithoutUpReviewInput
+  updatedAt: DateTime
+  voteUp: Boolean
+}
+
+input UpReviewUpdateWithWhereUniqueWithoutAuthorInput {
+  data: UpReviewUpdateWithoutAuthorDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewUpdateWithWhereUniqueWithoutItemInput {
+  data: UpReviewUpdateWithoutItemDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewUpdateWithWhereUniqueWithoutReviewInput {
+  data: UpReviewUpdateWithoutReviewDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewUpsertWithWhereUniqueWithoutAuthorInput {
+  create: UpReviewCreateWithoutAuthorInput!
+  update: UpReviewUpdateWithoutAuthorDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewUpsertWithWhereUniqueWithoutItemInput {
+  create: UpReviewCreateWithoutItemInput!
+  update: UpReviewUpdateWithoutItemDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewUpsertWithWhereUniqueWithoutReviewInput {
+  create: UpReviewCreateWithoutReviewInput!
+  update: UpReviewUpdateWithoutReviewDataInput!
+  where: UpReviewWhereUniqueInput!
+}
+
+input UpReviewWhereInput {
+  AND: [UpReviewWhereInput!]
+  author: UserWhereInput
+  authorId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  item: ItemWhereInput
+  itemId: StringFilter
+  NOT: [UpReviewWhereInput!]
+  OR: [UpReviewWhereInput!]
+  Review: ReviewWhereInput
+  reviewUpId: StringFilter
+  updatedAt: DateTimeFilter
+  voteUp: BooleanFilter
+}
+
+input UpReviewWhereUniqueInput {
+  id: String
+}
+
 type User {
   address(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
   avatar: String
@@ -3280,6 +4184,18 @@ type User {
   role: Role
 }
 
+type UserConnection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [UserEdge]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+}
+
 input UserCreateOneWithoutAddressInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutAddressInput
@@ -3288,6 +4204,11 @@ input UserCreateOneWithoutAddressInput {
 input UserCreateOneWithoutCartInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutCartInput
+}
+
+input UserCreateOneWithoutDownReviewInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDownReviewInput
 }
 
 input UserCreateOneWithoutItemReviewInput {
@@ -3305,7 +4226,57 @@ input UserCreateOneWithoutOrderInput {
   create: UserCreateWithoutOrderInput
 }
 
+input UserCreateOneWithoutUpReviewInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutUpReviewInput
+}
+
 input UserCreateWithoutAddressInput {
+  avatar: String
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
+  email: String!
+  id: String
+  itemReview: ReviewCreateManyWithoutAuthorInput
+  likes: LikeCreateManyWithoutUserInput
+  likesCount: Int
+  name: String!
+  Order: OrderCreateManyWithoutUserInput
+  password: String!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
+  role: Role
+  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutCartInput {
+  address: AddressCreateManyWithoutUserInput
+  avatar: String
+  createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
+  email: String!
+  id: String
+  itemReview: ReviewCreateManyWithoutAuthorInput
+  likes: LikeCreateManyWithoutUserInput
+  likesCount: Int
+  name: String!
+  Order: OrderCreateManyWithoutUserInput
+  password: String!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
+  role: Role
+  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutDownReviewInput {
+  address: AddressCreateManyWithoutUserInput
   avatar: String
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
@@ -3323,26 +4294,7 @@ input UserCreateWithoutAddressInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
-}
-
-input UserCreateWithoutCartInput {
-  address: AddressCreateManyWithoutUserInput
-  avatar: String
-  createdAt: DateTime
-  email: String!
-  id: String
-  itemReview: ReviewCreateManyWithoutAuthorInput
-  likes: LikeCreateManyWithoutUserInput
-  likesCount: Int
-  name: String!
-  Order: OrderCreateManyWithoutUserInput
-  password: String!
-  PasswordResetToken: String
-  PasswordResetTokenExpiry: Float
-  permissions: Permission
-  reviewCount: Int
-  role: Role
-  updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
 }
 
 input UserCreateWithoutItemReviewInput {
@@ -3350,6 +4302,7 @@ input UserCreateWithoutItemReviewInput {
   avatar: String
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
   email: String!
   id: String
   likes: LikeCreateManyWithoutUserInput
@@ -3363,6 +4316,7 @@ input UserCreateWithoutItemReviewInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
 }
 
 input UserCreateWithoutLikesInput {
@@ -3370,6 +4324,7 @@ input UserCreateWithoutLikesInput {
   avatar: String
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
   email: String!
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
@@ -3383,6 +4338,7 @@ input UserCreateWithoutLikesInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
 }
 
 input UserCreateWithoutOrderInput {
@@ -3390,6 +4346,7 @@ input UserCreateWithoutOrderInput {
   avatar: String
   cart: CartItemCreateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
   email: String!
   id: String
   itemReview: ReviewCreateManyWithoutAuthorInput
@@ -3403,6 +4360,37 @@ input UserCreateWithoutOrderInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutUpReviewInput {
+  address: AddressCreateManyWithoutUserInput
+  avatar: String
+  cart: CartItemCreateManyWithoutUserInput
+  createdAt: DateTime
+  DownReview: DownReviewCreateManyWithoutAuthorInput
+  email: String!
+  id: String
+  itemReview: ReviewCreateManyWithoutAuthorInput
+  likes: LikeCreateManyWithoutUserInput
+  likesCount: Int
+  name: String!
+  Order: OrderCreateManyWithoutUserInput
+  password: String!
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
+  role: Role
+  updatedAt: DateTime
+}
+
+type UserEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: User!
 }
 
 input UserUpdateOneRequiredWithoutCartInput {
@@ -3410,6 +4398,13 @@ input UserUpdateOneRequiredWithoutCartInput {
   create: UserCreateWithoutCartInput
   update: UserUpdateWithoutCartDataInput
   upsert: UserUpsertWithoutCartInput
+}
+
+input UserUpdateOneRequiredWithoutDownReviewInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDownReviewInput
+  update: UserUpdateWithoutDownReviewDataInput
+  upsert: UserUpsertWithoutDownReviewInput
 }
 
 input UserUpdateOneRequiredWithoutItemReviewInput {
@@ -3433,6 +4428,13 @@ input UserUpdateOneRequiredWithoutOrderInput {
   upsert: UserUpsertWithoutOrderInput
 }
 
+input UserUpdateOneRequiredWithoutUpReviewInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutUpReviewInput
+  update: UserUpdateWithoutUpReviewDataInput
+  upsert: UserUpsertWithoutUpReviewInput
+}
+
 input UserUpdateOneWithoutAddressInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutAddressInput
@@ -3446,6 +4448,7 @@ input UserUpdateWithoutAddressDataInput {
   avatar: String
   cart: CartItemUpdateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
   email: String
   id: String
   itemReview: ReviewUpdateManyWithoutAuthorInput
@@ -3460,11 +4463,35 @@ input UserUpdateWithoutAddressDataInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutCartDataInput {
   address: AddressUpdateManyWithoutUserInput
   avatar: String
+  createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
+  email: String
+  id: String
+  itemReview: ReviewUpdateManyWithoutAuthorInput
+  likes: LikeUpdateManyWithoutUserInput
+  likesCount: Int
+  name: String
+  Order: OrderUpdateManyWithoutUserInput
+  password: String
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
+  role: Role
+  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutDownReviewDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  avatar: String
+  cart: CartItemUpdateManyWithoutUserInput
   createdAt: DateTime
   email: String
   id: String
@@ -3480,6 +4507,7 @@ input UserUpdateWithoutCartDataInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutItemReviewDataInput {
@@ -3487,6 +4515,7 @@ input UserUpdateWithoutItemReviewDataInput {
   avatar: String
   cart: CartItemUpdateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
   email: String
   id: String
   likes: LikeUpdateManyWithoutUserInput
@@ -3500,6 +4529,7 @@ input UserUpdateWithoutItemReviewDataInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutLikesDataInput {
@@ -3507,6 +4537,7 @@ input UserUpdateWithoutLikesDataInput {
   avatar: String
   cart: CartItemUpdateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
   email: String
   id: String
   itemReview: ReviewUpdateManyWithoutAuthorInput
@@ -3520,6 +4551,7 @@ input UserUpdateWithoutLikesDataInput {
   reviewCount: Int
   role: Role
   updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateWithoutOrderDataInput {
@@ -3527,12 +4559,36 @@ input UserUpdateWithoutOrderDataInput {
   avatar: String
   cart: CartItemUpdateManyWithoutUserInput
   createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
   email: String
   id: String
   itemReview: ReviewUpdateManyWithoutAuthorInput
   likes: LikeUpdateManyWithoutUserInput
   likesCount: Int
   name: String
+  password: String
+  PasswordResetToken: String
+  PasswordResetTokenExpiry: Float
+  permissions: Permission
+  reviewCount: Int
+  role: Role
+  updatedAt: DateTime
+  UpReview: UpReviewUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutUpReviewDataInput {
+  address: AddressUpdateManyWithoutUserInput
+  avatar: String
+  cart: CartItemUpdateManyWithoutUserInput
+  createdAt: DateTime
+  DownReview: DownReviewUpdateManyWithoutAuthorInput
+  email: String
+  id: String
+  itemReview: ReviewUpdateManyWithoutAuthorInput
+  likes: LikeUpdateManyWithoutUserInput
+  likesCount: Int
+  name: String
+  Order: OrderUpdateManyWithoutUserInput
   password: String
   PasswordResetToken: String
   PasswordResetTokenExpiry: Float
@@ -3552,6 +4608,11 @@ input UserUpsertWithoutCartInput {
   update: UserUpdateWithoutCartDataInput!
 }
 
+input UserUpsertWithoutDownReviewInput {
+  create: UserCreateWithoutDownReviewInput!
+  update: UserUpdateWithoutDownReviewDataInput!
+}
+
 input UserUpsertWithoutItemReviewInput {
   create: UserCreateWithoutItemReviewInput!
   update: UserUpdateWithoutItemReviewDataInput!
@@ -3567,12 +4628,18 @@ input UserUpsertWithoutOrderInput {
   update: UserUpdateWithoutOrderDataInput!
 }
 
+input UserUpsertWithoutUpReviewInput {
+  create: UserCreateWithoutUpReviewInput!
+  update: UserUpdateWithoutUpReviewDataInput!
+}
+
 input UserWhereInput {
   address: AddressFilter
   AND: [UserWhereInput!]
   avatar: NullableStringFilter
   cart: CartItemFilter
   createdAt: DateTimeFilter
+  DownReview: DownReviewFilter
   email: StringFilter
   id: StringFilter
   itemReview: ReviewFilter
@@ -3589,6 +4656,7 @@ input UserWhereInput {
   reviewCount: NullableIntFilter
   role: Role
   updatedAt: DateTimeFilter
+  UpReview: UpReviewFilter
 }
 
 input UserWhereUniqueInput {

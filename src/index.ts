@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import createServer from "./server";
 import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
-import { Request, Response } from "express-serve-static-core";
+import { Request } from "express-serve-static-core";
 
 // process.env.NODE_ENV = "production";
 

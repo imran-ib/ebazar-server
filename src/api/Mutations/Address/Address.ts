@@ -4,15 +4,16 @@ import { ObjectDefinitionBlock } from "@nexus/schema/dist/core";
 import { Context } from "./../../../context";
 import { UserAuthResolver } from "../../../Utils/Auth/AuthResolver";
 import { Mails } from "../../../Utils/Mails/SendMail";
-
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
   t.crud.updateOneAddress();
   t.crud.deleteOneAddress();
-
-  t.field("CreateUsersAddress", {
+  t.crud.deleteManyAddress({
+    alias: "deleteUserAddresses",
+  });
+  t.field("CreateAddress", {
     type: "Address",
     args: {
       name: stringArg({ required: true }),
@@ -36,6 +37,7 @@ export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
     //@ts-ignore
     resolve: UserAuthResolver(
       async (parent: any, args: any, ctx: any, info: any) => {
+        console.log("UserAddress -> args", args);
         try {
           const ADDRESS: Address = await prisma.address.create({
             data: {
@@ -63,7 +65,7 @@ export const UserAddress = (t: ObjectDefinitionBlock<"Mutation">) => {
               },
             },
           });
-
+          // if it is the first address make it primary
           const UsersAddresses: Address[] = await prisma.address.findMany({
             where: {
               AND: [{ userId: ctx.request.userId }, { isPrimary: true }],
