@@ -90,6 +90,7 @@ export const ItemsQueryField = queryField((t) => {
             tags: {
               some: {
                 text: {
+                  //@ts-ignore
                   contains: args.tag,
                 },
               },
@@ -98,6 +99,7 @@ export const ItemsQueryField = queryField((t) => {
             catagory: {
               some: {
                 text: {
+                  //@ts-ignore
                   contains: args.category,
                 },
               },
