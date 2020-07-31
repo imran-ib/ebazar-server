@@ -25,7 +25,6 @@
     "graphql-yoga": "1.18.3",
     "jsonwebtoken": "8.5.1",
     "nexus-plugin-prisma": "0.16.1",
-    "nexus-prisma": "^0.16.2",
     "nodemailer": "^6.4.6",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "rand-token": "^1.0.1",

@@ -6,5 +6,10 @@
     "esModuleInterop": true,
     "strict": true
   },
+  "typeRoots": ["node_modules/@types", "types"],
+  "plugins": [{
+    "name": "nexus/typescript-language-service"
+  }],
+  "types": ["nexus-prisma-typegen"],
   "include": ["**/*.ts", "**/*.tsx", ".", "types.d.ts"]
 }
