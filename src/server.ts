@@ -8,7 +8,6 @@ import { Request } from "express";
 import { verify } from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
 const server = new GraphQLServer({
   schema,
   context: createContext,
