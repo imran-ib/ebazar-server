@@ -48,6 +48,7 @@ export const schema = makeSchema({
       experimentalCRUD: true,
       paginationStrategy: "prisma",
       shouldGenerateArtifacts: true,
+
     }),
     connectionPlugin(),
   ],
@@ -57,6 +58,7 @@ export const schema = makeSchema({
   },
 
   shouldGenerateArtifacts: true,
+  
   typegenAutoConfig: {
     sources: [
       {

@@ -17,7 +17,7 @@ const server = new GraphQLServer({
 server.express.use(cookieParser());
 
 const options = {
-  port: 4444,
+  port: process.env.PORT || 4444,
   endpoint: "/",
   subscriptions: "/subscriptions",
   playground: "/",
