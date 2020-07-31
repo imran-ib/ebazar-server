@@ -3,6 +3,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "lib": ["esnext", "ES2020"],
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "strict": true
   },
@@ -11,5 +12,6 @@
     "name": "nexus/typescript-language-service"
   }],
   "types": ["nexus-prisma-typegen"],
-  "include": ["**/*.ts", "**/*.tsx", ".", "types.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", ".", "types.d.ts"],
+
 }
