@@ -47,7 +47,6 @@ export const schema = makeSchema({
     nexusSchemaPrisma({
       experimentalCRUD: true,
       paginationStrategy: "prisma",
-      shouldGenerateArtifacts: true,
     }),
     connectionPlugin(),
   ],
@@ -56,6 +55,7 @@ export const schema = makeSchema({
     typegen: __dirname + "/generated/nexus.ts",
   },
 
+  shouldGenerateArtifacts: true,
   typegenAutoConfig: {
     sources: [
       {
