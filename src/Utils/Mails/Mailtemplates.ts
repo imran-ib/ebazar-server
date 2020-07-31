@@ -1,4 +1,3 @@
-import { User, Seller } from "@prisma/client";
 function ContactFormMail(email: string, message: string) {
   return `
   <div 
@@ -24,7 +23,7 @@ function ContactFormMail(email: string, message: string) {
   </div> 
   `;
 }
-function ForgotPasswordUser(user: User, token: string) {
+function ForgotPasswordUser(user:any, token: string) {
   return `
   <div 
   style ="text-align: center;
@@ -43,7 +42,7 @@ function ForgotPasswordUser(user: User, token: string) {
   </div> 
   `;
 }
-function ForgotPasswordSeller(seller: Seller, token: string) {
+function ForgotPasswordSeller(seller: any, token: string) {
   return `
   <div 
   style ="text-align: center;
@@ -62,7 +61,7 @@ function ForgotPasswordSeller(seller: Seller, token: string) {
   </div> 
   `;
 }
-function SellerVerification(seller: Seller, token: string) {
+function SellerVerification(seller: any, token: string) {
   return `
   <div 
   style ="text-align: center;

@@ -1,22 +1,22 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
+import { PubSub } from 'graphql-yoga'
+
 
 export interface Context {
-  prisma: PrismaClient;
-  request: any;
-  response: any;
-  pubsub: any;
+  prisma: PrismaClient
+  request: any
+  response: any
+  pubsub: PubSub
 }
 
-export function createContext(
-  request: any,
-  pubsub: any,
-  response: any,
-  prisma: any
-) {
+const prisma = new PrismaClient()
+const pubsub = new PubSub()
+
+export function createContext(request: any, response: any): Context {
   return {
-    ...request,
-    response,
-    pubsub,
     prisma,
-  };
+    ...request,
+    ...response,
+    pubsub,
+  }
 }

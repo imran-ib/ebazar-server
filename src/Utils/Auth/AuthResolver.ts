@@ -1,5 +1,6 @@
-import { Context } from "../../context";
-import { prisma } from "../../api/Primsa/Prisma";
+import { Context, createContext } from "../../context";
+
+
 
 export const UserAuthResolver = (resolverFunctions: any) => async (
   parent: any,
@@ -8,6 +9,7 @@ export const UserAuthResolver = (resolverFunctions: any) => async (
   info: any
 ) => {
   const user = ctx.request.user;
+
   if (!user) {
     throw new Error(
       "ACCESS DENIED,  AUTHORIZATION FAILED , YOU ARE NOT LOGGED IN AS USER"
@@ -44,7 +46,7 @@ export const AdminAuthResolver = (resolverFunctions: any) => async (
   let isAdmin: boolean = false;
 
   const [UserIsAdmin] = userId
-    ? await prisma.user.findMany({
+    ? await ctx.prisma.user.findMany({
         where: {
           AND: [
             {
@@ -59,7 +61,7 @@ export const AdminAuthResolver = (resolverFunctions: any) => async (
     : [];
 
   const [SellerAdmin] = sellerId
-    ? await prisma.seller.findMany({
+    ? await ctx.prisma.seller.findMany({
         where: {
           AND: [
             {

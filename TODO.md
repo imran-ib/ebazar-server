@@ -1,5 +1,0 @@
-- [x] Remove unused packages
-- [x] Remove unused imports and variables
-- [x] check todo in every file and complete them
-- [ ] Add Blocked status mutation for users and sellers
-- [ ] write Tests

@@ -1,5 +1,9 @@
-import { nexusPrismaPlugin } from "nexus-prisma";
 import { makeSchema, connectionPlugin } from "@nexus/schema";
+import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema";
+import { Mutation } from "./types/Mutation";
+import { Query, SearchTermResults, ItemsQueryField } from "./types/Query";
+import { AuthPayload } from "./types/AuthPayload";
+
 import {
   User,
   Seller,
@@ -15,15 +19,13 @@ import {
   Address,
   UpReview,
   DownReview,
-} from "./api/Models/Modles";
-import { Query } from "./api/Queries/Queries";
-import { Mutation } from "./api/Mutations/Mutations";
-import { ItemsQueryField, SearchTermResults } from "./api/Queries/Item/Item";
+} from "./types/Models";
 
 export const schema = makeSchema({
   types: [
-    Query,
     Mutation,
+    Query,
+    AuthPayload,
     User,
     Seller,
     Like,
@@ -38,11 +40,13 @@ export const schema = makeSchema({
     Address,
     UpReview,
     DownReview,
-    ItemsQueryField,
     SearchTermResults,
+    ItemsQueryField,
   ],
   plugins: [
-    nexusPrismaPlugin({
+    nexusSchemaPrisma({
+      experimentalCRUD: true,
+      paginationStrategy: "prisma",
       shouldGenerateArtifacts: true,
     }),
     connectionPlugin(),
@@ -51,7 +55,7 @@ export const schema = makeSchema({
     schema: __dirname + "/../schema.graphql",
     typegen: __dirname + "/generated/nexus.ts",
   },
-  shouldGenerateArtifacts: true,
+
   typegenAutoConfig: {
     sources: [
       {
