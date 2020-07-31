@@ -71,11 +71,9 @@ const rules = {
 export const permissions = shield(
   {
     Query: {
-      CurrentUser: rules.isAuthenticatedUser,
       Order: rules.isAuthenticatedUser,
       UserLikes: rules.isAuthenticatedUser,
       UserOrder: rules.isAuthenticatedUser,
-      CurrentSeller: rules.isAuthenticatedSeller,
       AllItems: rules.isAuthenticatedAdmin,
       AllUsers: rules.isAuthenticatedAdmin,
       AllSeller: rules.isAuthenticatedAdmin,

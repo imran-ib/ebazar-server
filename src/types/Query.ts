@@ -225,6 +225,7 @@ export const Query = queryType({
       type: "User",
       disableBackwardPagination: true,
       inheritAdditionalArgs: true,
+
       //@ts-ignore
       resolve: async (root, args, ctx, info) => {
         return connectionFromArray(await prisma.user.findMany(), args);
@@ -295,33 +296,45 @@ export const ItemsQueryField = queryField((t) => {
     inheritAdditionalArgs: true,
     //@ts-ignore
     async resolve(root, args, ctx, info) {
-      return connectionFromArray(
-        await prisma.item.findMany({
-          where: {
-            tags: {
-              some: {
-                text: {
-                  //@ts-ignore
-                  contains: args.tag,
+      if (args.tag) {
+        return connectionFromArray(
+          await prisma.item.findMany({
+            where: {
+              tags: {
+                some: {
+                  text: {
+                    //@ts-ignore
+                    contains: args.tag,
+                  },
                 },
               },
             },
-
-            catagory: {
-              some: {
-                text: {
-                  //@ts-ignore
-                  contains: args.category,
+            orderBy: {
+              createdAt: "asc",
+            },
+          }),
+          args
+        );
+      } else if (args.category) {
+        return connectionFromArray(
+          await prisma.item.findMany({
+            where: {
+              catagory: {
+                some: {
+                  text: {
+                    //@ts-ignore
+                    contains: args.category,
+                  },
                 },
               },
             },
-          },
-          orderBy: {
-            createdAt: "asc",
-          },
-        }),
-        args
-      );
+            orderBy: {
+              createdAt: "asc",
+            },
+          }),
+          args
+        );
+      }
     },
   });
 });

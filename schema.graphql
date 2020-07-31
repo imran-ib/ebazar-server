@@ -1031,6 +1031,9 @@ type ItemConnection {
   """
   edges: [ItemEdge]
 
+  """Flattened list of Item type"""
+  nodes: [Item!]!
+
   """
   https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
   """
@@ -3196,6 +3199,9 @@ type Query {
 
     """Returns the first n elements from the list."""
     first: Int!
+
+    """Skip Posts"""
+    skip: Int = 0
   ): ItemConnection!
   AllSeller(
     """Returns the elements in the list that come after the specified cursor"""
@@ -3203,6 +3209,9 @@ type Query {
 
     """Returns the first n elements from the list."""
     first: Int!
+
+    """Skip Posts"""
+    skip: Int = 0
   ): SellerConnection!
   AllUsers(
     """Returns the elements in the list that come after the specified cursor"""
@@ -3210,6 +3219,9 @@ type Query {
 
     """Returns the first n elements from the list."""
     first: Int!
+
+    """Skip Posts"""
+    skip: Int = 0
   ): UserConnection!
 
   """Currently Logged in Seller"""
@@ -3228,6 +3240,9 @@ type Query {
 
     """Returns the first n elements from the list."""
     first: Int!
+
+    """Skip Posts"""
+    skip: Int = 0
     tag: String
   ): ItemConnection!
   itemCount: Int!
@@ -3244,6 +3259,9 @@ type Query {
 
     """Returns the first n elements from the list."""
     first: Int!
+
+    """Skip Posts"""
+    skip: Int = 0
     term: String!
   ): ItemConnection!
   SingleAddress(where: AddressWhereUniqueInput!): Address
@@ -3619,6 +3637,9 @@ type SellerConnection {
   https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
   """
   edges: [SellerEdge]
+
+  """Flattened list of Seller type"""
+  nodes: [Seller!]!
 
   """
   https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
@@ -4195,6 +4216,9 @@ type UserConnection {
   https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
   """
   edges: [UserEdge]
+
+  """Flattened list of User type"""
+  nodes: [User!]!
 
   """
   https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo

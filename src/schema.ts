@@ -1,4 +1,4 @@
-import { makeSchema, connectionPlugin } from "@nexus/schema";
+import { makeSchema, connectionPlugin, intArg } from "@nexus/schema";
 import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema";
 import { Mutation } from "./types/Mutation";
 import { Query, SearchTermResults, ItemsQueryField } from "./types/Query";
@@ -48,9 +48,16 @@ export const schema = makeSchema({
       experimentalCRUD: true,
       paginationStrategy: "prisma",
       shouldGenerateArtifacts: true,
-
     }),
-    connectionPlugin(),
+    connectionPlugin({
+      includeNodesField: true,
+      additionalArgs: {
+        skip: intArg({
+          default: 0,
+          description: "Skip Posts",
+        }),
+      },
+    }),
   ],
   outputs: {
     schema: __dirname + "/../schema.graphql",
@@ -58,7 +65,7 @@ export const schema = makeSchema({
   },
 
   shouldGenerateArtifacts: true,
-  
+
   typegenAutoConfig: {
     sources: [
       {
