@@ -47,6 +47,7 @@ export const schema = makeSchema({
     nexusSchemaPrisma({
       experimentalCRUD: true,
       paginationStrategy: "prisma",
+      shouldGenerateArtifacts: true,
     }),
     connectionPlugin(),
   ],
